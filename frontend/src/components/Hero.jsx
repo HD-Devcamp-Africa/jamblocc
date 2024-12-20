@@ -25,14 +25,19 @@ const Hero = () => {
           Get access to curated past questions and study resources tailored for
           JAMB students.
         </motion.p>
-        <motion.button
-          className="mt-6 px-6 py-3 bg-purple-600 text-white font-bold rounded shadow-md hover:bg-purple-700"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+        <motion.div
+          className="mt-20"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1 }}
         >
-          Get Started
-        </motion.button>
+          <a
+            href="/waitlist"
+            className="px-6 py-3 bg-purple-600 text-white font-bold rounded shadow-md hover:bg-purple-700"
+          >
+            Get Started
+          </a>
+        </motion.div>
       </div>
     </section>
   );

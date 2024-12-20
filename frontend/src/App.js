@@ -7,6 +7,7 @@ import WaitlistPage from "./pages/WaitlistPage";
 import LandingPage from "./pages/LandingPage";
 import "./index.css";
 import "./App.css";
+import ComingSoonPage from "./pages/ComingSoonPage";
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/waitlist" element={<WaitlistPage />} />
+        <Route path="*" element={<ComingSoonPage />} />
       </Routes>
       {/* </div> */}
     </Router>
