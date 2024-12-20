@@ -1,7 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
+// import { useState } from "react";
 
 const Hero = () => {
+  // const [clickCount, setClickCount] = useState(0);
+
+  // const handleButtonClick = () => {
+  //   setClickCount((prevCount) => {
+  //     const newCount = prevCount + 1;
+  //     console.log(`Button clicked ${newCount} times`);
+  //     return newCount;
+  //   });
+  // };
+
   return (
     <section className="min-h-screen w-full flex items-center justify-center py-20 text-center">
       <div className="container mx-auto px-6">
@@ -25,6 +36,14 @@ const Hero = () => {
           Get access to curated past questions and study resources tailored for
           JAMB students.
         </motion.p>
+        {/* <motion.p
+          className="text-gray-600 mt-4 text-lg md:text-xl"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1 }}
+        >
+          Button clicked {clickCount} times
+        </motion.p> */}
         <motion.div
           className="mt-20"
           initial={{ opacity: 0, y: 50 }}

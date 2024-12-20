@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import "@lottiefiles/lottie-player"/;
+import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import WaitlistPage from "./pages/WaitlistPage";
-import LandingPage from "./pages/LandingPage";
-import "./index.css";
-import "./App.css";
 import ComingSoonPage from "./pages/ComingSoonPage";
+import "./App.css";
+import "./index.css";
+
 function App() {
   return (
     <Router>
