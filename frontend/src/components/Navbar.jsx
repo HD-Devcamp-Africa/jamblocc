@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaHome, FaInfoCircle, FaPhone, FaStar } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -33,19 +33,20 @@ const Navbar = () => {
             initial={{ opacity: 0, x: -200 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -200 }}
-            className="md:hidden flex flex-col space-y-4 text-gray-700 px-6 py-4"
+            transition={{ duration: 0.5 }}
+            className="md:hidden flex flex-col space-y-4 text-gray-700 px-6 py-4 bg-white shadow-lg"
           >
-            <li className="hover:text-purple-500 cursor-pointer hover:underline ">
-              Home
+            <li className="hover:text-purple-500 cursor-pointer hover:underline border-b py-2 flex items-center">
+              <FaHome className="mr-2" /> Home
             </li>
-            <li className="hover:text-purple-500 cursor-pointer hover:underline ">
-              Features
+            <li className="hover:text-purple-500 cursor-pointer hover:underline border-b py-2 flex items-center">
+              <FaStar className="mr-2" /> Features
             </li>
-            <li className="hover:text-purple-500 cursor-pointer hover:underline ">
-              About
+            <li className="hover:text-purple-500 cursor-pointer hover:underline border-b py-2 flex items-center">
+              <FaInfoCircle className="mr-2" /> About
             </li>
-            <li className="hover:text-purple-500 cursor-pointer hover:underline ">
-              Contact
+            <li className="hover:text-purple-500 cursor-pointer hover:underline border-b py-2 flex items-center">
+              <FaPhone className="mr-2" /> Contact
             </li>
           </motion.ul>
         )}
