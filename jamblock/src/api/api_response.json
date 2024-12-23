@@ -1,0 +1,87 @@
+{
+    "subject": "english",
+    "status": 200,
+    "data": [
+      {
+        "id": 1,
+        "question": "He put………….. eggs in a basket.",
+        "option": {
+          "a": "white dozen eggs ",
+          "b": "a dozen white eggs  ",
+          "c": " a white dozen eggs ",
+          "d": "dozen white",
+          "e": ""
+        },
+        "section": "most appropriate option",
+        "image": "",
+        "answer": "b",
+        "solution": "",
+        "examtype": "utme",
+        "examyear": "2003",
+        "questionNub": null,
+        "hasPassage": 0,
+        "category": "others"
+      },
+      {
+        "id": 2,
+        "question": "Which of the following is a common noun?",
+        "option": {
+          "a": "John",
+          "b": "car",
+          "c": "Africa",
+          "d": "Monday",
+          "e": ""
+        },
+        "section": "grammar",
+        "image": "",
+        "answer": "b",
+        "solution": "",
+        "examtype": "utme",
+        "examyear": "2004",
+        "questionNub": null,
+        "hasPassage": 0,
+        "category": "others"
+      },
+      {
+        "id": 3,
+        "question": "Choose the correct spelling:",
+        "option": {
+          "a": "definately",
+          "b": "definitely",
+          "c": "definitly",
+          "d": "definatly",
+          "e": ""
+        },
+        "section": "spelling",
+        "image": "",
+        "answer": "b",
+        "solution": "",
+        "examtype": "utme",
+        "examyear": "2005",
+        "questionNub": null,
+        "hasPassage": 0,
+        "category": "others"
+      },
+      {
+        "id": 4,
+        "question": "Identify the correct sentence:",
+        "option": {
+          "a": "She going to the market.",
+          "b": "She goes to the market.",
+          "c": "She go to the market.",
+          "d": "She gone to the market.",
+          "e": ""
+        },
+        "section": "sentence structure",
+        "image": "",
+        "answer": "b",
+        "solution": "",
+        "examtype": "utme",
+        "examyear": "2006",
+        "questionNub": null,
+        "hasPassage": 0,
+        "category": "others"
+      }
+    ]
+  }
+  
