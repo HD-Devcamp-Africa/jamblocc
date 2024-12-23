@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaTimes, FaHome, FaInfoCircle, FaPhone, FaStar } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { CiHome } from "react-icons/ci";
 import { Link } from "react-router-dom"; // Assuming you're using react-router for navigation
 
 const Navbar = () => {
@@ -46,7 +47,7 @@ const Navbar = () => {
             className="md:hidden flex flex-col space-y-4 text-gray-700 px-6 py-4 bg-white shadow-lg"
           >
             <li className="hover:text-purple-500 cursor-pointer hover:underline border-b py-2 flex items-center">
-              <FaHome className="mr-2" /> <Link to="/">Home</Link>
+              <CiHome className="mr-2" /> <Link to="/">Home</Link>
             </li>
             <li className="hover:text-purple-500 cursor-pointer hover:underline border-b py-2 flex items-center">
               <FaStar className="mr-2" /> <Link to="*">Features</Link>

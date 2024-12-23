@@ -20,3 +20,19 @@
     @apply bg-zinc-950 text-neutral-200;
   }
 } */
+
+
+@layer utilities {
+  .animate-scroll {
+    animation: scroll 15s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}

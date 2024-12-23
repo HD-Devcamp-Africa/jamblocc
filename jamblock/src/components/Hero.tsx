@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ConnectButton } from "thirdweb/react";
 import { client } from "../client";
+import TrustedBrands from "./TrustedBrands";
 
 const Hero: React.FC = () => {
     return (
@@ -44,6 +45,9 @@ const Hero: React.FC = () => {
                         />
                     </div>
                 </motion.div>
+                <div>
+                    <TrustedBrands/>
+                </div>
             </div>
         </section>
     );
