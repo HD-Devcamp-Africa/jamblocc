@@ -42,9 +42,18 @@ import SignupPage from "./pages/SignupPage";
 import WaitlistPage from "./pages/WaitlistPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import TestPage from "./pages/TestPage";
+import Dashboard from "./pages/DashboardPage";
+import Typewriter from "./components/TypeWriter";
 
+
+  // Testing the typewriter component
+  const handleTypingComplete = () => {
+    console.log("Typing completed! Proceeding to the next function...");
+    // Add the next function logic here
+  };
 
 export function App() {
+  
   return (
     <Router>
       <Routes>
@@ -56,7 +65,9 @@ export function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/waitlist" element={<WaitlistPage />} />
         <Route path="/coming-soon" element={<ComingSoonPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/test" element={<TestPage />} />
+        <Route path="/writer" element={<Typewriter onComplete={handleTypingComplete} />} />
 		<Route path="*" element={<ComingSoonPage />} />
       </Routes>
     </Router>

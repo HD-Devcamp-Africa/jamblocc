@@ -64,17 +64,17 @@ const SingleImage: React.FC<SingleImageProps> = ({ brand }) => {
   return (
     <a
       href={link}
-      className="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]"
+      className="mx-4 flex w-[750px] items-center justify-center py-15 sm:w-[200px] 2xl:w-[230px] text-50"
     >
       <img
         src={imageSrc}
         alt={altText}
-        className="h-10 w-full dark:hidden"
+        className="h-48 w-full dark:hidden sm:h-14"
       />
       <img
         src={lightImageSrc}
         alt={altText}
-        className="hidden h-10 w-full dark:block"
+        className="hidden h-48 w-full dark:block sm:h-14"
       />
     </a>
   );
