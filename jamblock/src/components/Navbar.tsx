@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
             handleNextStep();
         } else {
             showPopup("Sign in to continue", 6000);
-            navigate("/");
+            // navigate("/");
         }
     }, [account]);
 

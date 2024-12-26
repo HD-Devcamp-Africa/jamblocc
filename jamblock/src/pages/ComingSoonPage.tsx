@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import BottomNav from "../components/BottomNav";
 // import "./App.css";
 
 function ComingSoonPage() {
@@ -25,6 +26,7 @@ function ComingSoonPage() {
           COMING SOON
         </h1>
       </div>
+      <BottomNav/>
     </div>
   );
 }

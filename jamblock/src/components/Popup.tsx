@@ -6,7 +6,7 @@ type PopupProps = {
     onClose?: () => void; // Optional callback when the popup closes
 };
 
-const Popup: React.FC<PopupProps> = ({ message, timeout = 3000, onClose }) => {
+const Popup: React.FC<PopupProps> = ({ message, timeout = 6000, onClose }) => {
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {

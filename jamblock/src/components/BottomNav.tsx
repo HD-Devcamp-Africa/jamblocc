@@ -14,20 +14,34 @@ const BottomNav: React.FC = (): JSX.Element | null => {
         <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-md border-t" role="navigation">
             <ul className="flex justify-around text-gray-700 py-2">
                 <li className="hover:text-purple-500 cursor-pointer flex flex-col items-center">
-                    <CiHome className="text-2xl" />
-                    <Link to="/">Home</Link>
+                    <Link to="/" className="flex flex-col items-center">
+                        <CiHome className="text-xl md:text-2xl" />
+                        <span className="text-xs md:text-sm">Home</span>
+                    </Link>
                 </li>
                 <li className="hover:text-purple-500 cursor-pointer flex flex-col items-center">
-                    <MdOutlineSpaceDashboard className="text-2xl" />
-                    <Link to="/test">Dashboard</Link>
+                    <Link to="/dashboard" className="flex flex-col items-center">
+                        <MdOutlineSpaceDashboard className="text-xl md:text-2xl" />
+                        <span className="text-xs md:text-sm">Dashboard</span>
+                    </Link>
                 </li>
                 <li className="hover:text-purple-500 cursor-pointer flex flex-col items-center">
-                    <FaBookReader className="text-2xl" />
-                    <Link to="*">About</Link>
+                    <Link to="*" className="flex flex-col items-center">
+                        <FaBookReader className="text-xl md:text-2xl" />
+                        <span className="text-xs md:text-sm">About</span>
+                    </Link>
                 </li>
                 <li className="hover:text-purple-500 cursor-pointer flex flex-col items-center">
-                    <FaClipboardQuestion className="text-2xl" />
-                    <Link to="/test">Past Questions</Link>
+                    <Link to="/profile" className="flex flex-col items-center">
+                        <FaClipboardQuestion className="text-xl md:text-2xl" />
+                        <span className="text-xs md:text-sm">Profile</span>
+                    </Link>
+                </li>
+                <li className="hover:text-purple-500 cursor-pointer flex flex-col items-center">
+                    {/* <Link to="/questions" className="flex flex-col items-center">
+                        <FaClipboardQuestion className="text-xl md:text-2xl" />
+                        <span className="text-xs md:text-sm">Questions</span>
+                    </Link> */}
                 </li>
             </ul>
         </nav>

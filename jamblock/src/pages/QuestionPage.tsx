@@ -4,8 +4,9 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 // import SearchFilterWithSidebar from '../components/SearchFilter';
 import QuestionCard from '../components/fetchCard/QuestionCard';
+import BottomNav from '../components/BottomNav';
 
-const TestPage = () => {
+const QuestionPage = () => {
     const [formData, setFormData] = useState({
         year: "",
         examType: "",
@@ -55,7 +56,8 @@ const TestPage = () => {
     {/* <SearchFilterWithSidebar/> */}
 
     {/* <QuestionCard/> */}
+    <BottomNav/>
         </div>
     )}
     
-export default TestPage;
+export default QuestionPage;

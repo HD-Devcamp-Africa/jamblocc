@@ -9,7 +9,7 @@ type TypewriterProps = {
 const Typewriter: React.FC<TypewriterProps> = ({ onComplete }) => {
     const [text, setText] = useState(""); // State for the current text
     const fullText = "Hey Welcome to Jamblock"; // Full text to display
-    const typingSpeed = 60; // Speed of typing in milliseconds
+    const typingSpeed = 20; // Speed of typing in milliseconds
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const Typewriter: React.FC<TypewriterProps> = ({ onComplete }) => {
             // Call the callback function after a short delay
             setTimeout(() => {
                 onComplete();
-                navigate("/dashboard");
+                navigate("/");
             }, 1000);
         // }
         return () => clearTimeout(timeout);
@@ -36,7 +36,7 @@ const Typewriter: React.FC<TypewriterProps> = ({ onComplete }) => {
             className="flex justify-center items-center min-h-screen bg-gradient-to-r from-purple-600 to-purple-800 text-white"
             overlayClassName="fixed inset-0 bg-black bg-opacity-50"
         >
-            <h1 className="text-4xl font-bold">{text}</h1>
+            <h1 className="md:text-4xl text-md font-bold">{text}</h1>
         </Modal>
     );
 };

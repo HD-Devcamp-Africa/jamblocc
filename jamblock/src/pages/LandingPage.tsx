@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import Features from "../components/Features";
 import TrustedBrands from "../components/TrustedBrands";
 import Typewriter from "../components/TypeWriter";
+import BottomNav from "../components/BottomNav";
 
 
 // Remove this later
@@ -13,13 +14,15 @@ const LandingPage = () => {
 
 
   return (
-    <div className=" min-h-screen font-sans">
+    <div className="min-h-screen font-sans">
+
+     
       {/* Navigation */}
       <Navbar />
       {/* Hero Section */}
       <Hero />
       {/* Features Section */}
-      {/* <Features /> */}
+    {/* <Features /> */}
       {/* Trusted Brands Section */}
       {/* <Dashboard/> */}
       {/* <TrustedBrands /> */}
@@ -27,6 +30,7 @@ const LandingPage = () => {
 
       {/* <Typewriter onComplete={handleTypingComplete}/> */}
        {/* <Footer /> */}
+       <BottomNav/>
     </div>
   );
 };
