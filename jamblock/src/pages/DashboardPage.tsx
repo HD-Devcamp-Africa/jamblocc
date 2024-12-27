@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { HiOutlineCog, HiOutlineBell, HiOutlineChartBar, HiOutlineUser, HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import { HiOutlineCog, HiOutlineBell, HiOutlineChartBar, HiOutlineUser, HiOutlineMenu, HiOutlineX, HiOutlineCheck, HiOutlineClipboard } from "react-icons/hi";
 import { FaUserCircle } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ConnectButton, useActiveAccount, useActiveWallet, useDisconnect } from "thirdweb/react";
+import { AccountBalance, ConnectButton, useActiveAccount, useActiveWallet, useDisconnect, useWalletBalance } from "thirdweb/react";
 import { client } from "../client";
 import BottomNav from "../components/BottomNav";
-import { shortenAddress } from "thirdweb/dist/types/utils/address";
+import { shortenAddress } from "@thirdweb-dev/react";
+// import { shortenAddress } from "thirdweb/dist/types/utils/address";
+// import { Address } from "@thirdweb-dev/react";
 
 const Dashboard: React.FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [copied, setCopied] = useState(false);
     const controls = useAnimation();
     const { ref, inView } = useInView({ triggerOnce: true });
     const account = useActiveAccount();
     const {disconnect} = useDisconnect();
     const wallet = useActiveWallet();
+    // const  balance  = useWalletBalance(wallet!);
 
     useEffect(() => {
         if (inView) {
@@ -82,18 +86,43 @@ const Dashboard: React.FC = () => {
             <motion.div className={`flex-1 p-6 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-20'}`} variants={contentVariants} initial="hidden" animate="visible">
                 <header className="flex justify-between items-center mb-6">
                     <h1 className="text-3xl font-semibold text-lg md:text-2xl lg:text-3xl">Welcome back, User!</h1>
-                    <div className="flex items-center space-x-4">
-                        <ConnectButton client={client} />
-                    </div>
-                    <div>
-                        {/* Display user address */}
-                    </div>
 
-                    <div>
+                    <div className="flex items-center space-x-4">   
+                    {account ? (
+                        <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+                            <div 
+                                onClick={() => {
+                                    navigator.clipboard.writeText(account.address);
+                                    setCopied(true);
+                                    setTimeout(() => setCopied(false), 2000);
+                                }} 
+                                className="cursor-pointer flex items-center space-x-2"
+                                title="Copy"
+                            >
+                                {shortenAddress(account.address)}
+                                {copied ? (
+                                    <HiOutlineCheck className="text-green-500" />
+                                ) : (
+                                    <HiOutlineClipboard className="text-white" />
+                                )}
+                            </div>
 
-                        <button  onClick={() => wallet && disconnect(wallet)}
-                            className="text-sm text-red-900">Disconnect</button>
+                            <button 
+                                onClick={() => disconnect(wallet!)} 
+                                className="text-sm font-bold text-white rounded-lg bg-red-600 py-3 px-8"
+                            >
+                                Logout
+                            </button>
+                        </div>
+
+                            
+                        ) : (
+                            <ConnectButton client={client} />
+                        )}
                     </div>
+                    
+                  
+
                 </header>
 
                 {/* Dashboard Section */}
