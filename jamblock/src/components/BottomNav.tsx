@@ -26,15 +26,15 @@ const BottomNav: React.FC = (): JSX.Element | null => {
                     </Link>
                 </li>
                 <li className="hover:text-purple-500 cursor-pointer flex flex-col items-center">
-                    <Link to="*" className="flex flex-col items-center">
+                    <Link to="/about" className="flex flex-col items-center">
                         <FaBookReader className="text-xl md:text-2xl" />
                         <span className="text-xs md:text-sm">About</span>
                     </Link>
                 </li>
                 <li className="hover:text-purple-500 cursor-pointer flex flex-col items-center">
-                    <Link to="/profile" className="flex flex-col items-center">
+                    <Link to="/questions" className="flex flex-col items-center">
                         <FaClipboardQuestion className="text-xl md:text-2xl" />
-                        <span className="text-xs md:text-sm">Profile</span>
+                        <span className="text-xs md:text-sm">Questions</span>
                     </Link>
                 </li>
                 <li className="hover:text-purple-500 cursor-pointer flex flex-col items-center">

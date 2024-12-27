@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { HiOutlineCog, HiOutlineBell, HiOutlineChartBar, HiOutlineUser, HiOutlineMenu, HiOutlineX, HiOutlineCheck, HiOutlineClipboard } from "react-icons/hi";
+import { HiOutlineCog, HiOutlineBell, HiOutlineChartBar, HiOutlineMenu, HiOutlineX, HiOutlineCheck, HiOutlineClipboard } from "react-icons/hi";
 import { FaUserCircle } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { AccountBalance, ConnectButton, useActiveAccount, useActiveWallet, useDisconnect, useWalletBalance } from "thirdweb/react";
+import { ConnectButton, useActiveAccount, useActiveWallet, useDisconnect } from "thirdweb/react";
 import { client } from "../client";
 import BottomNav from "../components/BottomNav";
 import { shortenAddress } from "@thirdweb-dev/react";
-// import { shortenAddress } from "thirdweb/dist/types/utils/address";
-// import { Address } from "@thirdweb-dev/react";
 
 const Dashboard: React.FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -18,7 +16,6 @@ const Dashboard: React.FC = () => {
     const account = useActiveAccount();
     const {disconnect} = useDisconnect();
     const wallet = useActiveWallet();
-    // const  balance  = useWalletBalance(wallet!);
 
     useEffect(() => {
         if (inView) {
@@ -109,7 +106,7 @@ const Dashboard: React.FC = () => {
 
                             <button 
                                 onClick={() => disconnect(wallet!)} 
-                                className="text-sm font-bold text-white rounded-lg bg-red-600 py-3 px-8"
+                                className="text-sm font-bold text-white rounded-lg bg-red-600 py-3 px-10"
                             >
                                 Logout
                             </button>

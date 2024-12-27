@@ -8,6 +8,7 @@ import ComingSoonPage from "./pages/ComingSoonPage";
 import QuestionPage from "./pages/QuestionPage";
 import Dashboard from "./pages/DashboardPage";
 import Typewriter from "./components/TypeWriter";
+import AboutPage from "./pages/AboutPage";
 // import ProtectedRoute from "./middlewares/ProtectedRoute";
 
   // Testing the typewriter component
@@ -31,12 +32,18 @@ export function App() {
         <Route path="/coming-soon" element={<ComingSoonPage />} />
       
         <Route path="/questions" element={<QuestionPage />} />
+
+        {/* Animated routes */}
         <Route path="/writer" element={<Typewriter onComplete={handleTypingComplete} />} />
+        <Route path="/about/" element={<AboutPage  />} /> 
+
     
 
 
         {/* Protected Routes */}
+        {/* Add protection using middleware here */}
         <Route path="/dashboard"  element={<Dashboard/>}  />
+
 
 
         {/* Catch-All Routes */}

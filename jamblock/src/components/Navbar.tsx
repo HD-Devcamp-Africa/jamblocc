@@ -18,18 +18,18 @@ const Navbar: React.FC = () => {
     const navigate = useNavigate();
     const account = useActiveAccount();
 
-    useEffect(() => {
-        if (account) {
-            handleNextStep();
-        } else {
-            showPopup("Sign in to continue", 6000);
-            // navigate("/");
-        }
-    }, [account]);
+    // useEffect(() => {
+    //     if (account) {
+    //         handleNextStep();
+    //     } else {
+    //         showPopup("Sign in to continue", 6000);
+    //         // navigate("/");
+    //     }
+    // }, [account]);
 
-    const handleNextStep = () => {
-        navigate("/test");
-    };
+    // const handleNextStep = () => {
+    //     navigate("/test");
+    // };
 
     const showPopup = (message: string, timeout: number = 3000): void => {
         const popup = document.createElement('div');
@@ -80,10 +80,10 @@ const Navbar: React.FC = () => {
                         <Link to="*">Dashboard</Link>
                     </li>
                     <li className="hover:text-purple-500 cursor-pointer">
-                        <Link to="/test">Past Questions</Link>
+                        <Link to="/questions">Past Questions</Link>
                     </li>
                     <li className="hover:text-purple-500 cursor-pointer">
-                        <Link to="*">About</Link>
+                        <Link to="/about">About</Link>
                     </li>
                 </ul>
                 <div className="hidden lg:block">
@@ -110,14 +110,14 @@ const Navbar: React.FC = () => {
                             <CiHome className="mr-2 text-2xl" /> <Link to="/">Home</Link>
                         </li>
                         <li className="hover:text-purple-500 font-bold cursor-pointer hover:underline border-b py-2 flex items-center">
-                            <MdOutlineSpaceDashboard className="mr-2 text-2xl" /> <Link to="/test">Dashboard</Link>
+                            <MdOutlineSpaceDashboard className="mr-2 text-2xl" /> <Link to="/dashboard">Dashboard</Link>
                         </li>
                         <li className="hover:text-purple-500 font-bold cursor-pointer hover:underline border-b py-2 flex items-center">
-                            <FaBookReader className="mr-2 text-2xl" /> <Link to="*">About</Link>
+                            <FaBookReader className="mr-2 text-2xl" /> <Link to="/about">About</Link>
                         </li>
                         <li className="hover:text-purple-500 font-bold cursor-pointer hover:underline border-b py-2 flex items-center">
                             <FaClipboardQuestion className="mr-2 text-2xl" />
-                            <Link to="/test">Past Questions</Link>
+                            <Link to="/questions">Past Questions</Link>
                         </li>
                     </motion.ul>
                 )}
