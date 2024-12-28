@@ -6,31 +6,25 @@ import TrustedBrands from "../components/TrustedBrands";
 import Typewriter from "../components/TypeWriter";
 import BottomNav from "../components/BottomNav";
 
-
 // Remove this later
 // import Dashboard from "../pages/DashboardPage"
 const LandingPage = () => {
-
-
-
   return (
-    <div className="min-h-screen font-sans">
-
-     
+    <div className="min-h-screen font-sans bg-white">
       {/* Navigation */}
       <Navbar />
       {/* Hero Section */}
       <Hero />
       {/* Features Section */}
-    {/* <Features /> */}
+      {/* <Features /> */}
       {/* Trusted Brands Section */}
       {/* <Dashboard/> */}
       {/* <TrustedBrands /> */}
       {/* Footer section */}
 
       {/* <Typewriter onComplete={handleTypingComplete}/> */}
-       {/* <Footer /> */}
-       <BottomNav/>
+      {/* <Footer /> */}
+      <BottomNav />
     </div>
   );
 };
