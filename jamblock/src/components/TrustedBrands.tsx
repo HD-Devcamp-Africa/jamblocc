@@ -42,7 +42,7 @@ const brandsData: Brand[] = [
 
 const TrustedBrands: React.FC = () => {
   return (
-    <section className="bg-white py-20 lg:py-[120px] dark:bg-dark">
+    <section className="hidden md:block bg-white py-20 lg:py-[120px] dark:bg-dark">
       <div className="overflow-hidden">
         <div className="relative flex animate-scroll">
           {/* Duplicate the brand data to create a seamless loop */}
