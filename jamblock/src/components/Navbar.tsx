@@ -87,7 +87,12 @@ const Navbar: React.FC = () => {
           </li>
         </ul>
         <div className="hidden lg:block">
-          <ConnectButton client={client} />
+          <ConnectButton
+            client={client}
+            connectButton={{
+              label: "Sign in",
+            }}
+          />
         </div>
         <button
           onClick={toggleMenu}

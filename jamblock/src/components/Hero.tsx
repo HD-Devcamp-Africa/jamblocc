@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
   };
 
   function login(params: VerifyLoginPayloadParams) {
-    throw new Error("Function not implemented.");
+    navigate("/dashboard");
   }
 
   function generatePayload(arg0: {
@@ -45,7 +45,7 @@ const Hero: React.FC = () => {
   }
 
   function logout() {
-    throw new Error("Function not implemented.");
+    navigate("/");
   }
 
   return (
@@ -86,40 +86,9 @@ const Hero: React.FC = () => {
                   name: "Example app",
                   url: "https://example.com",
                 }}
-                auth={{
-                  isLoggedIn: async (address) => {
-                    console.log("checking if logged in!", { address });
-                    function isLoggedIn(): boolean | PromiseLike<boolean> {
-                      throw new Error("Function not implemented.");
-                    }
-
-                    return await isLoggedIn();
-                  },
-                  doLogin: async (params) => {
-                    console.log("logging in!");
-                    await login(params);
-                  },
-                  getLoginPayload: async ({ address }) =>
-                    generatePayload({ address }),
-                  doLogout: async () => {
-                    console.log("logging out!");
-                    await logout();
-                  },
-                }}
-                onConnect={(account) => {
-                  console.log("connected!", { account });
-                  setIsConnected(true);
-                  // navigate("/dashboard");
-                }}
-                onDisconnect={(account) => {
-                  console.log("disconnected!", { account });
-                  setIsConnected(false);
-                  // navigate("/");
-                }}
                 connectButton={{
                   label: "Sign in",
                 }}
-                // label={{"Connect Wallet"}}
               />
             </div>
           </motion.div>
