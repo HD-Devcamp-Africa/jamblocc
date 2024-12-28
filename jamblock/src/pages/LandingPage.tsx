@@ -5,10 +5,21 @@ import Features from "../components/Features";
 import TrustedBrands from "../components/TrustedBrands";
 import Typewriter from "../components/TypeWriter";
 import BottomNav from "../components/BottomNav";
+import PrizeModal from "../components/PrizeModal";
+import { useState } from "react";
 
-// Remove this later
-// import Dashboard from "../pages/DashboardPage"
 const LandingPage = () => {
+  // For claiming token
+  const [showPrize, setShowPrize] = useState(true);
+  const [prizeClaimed, setPrizeClaimed] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [score, setScore] = useState(100);
+
+  const claimPrize = () => {
+    setPrizeClaimed(true);
+    setShowModal(true);
+  };
+
   return (
     <div className="min-h-screen font-sans bg-white">
       {/* Navigation */}
@@ -20,6 +31,13 @@ const LandingPage = () => {
       {/* Trusted Brands Section */}
       {/* <Dashboard/> */}
       {/* <TrustedBrands /> */}
+      <PrizeModal
+        showPrize={showPrize}
+        prizeClaimed={prizeClaimed}
+        showModal={showModal}
+        score={score}
+        claimPrize={claimPrize}
+      />
       {/* Footer section */}
 
       {/* <Typewriter onComplete={handleTypingComplete}/> */}

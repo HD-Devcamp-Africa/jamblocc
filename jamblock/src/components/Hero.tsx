@@ -6,6 +6,7 @@ import TrustedBrands from "./TrustedBrands";
 import { useActiveAccount } from "thirdweb/react";
 import { useNavigate } from "react-router-dom";
 import { VerifyLoginPayloadParams } from "thirdweb/dist/types/auth/core/verify-login-payload";
+import { sepolia } from "thirdweb/chains";
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
@@ -88,6 +89,10 @@ const Hero: React.FC = () => {
                 }}
                 connectButton={{
                   label: "Sign in",
+                }}
+                accountAbstraction={{
+                  chain: sepolia,
+                  sponsorGas: true,
                 }}
               />
             </div>
