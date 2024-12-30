@@ -93,7 +93,7 @@ For questions or support, please contact:
 
 - **Name**: Moses Sunday
 - **Email**: [moses.main21@gmail.com](mailto:moses.main21@gmail.com)
-- **GitHub**: [Moses-main](https://github.com/Moses-mainMoses-main
+- **GitHub**: [Moses-main](https://github.com/Moses-mainMoses-main)
 
 ---
 
