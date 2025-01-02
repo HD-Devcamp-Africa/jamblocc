@@ -12,8 +12,8 @@ exports.storeQuestion = async (req, res) => {
   try {
     // Fetching required environment variables
     const apiUrl = process.env.API_URL;
-    // const accessToken = process.env.ACCESS_TOKEN;
-    const accessToken = "ALOC-ccc913cc887c0d2e4c2d";
+    const accessToken = process.env.ACCESS_TOKEN;
+    // const accessToken = 
 
     // Validate environment variables
     if (!apiUrl || !accessToken) {
