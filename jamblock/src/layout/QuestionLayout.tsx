@@ -1,22 +1,26 @@
-import React, { ReactNode, useState, useRef, useEffect } from 'react';
-import { FaFilter, FaTimes } from 'react-icons/fa'; // Icons for the toggle button
-import Navbar from '../components/Navbar';
+import React, { ReactNode, useState, useRef, useEffect } from "react";
+import { FaFilter, FaTimes } from "react-icons/fa"; // Icons for the toggle button
+import Navbar from "../components/Navbar";
 
 interface LayoutProps {
   children: ReactNode;
-  onFilterChange?: (filters: { search: string; years: string[]; subjects: string[] }) => void;
+  onFilterChange?: (filters: {
+    search: string;
+    years: string[];
+    subjects: string[];
+  }) => void;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
-  const [searchFilter, setSearchFilter] = useState('');
+  const [searchFilter, setSearchFilter] = useState("");
   const [yearFilter, setYearFilter] = useState<string[]>([]);
   const [subjectFilter, setSubjectFilter] = useState<string[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const headerRef = useRef<HTMLDivElement>(null);
 
-  const availableYears = ['2020', '2021', '2022', '2023'];
-  const availableSubjects = ['Math', 'English', 'Physics', 'Chemistry'];
+  const availableYears = ["2020", "2021", "2022", "2023"];
+  const availableSubjects = ["Math", "English", "Physics", "Chemistry"];
 
   useEffect(() => {
     if (headerRef.current) {
@@ -35,7 +39,11 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
       ? yearFilter.filter((y) => y !== year)
       : [...yearFilter, year];
     setYearFilter(updatedYears);
-    notifyParent({ search: searchFilter, years: updatedYears, subjects: subjectFilter });
+    notifyParent({
+      search: searchFilter,
+      years: updatedYears,
+      subjects: subjectFilter,
+    });
   };
 
   const handleSubjectChange = (subject: string) => {
@@ -43,10 +51,18 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
       ? subjectFilter.filter((s) => s !== subject)
       : [...subjectFilter, subject];
     setSubjectFilter(updatedSubjects);
-    notifyParent({ search: searchFilter, years: yearFilter, subjects: updatedSubjects });
+    notifyParent({
+      search: searchFilter,
+      years: yearFilter,
+      subjects: updatedSubjects,
+    });
   };
 
-  const notifyParent = (filters: { search: string; years: string[]; subjects: string[] }) => {
+  const notifyParent = (filters: {
+    search: string;
+    years: string[];
+    subjects: string[];
+  }) => {
     if (onFilterChange) {
       onFilterChange(filters);
     }
@@ -63,7 +79,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
         {/* Sidebar */}
         <aside
           className={`bg-white shadow-md w-64 p-4 fixed top-0 bottom-0 transition-transform duration-300 ease-in-out ${
-            isSidebarOpen ? 'translate-x-0' : '-translate-x-64'
+            isSidebarOpen ? "translate-x-0" : "-translate-x-64"
           } z-10`}
           style={{ marginTop: headerHeight }}
         >
@@ -117,7 +133,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
             </button>
             <input
               type="text"
-              placeholder="Search questions..."
+              placeholder="Search Subjects ..."
               className="px-4 py-2 rounded-md border border-gray-300 text-gray-700"
               value={searchFilter}
               onChange={handleSearchChange}
@@ -126,11 +142,6 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
 
           {/* Main Content */}
           <main className="p-4 mt-16">{children}</main>
-
-          {/* Footer */}
-          <footer className="bg-gray-800 text-gray-200 text-center py-4 mt-6">
-            <p>&copy; 2024 Exam Viewer Platform</p>
-          </footer>
         </div>
       </div>
     </div>
