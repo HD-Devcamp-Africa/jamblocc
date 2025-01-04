@@ -27,21 +27,25 @@ Jamblock is a Web3 platform designed for blockchain enthusiasts to learn blockch
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/Moses-main/JAMBlock.git
    ```
 
 2. Navigate to the project directory:
+
    ```bash
    cd jamblock
    ```
 
 3. Install dependencies:
+
    ```bash
    npm install
    ```
 
 4. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -100,4 +104,3 @@ For questions or support, please contact:
 ## Acknowledgments
 
 Special thanks to all contributors and the blockchain community for their support and inspiration.
-

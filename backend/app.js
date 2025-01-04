@@ -1,15 +1,15 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const questionRoutes = require("./routes/questionRoutes");
+// const express = require("express");
+// const bodyParser = require("body-parser");
+// const cors = require("cors");
+// const questionRoutes = require("./routes/questionRoutes");
 
-const app = express();
+// const app = express();
 
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
+// // Middleware
+// app.use(cors());
+// app.use(bodyParser.json());
 
-// Routes
-app.use("/api/questions", questionRoutes);
+// // Routes
+// app.use("/api/questions", questionRoutes);
 
-module.exports = app;
+// module.exports = app;

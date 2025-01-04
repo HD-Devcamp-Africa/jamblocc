@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const questionSchema = new mongoose.Schema({
   subject: { type: String, required: true },
@@ -13,7 +13,7 @@ const questionSchema = new mongoose.Schema({
       d: { type: String, default: "" },
       e: { type: String, default: "" },
     },
-    section: { type: String, required: true },
+    section: { type: String, required: true, default: "Default Section" },
     image: { type: String, default: "" },
     answer: { type: String, required: true },
     solution: { type: String, default: "" },
@@ -25,4 +25,19 @@ const questionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Question", questionSchema);
+// Cache for storing created models
+const modelsCache = {};
+
+const createQuestionModel = (subject) => {
+  const collectionName = subject.toLowerCase().replace(/\s+/g, "_");
+  if (!modelsCache[collectionName]) {
+    modelsCache[collectionName] = mongoose.model(
+      collectionName,
+      questionSchema,
+      collectionName
+    );
+  }
+  return modelsCache[collectionName];
+};
+
+export { createQuestionModel };
