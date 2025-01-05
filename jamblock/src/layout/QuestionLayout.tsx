@@ -20,7 +20,25 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   const availableYears = ["2020", "2021", "2022", "2023"];
-  const availableSubjects = ["Math", "English", "Physics", "Chemistry"];
+  const availableSubjects = [
+    "english",
+    "mathematics",
+    "commerce",
+    "accounting",
+    "biology",
+    "physics",
+    "chemistry",
+    "englishlit",
+    "government",
+    "crk",
+    "geography",
+    "economics",
+    "irk",
+    "civiledu",
+    "insurance",
+    "currentaffairs",
+    "history",
+  ];
 
   useEffect(() => {
     if (headerRef.current) {
@@ -78,7 +96,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
       <div className="min-h-screen bg-gray-100 flex">
         {/* Sidebar */}
         <aside
-          className={`bg-white shadow-md w-64 p-4 fixed top-0 bottom-0 transition-transform duration-300 ease-in-out ${
+          className={`bg-white shadow-md w-64 p-4 fixed top-0 md:top-24 bottom-0 transition-transform duration-300 ease-in-out ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-64"
           } z-10`}
           style={{ marginTop: headerHeight }}
@@ -86,7 +104,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
           <h2 className="text-lg font-bold mb-4">Filters</h2>
 
           {/* Year Filter */}
-          <div className="mb-6">
+          <div className="mb-6 ">
             <h3 className="font-semibold mb-2">Filter by Year</h3>
             {availableYears.map((year) => (
               <label key={year} className="block mb-1">

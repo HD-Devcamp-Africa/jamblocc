@@ -21,7 +21,7 @@ const questionSchema = new mongoose.Schema({
     examyear: { type: String, required: true },
     questionNub: { type: Number, default: null },
     hasPassage: { type: Number, default: 0 },
-    category: { type: String, required: true },
+    category: { type: String, required: false },
   },
 });
 

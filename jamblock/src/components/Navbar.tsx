@@ -71,7 +71,14 @@ const Navbar: React.FC = () => {
   return (
     <header className="bg-white shadow-md sticky top-0 z-10 font-roboto md:block lg:block hidden">
       <nav className="container mx-auto flex justify-between items-center py-4 px-6">
-        <div className="text-xl font-bold text-purple-800">JAMBlock</div>
+        {/* <div className="text-xl font-bold text-purple-800">JAMBlock</div> */}
+        <Link to="/">
+          <img
+            src="/public/images/logo.jpg"
+            alt="JAMBlock Logo"
+            className="h-20 rounded-md"
+          />
+        </Link>
         <ul className="hidden lg:flex space-x-8 text-gray-700">
           <li className="hover:text-purple-500 cursor-pointer">
             <Link to="/">Home</Link>

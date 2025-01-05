@@ -38,6 +38,10 @@ export const fetchQuestions = async (req, res) => {
   }
 };
 
+// ############################################################################
+// ############################################################################
+// ############################################################################
+
 export const storeQuestion = async (req, res) => {
   try {
     const apiUrl = process.env.API_URL;
@@ -49,8 +53,37 @@ export const storeQuestion = async (req, res) => {
       });
     }
 
-    const subject = req.query.subject || "english";
-    const fullUrl = `${apiUrl}?subject=${subject}`;
+    // Retrieve and validate the subject query parameter
+    const subject = req.query.subject?.toLowerCase();
+    const supportedSubjects = [
+      "english",
+      "mathematics",
+      "commerce",
+      "accounting",
+      "biology",
+      "physics",
+      "chemistry",
+      "englishlit",
+      "government",
+      "crk",
+      "geography",
+      "economics",
+      "irk",
+      "civiledu",
+      "insurance",
+      "currentaffairs",
+      "history",
+    ];
+
+    if (!subject || !supportedSubjects.includes(subject)) {
+      return res.status(400).json({
+        error: `Invalid or unsupported subject. Supported subjects are: ${supportedSubjects.join(
+          ", "
+        )}.`,
+      });
+    }
+
+    const fullUrl = `${apiUrl}?subject=${encodeURIComponent(subject)}`;
 
     const response = await axios.get(fullUrl, {
       headers: {
@@ -61,7 +94,13 @@ export const storeQuestion = async (req, res) => {
 
     const { subject: responseSubject, status, data } = response.data;
 
-    // Handle empty section
+    if (!data || !data.id) {
+      return res.status(404).json({
+        error: "No valid question data found for the specified subject.",
+      });
+    }
+
+    // Handle empty or missing section
     if (!data.section || data.section.trim() === "") {
       data.section = "Default Section";
     }
@@ -78,6 +117,7 @@ export const storeQuestion = async (req, res) => {
         message: `Question with id ${data.id} already exists in the ${responseSubject} collection.`,
       });
     }
+
     // Save new question
     const newQuestion = new QuestionModel({
       subject: responseSubject,
@@ -97,6 +137,15 @@ export const storeQuestion = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching or saving question:", error);
+
+    // Handle specific errors
+    if (error.response && error.response.status === 404) {
+      return res.status(404).json({
+        error: "Subject not found in the API.",
+        details: error.response.data,
+      });
+    }
+
     res.status(500).json({
       error: "Failed to fetch or save question.",
       details: error.response ? error.response.data : error.message,
@@ -104,63 +153,9 @@ export const storeQuestion = async (req, res) => {
   }
 };
 
-// // Store question data from the API
-// export const storeQuestion = async (req, res) => {
-//   console.log("fetch-and-store endpoint hit");
-
-//   try {
-//     // Fetching required environment variables
-//     const apiUrl = process.env.API_URL;
-//     const accessToken = process.env.ACCESS_TOKEN;
-
-//     // Validate environment variables
-//     if (!apiUrl || !accessToken) {
-//       return res.status(500).json({
-//         error: "Missing API_URL or ACCESS_TOKEN in environment variables.",
-//       });
-//     }
-
-//     // Prepare API URL with query parameter
-//     const subject = req.query.subject || "english"; // Default subject: "english"
-//     const fullUrl = `${apiUrl}?subject=${subject}`;
-//     console.log("Requesting API with URL:", fullUrl);
-
-//     // Make the API call
-//     const response = await axios.get(fullUrl, {
-//       headers: {
-//         accessToken: accessToken, // Add 'Bearer' if required by the API
-//         Accept: "application/json",
-//       },
-//     });
-
-//     // Log the raw response data
-//     console.log("API Response Data:", response.data);
-
-//     // Extract the data from the response
-//     const questionData = response.data;
-
-//     // check if the response is already in the database, if not save the data or response in the database
-//     const savedQuestions = await Question.insertMany(questionData, {
-//       ordered: false,
-//     });
-
-//     // Respond with a success message and saved data
-//     res.status(201).json({
-//       message: "Question data saved successfully.",
-//       savedQuestions, // Return saved questions
-//     });
-//   } catch (error) {
-//     // Log detailed error information
-//     console.error("Error fetching or saving question:", error);
-
-//     // Return the error response
-//     res.status(500).json({
-//       error: "Failed to fetch or save question.",
-//       details: error.response ? error.response.data : error.message,
-//     });
-//   }
-// };
-
+//  ###########################################################################
+//  ###########################################################################
+//  ###########################################################################
 // Get all stored questions
 export const getAllQuestions = async (req, res) => {
   try {
@@ -171,6 +166,8 @@ export const getAllQuestions = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+// ###############################################################################
 
 // Search questions by subject
 export const searchQuestions = async (req, res) => {
