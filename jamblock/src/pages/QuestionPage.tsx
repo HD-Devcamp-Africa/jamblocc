@@ -1,6 +1,6 @@
 import ApiResponseDisplay from "../components/fetchCard/ApiResponseDisplay";
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 // import SearchFilterWithSidebar from '../components/SearchFilter';
 import BottomNav from "../components/BottomNav";
 

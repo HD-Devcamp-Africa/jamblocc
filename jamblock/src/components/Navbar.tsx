@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom"; // Assuming you're using r
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { useActiveAccount } from "thirdweb/react";
 // import Popup from "./Popup";
-import { client } from "../client";
+import { clientId } from "../client";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-10 font-roboto md:block lg:block hidden">
+    <header className="bg-gray-800 shadow-md sticky top-0 z-10 font-roboto md:block lg:block hidden">
       <nav className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* <div className="text-xl font-bold text-purple-800">JAMBlock</div> */}
         <Link to="/">
@@ -95,7 +95,7 @@ const Navbar: React.FC = () => {
         </ul>
         <div className="hidden lg:block">
           <ConnectButton
-            client={client}
+            client={clientId}
             connectButton={{
               label: "Sign in",
             }}
@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
         </div>
         <button
           onClick={toggleMenu}
-          className="lg:hidden px-4 py-2 bg-purple-600 text-white rounded"
+          className="lg:hidden px-4 py-4 bg-purple-800 text-white rounded"
         >
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>

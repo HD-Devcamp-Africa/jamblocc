@@ -9,16 +9,16 @@ import QuestionPage from "./pages/QuestionPage";
 import Dashboard from "./pages/DashboardPage";
 import Typewriter from "./components/TypeWriter";
 import AboutPage from "./pages/AboutPage";
+import ExamPage from "./pages/ExamPage";
 // import ProtectedRoute from "./middlewares/ProtectedRoute";
 
-  // Testing the typewriter component
-  const handleTypingComplete = () => {
-    console.log("Typing completed! Proceeding to the next function...");
-    // Add the next function logic here
-  };
+// Testing the typewriter component
+const handleTypingComplete = () => {
+  console.log("Typing completed! Proceeding to the next function...");
+  // Add the next function logic here
+};
 
 export function App() {
-  
   return (
     <Router>
       <Routes>
@@ -30,26 +30,25 @@ export function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/waitlist" element={<WaitlistPage />} />
         <Route path="/coming-soon" element={<ComingSoonPage />} />
-      
+
         <Route path="/questions" element={<QuestionPage />} />
 
         {/* Animated routes */}
-        <Route path="/writer" element={<Typewriter onComplete={handleTypingComplete} />} />
-        <Route path="/about/" element={<AboutPage  />} /> 
-
-    
-
+        <Route
+          path="/writer"
+          element={<Typewriter onComplete={handleTypingComplete} />}
+        />
+        <Route path="/about/" element={<AboutPage />} />
 
         {/* Protected Routes */}
         {/* Add protection using middleware here */}
-        <Route path="/dashboard"  element={<Dashboard/>}  />
+        <Route path="/dashboard" element={<Dashboard />} />
 
-
+        <Route path="/exams" element={<ExamPage />} />
 
         {/* Catch-All Routes */}
         <Route path="*" element={<ComingSoonPage />} />
         <Route path="/test/*" element={<ComingSoonPage />} />
- 
       </Routes>
     </Router>
   );

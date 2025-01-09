@@ -18,7 +18,7 @@ import {
   useActiveWallet,
   useDisconnect,
 } from "thirdweb/react";
-import { client } from "../client";
+import { clientId } from "../client";
 import BottomNav from "../components/BottomNav";
 import { shortenAddress } from "@thirdweb-dev/react";
 
@@ -73,7 +73,7 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="mt-40">
           <nav className="space-y-10">
-            <motion.a
+            {/* <motion.a
               href="#"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
               variants={itemVariants}
@@ -82,7 +82,7 @@ const Dashboard: React.FC = () => {
             >
               <HiOutlineBell className="text-xl" />
               {isSidebarOpen && <span>Tasks</span>}
-            </motion.a>
+            </motion.a> */}
             <motion.a
               href="/"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
@@ -94,7 +94,7 @@ const Dashboard: React.FC = () => {
               {isSidebarOpen && <span>Home</span>}
             </motion.a>
             <motion.a
-              href="#"
+              href="*"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
               variants={itemVariants}
               initial="hidden"
@@ -104,7 +104,7 @@ const Dashboard: React.FC = () => {
               {isSidebarOpen && <span>Exams</span>}
             </motion.a>
             <motion.a
-              href="#"
+              href="*"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
               variants={itemVariants}
               initial="hidden"
@@ -114,7 +114,7 @@ const Dashboard: React.FC = () => {
               {isSidebarOpen && <span>Settings</span>}
             </motion.a>
             <motion.a
-              href="#"
+              href="*"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
               variants={itemVariants}
               initial="hidden"
@@ -169,7 +169,7 @@ const Dashboard: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <ConnectButton client={client} />
+              <ConnectButton client={clientId} />
             )}
           </div>
         </header>
