@@ -204,11 +204,11 @@ const ApiResponseDisplay: React.FC = () => {
   return (
     <QuestionLayout onFilterChange={handleFilterChange}>
       {/* Subject Selector */}
-      <div className="mb-4">
+      <div className="mb-4 ">
         <select
           value={selectedSubject}
           onChange={(e) => handleSubjectChange(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded "
         >
           {Object.keys(apiResponse?.data || {}).map((subject) => (
             <option key={subject} value={subject}>
@@ -218,7 +218,7 @@ const ApiResponseDisplay: React.FC = () => {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+      <div className="grid bg-gradient-to-r from-gray-700 to-purple-900 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {filteredData.map((item, index) => (
           <QuestionCard key={item._id} question={item.data} index={index + 1} />
         ))}

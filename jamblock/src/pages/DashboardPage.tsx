@@ -109,7 +109,7 @@ const Dashboard: React.FC = () => {
               {isSidebarOpen && <span>Exams</span>}
             </motion.a>
             <motion.a
-              href="*"
+              href="/account-settings"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
               variants={itemVariants}
               initial="hidden"
@@ -190,19 +190,22 @@ const Dashboard: React.FC = () => {
           {/* Settings Card */}
           <motion.div
             ref={ref}
-            className="bg-gray-400 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="bg-gray-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             variants={contentVariants}
             initial="hidden"
             animate={controls}
           >
-            <h3 className="text-xl text-black font-semibold mb-4 text-lg md:text-xl lg:text-2xl">
+            <h3 className="text-xl text-purple-900 font-semibold mb-4 text-lg md:text-xl lg:text-2xl">
               Account Settings
             </h3>
             <p className="text-black mb-4 text-sm md:text-base lg:text-lg">
               Manage your account settings, update your profile information, and
               adjust security settings.
             </p>
-            <button className="bg-purple-800 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg">
+            <button
+              onClick={() => navigate("/account-setting")}
+              className="bg-purple-800 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg"
+            >
               Go to Settings
             </button>
           </motion.div>
@@ -210,18 +213,21 @@ const Dashboard: React.FC = () => {
           {/* Analytics Card */}
           <motion.div
             ref={ref}
-            className="bg-gray-400 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="bg-gray-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             variants={contentVariants}
             initial="hidden"
             animate={controls}
           >
-            <h3 className="text-xl text-black font-semibold mb-4 text-lg md:text-xl lg:text-2xl">
+            <h3 className="text-xl text-purple-900 font-semibold mb-4 text-lg md:text-xl lg:text-2xl">
               Analytics
             </h3>
             <p className="text-black mb-4 text-sm md:text-base lg:text-lg">
               View your recent activity, insights, and track your performance.
             </p>
-            <button className="bg-purple-800 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg">
+            <button
+              onClick={() => navigate("*")}
+              className="bg-purple-800 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg"
+            >
               View Analytics
             </button>
           </motion.div>
@@ -229,19 +235,22 @@ const Dashboard: React.FC = () => {
           {/* Notifications Card */}
           <motion.div
             ref={ref}
-            className="bg-gray-400 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="bg-gray-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             variants={contentVariants}
             initial="hidden"
             animate={controls}
           >
-            <h3 className="text-xl text-black font-semibold mb-4 text-lg md:text-xl lg:text-2xl">
+            <h3 className="text-xl text-purple-900 font-semibold mb-4 text-lg md:text-xl lg:text-2xl">
               Notifications
             </h3>
             <p className="text-black mb-4 text-sm md:text-base lg:text-lg">
               Stay up to date with the latest updates, messages, and alerts
               related to your account.
             </p>
-            <button className="bg-purple-800  text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg">
+            <button
+              onClick={() => navigate("*")}
+              className="bg-purple-800  text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg"
+            >
               Check Notifications
             </button>
           </motion.div>

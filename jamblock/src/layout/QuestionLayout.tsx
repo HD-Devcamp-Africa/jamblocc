@@ -93,7 +93,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
   return (
     <div>
       <Navbar />
-      <div className="min-h-screen bg-gray-100 flex">
+      <div className="min-h-screen bg-gray-700 flex">
         {/* Sidebar */}
         <aside
           className={`bg-white shadow-md w-64 p-4 fixed top-0 md:top-24 bottom-0 transition-transform duration-300 ease-in-out ${
@@ -141,7 +141,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
           {/* Header */}
           <header
             ref={headerRef}
-            className="bg-purple-600 text-white py-4 px-6 shadow-md flex justify-between items-center fixed top-18 left-0 right-0 z-20"
+            className="bg-purple-900 text-white py-4 px-6 shadow-md flex justify-between items-center fixed top-18 left-0 right-0 z-20"
           >
             <button
               onClick={toggleSidebar}

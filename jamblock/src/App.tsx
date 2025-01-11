@@ -10,6 +10,7 @@ import Dashboard from "./pages/DashboardPage";
 import Typewriter from "./components/TypeWriter";
 import AboutPage from "./pages/AboutPage";
 import ExamPage from "./pages/ExamPage";
+import AccountSettings from "./pages/AccountSettingPage";
 // import ProtectedRoute from "./middlewares/ProtectedRoute";
 
 // Testing the typewriter component
@@ -33,18 +34,14 @@ export function App() {
 
         <Route path="/questions" element={<QuestionPage />} />
 
-        {/* Animated routes */}
-        <Route
-          path="/writer"
-          element={<Typewriter onComplete={handleTypingComplete} />}
-        />
         <Route path="/about/" element={<AboutPage />} />
 
         {/* Protected Routes */}
         {/* Add protection using middleware here */}
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/account-setting" element={<AccountSettings />} />
 
-        <Route path="/exams" element={<ExamPage />} />
+        {/* <Route path="/exams" element={<ExamPage />} /> */}
 
         {/* Catch-All Routes */}
         <Route path="*" element={<ComingSoonPage />} />
