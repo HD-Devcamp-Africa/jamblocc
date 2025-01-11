@@ -18,15 +18,19 @@ import {
   useActiveWallet,
   useDisconnect,
 } from "thirdweb/react";
+import { useNavigate } from "react-router-dom";
+
 import { clientId } from "../client";
 import BottomNav from "../components/BottomNav";
 import { shortenAddress } from "@thirdweb-dev/react";
+import { inAppWallet, createWallet } from "thirdweb/wallets";
 
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const controls = useAnimation();
   const { ref, inView } = useInView({ triggerOnce: true });
+  const navigate = useNavigate();
   const account = useActiveAccount();
   const { disconnect } = useDisconnect();
   const wallet = useActiveWallet();
@@ -57,9 +61,10 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen h-full bg-gradient-to-r from-purple-800 via-purple-600 to-purple-400 text-white flex overflow-hidden">
+    <div className="min-h-screen h-full bg-gray-800 text-white flex overflow-hidden">
+      {/* <div className="min-h-screen h-full bg-gradient-to-r from-purple-800 via-purple-600 to-purple-400 text-white flex overflow-hidden"> */}
       <motion.div
-        className="bg-purple-900 p-6 space-y-6 fixed top-0 left-0 h-full z-0"
+        className="bg-gray-900 p-6 space-y-6 fixed top-0 left-0 h-full z-0"
         variants={sidebarVariants}
         initial={isSidebarOpen ? "open" : "closed"}
         animate={isSidebarOpen ? "open" : "closed"}
@@ -83,7 +88,7 @@ const Dashboard: React.FC = () => {
               <HiOutlineBell className="text-xl" />
               {isSidebarOpen && <span>Tasks</span>}
             </motion.a> */}
-            <motion.a
+            {/* <motion.a
               href="/"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
               variants={itemVariants}
@@ -92,7 +97,7 @@ const Dashboard: React.FC = () => {
             >
               <GoHome className="text-xl" />
               {isSidebarOpen && <span>Home</span>}
-            </motion.a>
+            </motion.a> */}
             <motion.a
               href="*"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
@@ -143,7 +148,7 @@ const Dashboard: React.FC = () => {
 
           <div className="flex items-center space-x-4">
             {account ? (
-              <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+              <div className="flex flex-col md:flex-row items-center mr-6 space-y-4 md:space-y-0 md:space-x-6">
                 <div
                   onClick={() => {
                     navigator.clipboard.writeText(account.address);
@@ -154,6 +159,7 @@ const Dashboard: React.FC = () => {
                   title="Copy"
                 >
                   {shortenAddress(account.address)}
+                  {/* {account.getbalance()} */}
                   {copied ? (
                     <HiOutlineCheck className="text-green-500" />
                   ) : (
@@ -162,7 +168,12 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 <button
-                  onClick={() => disconnect(wallet!)}
+                  onClick={() => {
+                    disconnect(wallet!);
+                    setTimeout(() => {
+                      navigate("/");
+                    }, 400);
+                  }}
                   className="text-sm font-bold text-white rounded-lg bg-[#E91E63] py-3 px-10"
                 >
                   Logout
@@ -175,11 +186,11 @@ const Dashboard: React.FC = () => {
         </header>
 
         {/* Dashboard Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-20">
+        <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-20">
           {/* Settings Card */}
           <motion.div
             ref={ref}
-            className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="bg-gray-400 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             variants={contentVariants}
             initial="hidden"
             animate={controls}
@@ -191,7 +202,7 @@ const Dashboard: React.FC = () => {
               Manage your account settings, update your profile information, and
               adjust security settings.
             </p>
-            <button className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg">
+            <button className="bg-purple-800 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg">
               Go to Settings
             </button>
           </motion.div>
@@ -199,7 +210,7 @@ const Dashboard: React.FC = () => {
           {/* Analytics Card */}
           <motion.div
             ref={ref}
-            className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="bg-gray-400 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             variants={contentVariants}
             initial="hidden"
             animate={controls}
@@ -210,7 +221,7 @@ const Dashboard: React.FC = () => {
             <p className="text-black mb-4 text-sm md:text-base lg:text-lg">
               View your recent activity, insights, and track your performance.
             </p>
-            <button className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg">
+            <button className="bg-purple-800 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg">
               View Analytics
             </button>
           </motion.div>
@@ -218,19 +229,19 @@ const Dashboard: React.FC = () => {
           {/* Notifications Card */}
           <motion.div
             ref={ref}
-            className="bg-purple-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="bg-gray-400 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             variants={contentVariants}
             initial="hidden"
             animate={controls}
           >
-            <h3 className="text-xl font-semibold mb-4 text-lg md:text-xl lg:text-2xl">
+            <h3 className="text-xl text-black font-semibold mb-4 text-lg md:text-xl lg:text-2xl">
               Notifications
             </h3>
-            <p className="text-white mb-4 text-sm md:text-base lg:text-lg">
+            <p className="text-black mb-4 text-sm md:text-base lg:text-lg">
               Stay up to date with the latest updates, messages, and alerts
               related to your account.
             </p>
-            <button className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg">
+            <button className="bg-purple-800  text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg">
               Check Notifications
             </button>
           </motion.div>

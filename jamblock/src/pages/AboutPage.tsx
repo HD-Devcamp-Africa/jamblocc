@@ -32,9 +32,9 @@ const AboutPage: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <div className="bg-purple-900 text-white p-10 rounded-lg shadow-lg">
+      <div className=" bg-gray-800 text-white p-10 rounded-lg shadow-lg">
         <p
-          className="text-justify w-[80%] mx-auto"
+          className="text-justify w-[80%] text-bold mx-auto"
           dangerouslySetInnerHTML={{ __html: displayedText }}
         />
         <BottomNav />

@@ -7,7 +7,7 @@ import BottomNav from "../components/BottomNav";
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen font-sans bg-white">
+    <div className="min-h-screen font-sans">
       {/* Navigation */}
       <Navbar />
       {/* Hero Section */}
@@ -17,9 +17,7 @@ const LandingPage = () => {
       {/* Trusted Brands Section */}
       {/* <Dashboard/> */}
       {/* <TrustedBrands /> */}
-
       {/* Footer section */}
-
       {/* <Typewriter onComplete={handleTypingComplete}/> */}
       <Footer />
       <BottomNav />

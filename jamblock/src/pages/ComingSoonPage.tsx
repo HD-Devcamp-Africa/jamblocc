@@ -17,16 +17,16 @@ function ComingSoonPage() {
     <div>
       <Navbar />
 
-      <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="flex items-center justify-center h-screen bg-gray-800">
         <h1
-          className={`text-4xl font-bold text-gray-800 transition-opacity duration-1000 ease-in-out transform ${
+          className={`text-4xl font-bold text-white transition-opacity duration-1000 ease-in-out transform ${
             visible ? "opacity-100 scale-100" : "opacity-0 scale-95"
           } animate-bounce`}
         >
           COMING SOON
         </h1>
       </div>
-      <BottomNav/>
+      <BottomNav />
     </div>
   );
 }

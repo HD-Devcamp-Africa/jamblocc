@@ -18,19 +18,6 @@ const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const account = useActiveAccount();
 
-  // useEffect(() => {
-  //     if (account) {
-  //         handleNextStep();
-  //     } else {
-  //         showPopup("Sign in to continue", 6000);
-  //         // navigate("/");
-  //     }
-  // }, [account]);
-
-  // const handleNextStep = () => {
-  //     navigate("/test");
-  // };
-
   const showPopup = (message: string, timeout: number = 3000): void => {
     const popup = document.createElement("div");
     popup.textContent = message;
@@ -69,7 +56,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="bg-gray-800 shadow-md sticky top-0 z-10 font-roboto md:block lg:block hidden">
+    <header className="bg-gray-800 shadow-md sticky top-0 z-10 font-roboto md:block lg:block hidden  border-b">
       <nav className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* <div className="text-xl font-bold text-purple-800">JAMBlock</div> */}
         <Link to="/">
@@ -79,12 +66,18 @@ const Navbar: React.FC = () => {
             className="h-20 rounded-md"
           />
         </Link>
-        <ul className="hidden lg:flex space-x-8 text-gray-700">
+        <ul className="hidden lg:flex space-x-8 font-bold text-gray-200">
           <li className="hover:text-purple-500 cursor-pointer">
             <Link to="/">Home</Link>
           </li>
           <li className="hover:text-purple-500 cursor-pointer">
-            <Link to="/dashboard">Dashboard</Link>
+            {account ? (
+              <Link to="/dashboard">Dashboard</Link>
+            ) : (
+              <span onClick={() => showPopup("Kindly sign in", 2000)}>
+                Dashboard
+              </span>
+            )}
           </li>
           <li className="hover:text-purple-500 cursor-pointer">
             <Link to="/questions">Past Questions</Link>
@@ -123,7 +116,13 @@ const Navbar: React.FC = () => {
             </li>
             <li className="hover:text-purple-500 font-bold cursor-pointer hover:underline border-b py-2 flex items-center">
               <MdOutlineSpaceDashboard className="mr-2 text-2xl" />{" "}
-              <Link to="/dashboard">Dashboard</Link>
+              {account ? (
+                <Link to="/dashboard">Dashboard</Link>
+              ) : (
+                <span onClick={() => showPopup("Kindly sign in", 2000)}>
+                  Dashboard
+                </span>
+              )}
             </li>
             <li className="hover:text-purple-500 font-bold cursor-pointer hover:underline border-b py-2 flex items-center">
               <FaBookReader className="mr-2 text-2xl" />{" "}

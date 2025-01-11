@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 // import SearchFilterWithSidebar from '../components/SearchFilter';
 import BottomNav from "../components/BottomNav";
 import PrizeModal from "../components/PrizeModal";
-import WalletConnect from "../components/ConnectWallet";
+// import WalletConnect from "../components/ConnectWallet";
 const ExampPage = () => {
   // For claiming prizes
   const [showPrize, setShowPrize] = useState(true);
@@ -44,7 +44,7 @@ const ExampPage = () => {
       <div>
         <Navbar />
         <div className="text-center  mt-40">
-          <WalletConnect />
+          {/* <WalletConnect /> */}
           <PrizeModal
             showPrize={showPrize}
             prizeClaimed={prizeClaimed}

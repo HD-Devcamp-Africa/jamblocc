@@ -3,42 +3,60 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 
 type TypewriterProps = {
-    onComplete: () => void; // Callback function to call when typing is complete
+  onComplete: () => void;
+  isConnected: boolean;
 };
 
-const Typewriter: React.FC<TypewriterProps> = ({ onComplete }) => {
-    const [text, setText] = useState(""); // State for the current text
-    const fullText = "Hey Welcome to Jamblock"; // Full text to display
-    const typingSpeed = 20; // Speed of typing in milliseconds
-    const navigate = useNavigate();
+const Typewriter: React.FC<TypewriterProps> = ({ onComplete, isConnected }) => {
+  const [text, setText] = useState("");
+  const fullText = "Hey Welcome to Jamblock";
+  const typingSpeed = 5;
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        let timeout: NodeJS.Timeout;
-        if (text.length < fullText.length) {
-            timeout = setTimeout(() => {
-                setText((prev) => prev + fullText[prev.length]);
-            }, typingSpeed);
-        } 
-        // else {
-            // Call the callback function after a short delay
-            setTimeout(() => {
-                onComplete();
-                navigate("/");
-            }, 1000);
-        // }
-        return () => clearTimeout(timeout);
-    }, [text, fullText, onComplete, navigate]);
+  useEffect(() => {
+    if (!isConnected) return;
 
-    return (
-        <Modal
-            isOpen={true}
-            contentLabel="Typewriter Modal"
-            className="flex justify-center items-center min-h-screen bg-gradient-to-r from-purple-600 to-purple-800 text-white"
-            overlayClassName="fixed inset-0 bg-black bg-opacity-50"
-        >
-            <h1 className="md:text-4xl text-md font-bold">{text}</h1>
-        </Modal>
-    );
+    let timeout: NodeJS.Timeout;
+    if (text.length < fullText.length) {
+      timeout = setTimeout(() => {
+        setText((prev) => prev + fullText[prev.length]);
+      }, typingSpeed);
+    } else {
+      timeout = setTimeout(() => {
+        onComplete();
+        navigate("/dashboard");
+      }, 1000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [text, fullText, onComplete, navigate, isConnected]);
+
+  if (!isConnected) return null;
+
+  return (
+    <Modal
+      isOpen={true}
+      contentLabel="Typewriter Modal"
+      className="modal-content"
+      overlayClassName="modal-overlay"
+      style={{
+        content: {
+          top: "50%",
+          left: "50%",
+          right: "auto",
+          bottom: "auto",
+          transform: "translate(-50%, -50%)",
+          background: "transparent",
+          border: "none",
+        },
+        overlay: {
+          backgroundColor: "rgba(0, 0, 0, 0.75)",
+        },
+      }}
+    >
+      <h1 className="md:text-4xl text-md font-bold text-white">{text}</h1>
+    </Modal>
+  );
 };
 
 export default Typewriter;

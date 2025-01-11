@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
     <footer className="bg-gray-800 text-white py-6">
       <div className="container mx-auto px-6 text-center">
         <p className="text-sm">
-          &copy; {new Date().getFullYear()} Jambly. All rights reserved.
+          &copy; {new Date().getFullYear()} JAMBlock. All rights reserved.
         </p>
         <p className="text-lg mt-2">
           Built with{" "}
