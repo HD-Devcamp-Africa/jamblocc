@@ -133,7 +133,7 @@ export const storeQuestion = async (req, res) => {
     );
     res.status(201).json({
       message: `Question saved successfully in the ${responseSubject} collection.`,
-      question: newQuestion,
+      // question: newQuestion,
     });
   } catch (error) {
     console.error("Error fetching or saving question:", error);
