@@ -1,18 +1,21 @@
-// FetchQuestionsForm.tsx
 import React, { useState } from "react";
 import axios from "axios";
 import { FiCheck } from "react-icons/fi";
+import { ImSpinner8 } from "react-icons/im";
 
 const FetchQuestionsForm: React.FC = () => {
   const [apiSubject, setApiSubject] = useState("");
   const [apiRandom, setApiRandom] = useState(false);
   const [apiResponse, setApiResponse] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false); // New loading state
   const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
   const handleApiSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(false); // Reset the submitted state
+    setIsSubmitted(false);
+    setLoading(true); // Start loading spinner
+
     try {
       const response = await axios.get(
         `http://localhost:5000/api/questions/fetch-and-store`,
@@ -24,9 +27,11 @@ const FetchQuestionsForm: React.FC = () => {
         }
       );
       setApiResponse(response.data);
-      setIsSubmitted(true); // Set submitted state to true on success
+      setIsSubmitted(true); // Show success tick
     } catch (error) {
       console.error("Error fetching API data:", error);
+    } finally {
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -56,9 +61,14 @@ const FetchQuestionsForm: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow flex items-center"
+          className={`bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow flex items-center justify-center`}
+          disabled={loading} // Disable button while loading
         >
-          Fetch Data {isSubmitted && <FiCheck className="ml-2" />}
+          {loading ? (
+            <ImSpinner8 className="animate-spin h-5 w-5" />
+          ) : (
+            <>Fetch Data {isSubmitted && <FiCheck className="ml-2" />}</>
+          )}
         </button>
       </form>
 

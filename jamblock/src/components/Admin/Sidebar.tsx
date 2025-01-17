@@ -26,6 +26,26 @@ const Sidebar: React.FC = () => {
           <BiStats />
           <span>Statistics</span>
         </a>
+        <ol>
+          <li className="font-bold">Supported Subjects</li>
+          <li>biology</li>
+          <li> physics</li>
+          <li> chemistry</li>
+          <li> englishlit</li>
+          <li> government</li>
+          <li> crk</li>
+          <li> geography</li>
+          <li> economics</li>
+          <li> irk</li>
+          <li> civiledu</li>
+          <li> insurance</li>
+          <li> currentaffairs</li>
+          <li>history</li>
+          <li>mathematics</li>
+          <li>commerce</li>
+          <li>english</li>
+          <li>accounting</li>
+        </ol>
       </nav>
     </aside>
   );
