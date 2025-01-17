@@ -1,0 +1,1 @@
+{ "message": "Subject available", "status": 200, "data": { "0": "english", "1": "mathematics", "2": "commerce", "3": "accounting", "4": "biology", "5": "physics", "6": "chemistry", "7": "englishlit", "8": "government", "9": "crk", "10": "geography", "11": "economics", "12": "irk", "13": "civiledu", "14": "insurance", "15": "currentaffairs", "16": "history" } }
