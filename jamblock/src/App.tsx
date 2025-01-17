@@ -1,3 +1,4 @@
+// App.tsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
@@ -7,45 +8,59 @@ import WaitlistPage from "./pages/WaitlistPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import QuestionPage from "./pages/QuestionPage";
 import Dashboard from "./pages/DashboardPage";
-import Typewriter from "./components/TypeWriter";
 import AboutPage from "./pages/AboutPage";
-import ExamPage from "./pages/ExamPage";
 import AccountSettings from "./pages/AccountSettingPage";
-// import ProtectedRoute from "./middlewares/ProtectedRoute";
-
-// Testing the typewriter component
-const handleTypingComplete = () => {
-  console.log("Typing completed! Proceeding to the next function...");
-  // Add the next function logic here
-};
+import Airdop from "./pages/Airdrop";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+// import Login from "./pages/Admin/Login";
+import ProtectedRoute from "./middlewares/ProtectedRoute";
 
 export function App() {
   return (
     <Router>
       <Routes>
-        {/* Route for Landing Page */}
+        {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
-
-        {/* Other routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/waitlist" element={<WaitlistPage />} />
         <Route path="/coming-soon" element={<ComingSoonPage />} />
-
         <Route path="/questions" element={<QuestionPage />} />
-
         <Route path="/about/" element={<AboutPage />} />
 
-        {/* Protected Routes */}
-        {/* Add protection using middleware here */}
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/account-setting" element={<AccountSettings />} />
+        {/* User Dashboard (Protected) */}
+        <Route
+          path="/dashboard"
+          element={
+            // <ProtectedRoute>
+            <Dashboard />
+            // </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/account-setting"
+          element={
+            <ProtectedRoute>
+              <AccountSettings />
+            </ProtectedRoute>
+          }
+        />
 
-        {/* <Route path="/exams" element={<ExamPage />} /> */}
+        {/* Admin Routes */}
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        {/* <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        /> */}
+
+        <Route path="/airdrop" element={<Airdop />} />
 
         {/* Catch-All Routes */}
         <Route path="*" element={<ComingSoonPage />} />
-        <Route path="/test/*" element={<ComingSoonPage />} />
       </Routes>
     </Router>
   );

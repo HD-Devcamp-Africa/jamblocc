@@ -44,6 +44,7 @@ const AccountSettings: React.FC = () => {
             id="walletAddress"
             disabled
             className="p-2.5 text-base border border-gray-300 rounded bg-gray-100 text-gray-600 cursor-not-allowed"
+            
           />
         </div> */}
       </div>

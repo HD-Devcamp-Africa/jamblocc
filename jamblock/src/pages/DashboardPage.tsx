@@ -108,6 +108,7 @@ const Dashboard: React.FC = () => {
               <HiOutlineChartBar className="text-xl" />
               {isSidebarOpen && <span>Exams</span>}
             </motion.a>
+
             <motion.a
               href="/account-settings"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
@@ -117,6 +118,16 @@ const Dashboard: React.FC = () => {
             >
               <HiOutlineCog className="text-xl" />
               {isSidebarOpen && <span>Settings</span>}
+            </motion.a>
+            <motion.a
+              href="/questions"
+              className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <HiOutlineCog className="text-xl" />
+              {isSidebarOpen && <span>Past Questions</span>}
             </motion.a>
             <motion.a
               href="*"

@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 interface QuestionCardProps {
   question: {
@@ -8,7 +9,7 @@ interface QuestionCardProps {
     answer: string;
     section: string;
     image: string;
-    solution: string;
+    solution: string | JSX.Element;
     examtype: string;
     examyear: string;
     questionNub: number | null;
@@ -22,9 +23,14 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question, index }) => {
   const [selectedOption, setSelectedOption] = React.useState<string | null>(
     null
   );
+  const [showSolution, setShowSolution] = React.useState<boolean>(false);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
+  };
+
+  const toggleSolution = () => {
+    setShowSolution((prev) => !prev);
   };
 
   return (
@@ -63,9 +69,24 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question, index }) => {
         ))}
       </div>
       <div className="mt-4">
-        <p className="text-sm text-gray-500">
-          <strong>Solution:</strong> {question.solution}
-        </p>
+        <button
+          onClick={toggleSolution}
+          className="text-sm bg-blue-500 text-white py-2 px-4 rounded"
+        >
+          {showSolution ? "Hide Solution" : "Show Solution"}
+        </button>
+        {showSolution && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            transition={{ duration: 0.5 }}
+            className="mt-2"
+          >
+            <p className="text-sm text-gray-500">
+              <strong>Solution:</strong> {question.solution}
+            </p>
+          </motion.div>
+        )}
       </div>
     </div>
   );

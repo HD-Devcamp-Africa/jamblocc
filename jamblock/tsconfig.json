@@ -19,7 +19,7 @@
     // "lib": ["dom", ],
 
   },
-  "include": ["src"],
+  "include": ["src", "services/Admin"],
   "references": [{ "path": "./tsconfig.node.json" }]
 
 

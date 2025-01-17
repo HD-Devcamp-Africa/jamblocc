@@ -2,21 +2,20 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import Popup from "../components/Popup";
 
 interface ProtectedRouteProps {
-  element: React.ReactElement;
+  children: JSX.Element;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
-    Popup({ message: "Please sign in to access this page." });
-    // return <Navigate to="/login" replace />;
+    // Redirect to login if not authenticated
+    return <Navigate to="/admin" replace />;
   }
 
-  return element;
+  return children;
 };
 
 export default ProtectedRoute;
