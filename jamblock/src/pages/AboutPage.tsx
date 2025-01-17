@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import BottomNav from "../components/BottomNav";
 import Navbar from "../components/Navbar";
+import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const AboutPage: React.FC = () => {
   const fullText = `
        <h1> About Our Platform</h1> <br /><br />
 
-        Welcome to JAMBlock, a revolutionary platform designed to transform how students prepare for JAMB and other academic challenges. Our mission is to combine education and innovation, offering a unique experience where students not only practice and excel but also earn real rewards for their achiev0ements.<br /><br />
+        Welcome to JAMBlock, a revolutionary platform designed to transform how students prepare for JAMB and other academic challenges. Our mission is to combine education and innovation, offering a unique experience where students not only practice and excel but also earn real rewards for their achievements.<br /><br />
 
         On our platform, users can participate in carefully curated practice tasks and tests that simulate real exam scenarios. These tasks are time-limited, fostering a competitive and engaging environment. The top performers, based on speed and accuracy, share tokenized rewards, motivating students to push their boundaries and achieve excellence.<br /><br />
 
@@ -32,13 +33,55 @@ const AboutPage: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <div className=" bg-gray-800 text-white p-10 rounded-lg shadow-lg">
+      <div className="bg-gray-800 text-white p-10 rounded-lg shadow-lg">
+        {/* Profile Section */}
+        <div className="text-center mb-8">
+          <img
+            src="https://avatars.githubusercontent.com/u/105107462?v=4"
+            alt="Owner"
+            className="w-24 h-24 rounded-full mx-auto border-4 border-purple-600"
+          />
+          <h2 className="text-xl font-semibold mt-4">Moses Sunday</h2>
+          <p className="text-gray-400">
+            Fullstack Blockchain Engineer & Enthusiast{" "}
+          </p>
+        </div>
+
+        {/* Social Media Links */}
+        <div className="flex justify-center space-x-4 mb-6">
+          <a
+            href="https://x.com/Moses_Sunday_"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-500 text-2xl"
+          >
+            <FaTwitter />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/moses-sunday/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-300 hover:text-blue-400 text-2xl"
+          >
+            <FaLinkedin />
+          </a>
+          <a
+            href="https://github.com/Moses-main"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-300 hover:text-gray-400 text-2xl"
+          >
+            <FaGithub />
+          </a>
+        </div>
+
+        {/* About Text */}
         <p
           className="text-justify w-[80%] text-bold mx-auto"
           dangerouslySetInnerHTML={{ __html: displayedText }}
         />
-        <BottomNav />
       </div>
+      <BottomNav />
     </div>
   );
 };
