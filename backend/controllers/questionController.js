@@ -42,7 +42,7 @@ export const fetchQuestions = async (req, res) => {
 // ############################################################################
 // ############################################################################
 
-export const storeQuestion = async (req, res) => {
+export const storeQuestions = async (req, res) => {
   try {
     const apiUrl = process.env.API_URL;
     const accessToken = process.env.ACCESS_TOKEN;
@@ -83,7 +83,8 @@ export const storeQuestion = async (req, res) => {
       });
     }
 
-    const fullUrl = `${apiUrl}?subject=${encodeURIComponent(subject)}`;
+    // New API endpoint to fetch multiple questions for the specified subject
+    const fullUrl = `${apiUrl}/m/115?subject=${encodeURIComponent(subject)}`;
 
     const response = await axios.get(fullUrl, {
       headers: {
@@ -94,49 +95,49 @@ export const storeQuestion = async (req, res) => {
 
     const { subject: responseSubject, status, data } = response.data;
 
-    if (!data || !data.id) {
+    if (!data || data.length === 0) {
       return res.status(404).json({
         error: "No valid question data found for the specified subject.",
       });
     }
 
-    // Handle empty or missing section
-    if (!data.section || data.section.trim() === "") {
-      data.section = "Default Section";
-    }
-
-    // Create dynamic model based on subject
+    // Iterate through each question in the fetched data
     const QuestionModel = createQuestionModel(responseSubject);
 
-    // Check for existing question in the subject-specific collection
-    const existingQuestion = await QuestionModel.findOne({
-      "data.id": data.id,
-    });
-    if (existingQuestion) {
-      return res.status(200).json({
-        message: `Question with id ${data.id} already exists in the ${responseSubject} collection.`,
+    const savedQuestions = [];
+    for (const questionData of data) {
+      // Handle empty or missing section
+      if (!questionData.section || questionData.section.trim() === "") {
+        questionData.section = "Default Section";
+      }
+
+      // Check for existing question in the subject-specific collection
+      const existingQuestion = await QuestionModel.findOne({
+        "data.id": questionData.id,
       });
+
+      if (existingQuestion) {
+        console.log(`Question with id ${questionData.id} already exists.`);
+        continue; // Skip saving if it already exists
+      }
+
+      // Create a new question document
+      const newQuestion = new QuestionModel({
+        subject: responseSubject,
+        status,
+        data: questionData,
+      });
+
+      await newQuestion.save();
+      savedQuestions.push(newQuestion);
+      console.log(`Question saved successfully with id ${questionData.id}`);
     }
 
-    // Save new question
-    const newQuestion = new QuestionModel({
-      subject: responseSubject,
-      status,
-      data,
-    });
-
-    await newQuestion.save();
-
-    console.log(
-      `Question saved successfully in the ${responseSubject} collection:`,
-      newQuestion
-    );
     res.status(201).json({
-      message: `Question saved successfully in the ${responseSubject} collection.`,
-      // question: newQuestion,
+      message: `Successfully saved ${savedQuestions.length} question(s) in the ${responseSubject} collection.`,
     });
   } catch (error) {
-    console.error("Error fetching or saving question:", error);
+    console.error("Error fetching or saving questions:", error);
 
     // Handle specific errors
     if (error.response && error.response.status === 404) {
@@ -147,12 +148,11 @@ export const storeQuestion = async (req, res) => {
     }
 
     res.status(500).json({
-      error: "Failed to fetch or save question.",
+      error: "Failed to fetch or save questions.",
       details: error.response ? error.response.data : error.message,
     });
   }
 };
-
 //  ###########################################################################
 //  ###########################################################################
 //  ###########################################################################

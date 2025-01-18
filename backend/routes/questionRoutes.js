@@ -3,7 +3,7 @@
 
 import {
   fetchQuestions,
-  storeQuestion,
+  storeQuestions,
   getAllQuestions,
   searchQuestions,
 } from "../controllers/questionController.js";
@@ -17,10 +17,10 @@ const cache = duration;
 const router = express.Router();
 
 // Routes
-router.post("/", storeQuestion); // Store question
+router.post("/", storeQuestions); // Store question
 // router.get("/", getAllQuestions); // Get all questions
 router.get("/search", cache(300), searchQuestions); // Search questions by subject
-router.get("/fetch-and-store", cache(300), storeQuestion); // Retrieve the response and
+router.get("/fetch-and-store", cache(300), storeQuestions); // Retrieve the response and
 router.get("/all-questions", cache(300), getAllQuestions); // get all questions
 //save it in the database
 
