@@ -17,6 +17,7 @@ import {
   useActiveAccount,
   useActiveWallet,
   useDisconnect,
+  useWalletBalance,
 } from "thirdweb/react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,6 +25,7 @@ import { clientId } from "../client";
 import BottomNav from "../components/BottomNav";
 import { shortenAddress } from "@thirdweb-dev/react";
 import { inAppWallet, createWallet } from "thirdweb/wallets";
+import { useBalance } from "wagmi";
 
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -34,6 +36,7 @@ const Dashboard: React.FC = () => {
   const account = useActiveAccount();
   const { disconnect } = useDisconnect();
   const wallet = useActiveWallet();
+  // const { data: balance, isLoading } = useBalance(wallet?.getAccount.name);
 
   useEffect(() => {
     if (inView) {
@@ -154,7 +157,31 @@ const Dashboard: React.FC = () => {
       >
         <header className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-semibold text-lg md:text-2xl lg:text-3xl">
-            Welcome back, User!
+            {account ? (
+              <>
+                {" "}
+                Welcome back,{" "}
+                <div
+                  onClick={() => {
+                    navigator.clipboard.writeText(account.address);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }}
+                  className="cursor-pointer flex items-center space-x-2"
+                  title="Copy"
+                >
+                  {shortenAddress(account.address)}
+                  {/* {account.getbalance()} */}
+                  {copied ? (
+                    <HiOutlineCheck className="text-green-500" />
+                  ) : (
+                    <HiOutlineClipboard className="text-white" />
+                  )}
+                </div>
+              </>
+            ) : (
+              <> Welcome back, User</>
+            )}
           </h1>
 
           <div className="flex items-center space-x-4">
