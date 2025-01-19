@@ -1,27 +1,26 @@
 import connectDB from "./config/db.js";
-
 import cors from "cors";
-import bodyParser from "body-parser";
 import express from "express";
 import questionRoutes from "./routes/questionRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
-
 import dotenv from "dotenv";
 
 dotenv.config();
-
 const app = express();
+
+// Middleware to parse JSON bodies
+app.use(express.json()); // Only this is needed
 
 // Connect to MongoDB
 connectDB();
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
 
 // Routes
 app.use("/api/questions", questionRoutes);
-app.use("/api/users", userRoutes);
+app.use("/api/user", userRoutes);
+
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
