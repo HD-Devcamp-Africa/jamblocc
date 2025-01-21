@@ -15,17 +15,16 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 // import Login from "./pages/Admin/Login";
 import ProtectedRoute from "./middlewares/ProtectedRoute";
 import WelcomePage from "./pages/WelcomePage";
-import OnboardingPage from "./pages/OnboardingPage";
+import Check from "./components/FeaturesCard";
 
 export function App() {
   return (
     <Router>
       <Routes>
         {/* Public Routes */}
-        {/* <Route path="/" element={<LandingPage />} /> */}
+        <Route path="/" element={<LandingPage />} />
 
         {/* <Route path="/" element={<LandingPage />} /> */}
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/waitlist" element={<WaitlistPage />} />
@@ -62,6 +61,7 @@ export function App() {
             </ProtectedRoute>
           }
         /> */}
+        {/* <Route path="/checkout" element={<Check />} /> */}
 
         <Route path="/airdrop" element={<Airdop />} />
 

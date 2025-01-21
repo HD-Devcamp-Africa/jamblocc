@@ -7,6 +7,7 @@ import { useActiveAccount } from "thirdweb/react";
 import { useNavigate } from "react-router-dom";
 import { VerifyLoginPayloadParams } from "thirdweb/dist/types/auth/core/verify-login-payload";
 // import { sepolia } from "thirdweb/chains";
+import FeaturesCard from "./FeaturesCard";
 
 import { createWallet, inAppWallet, injectedProvider } from "thirdweb/wallets";
 import TrustedBrands from "./TrustedBrands";
@@ -88,7 +89,7 @@ const Hero: React.FC = () => {
   }
 
   return (
-    <section className="min-h-screen w-full flex items-center justify-center py-20 text-center bg-gray-800">
+    <section className="min-h-screen w-full flex items-center justify-center py-20 text-center bg-gray-900">
       <div className="container mx-auto px-6">
         <motion.h1
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
@@ -171,6 +172,16 @@ const Hero: React.FC = () => {
         ) : (
           <button> Welcome</button>
         )}
+        <button
+          onClick={() => {
+            navigate("/signup");
+          }}
+          className="px-9 py-2 text-black bg-white rounded-md font-bold"
+        >
+          Get Started
+        </button>
+
+        <FeaturesCard />
       </div>
     </section>
   );

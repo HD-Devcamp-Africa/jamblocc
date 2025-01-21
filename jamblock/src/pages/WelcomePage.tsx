@@ -29,8 +29,8 @@ const WelcomePage: React.FC = () => {
         } transform transition-all duration-500 ease-in-out z-20 bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-md`}
       >
         <div className="text-center text-white">
-          <h1 className="md:text-2xl text-sm font-bold mb-4 animate__animated animate__fadeIn">
-            Welcome to Our JAMBlock!
+          <h1 className="md:text-2xl text-blue-300 text-md font-bold mb-4 animate__animated animate__fadeIn">
+            Welcome to JAMBlock!
           </h1>
           <p className="text-justify pb-2">
             JamBlock is a platform designed to assist students in preparing for

@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="bg-gray-800 shadow-md sticky top-0 z-10 font-roboto md:block lg:block hidden  border-b">
+    <header className="bg-gray-900 shadow-md sticky top-0 z-10 font-roboto md:block lg:block hidden  border-b">
       <nav className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* <div className="text-xl font-bold text-purple-800">JAMBlock</div> */}
         <Link to="/">
@@ -109,28 +109,51 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -200 }}
             transition={{ duration: 0.5 }}
-            className="lg:hidden flex flex-col space-y-4 text-gray-700 px-6 py-4 bg-white shadow-lg"
+            className="lg:hidden flex flex-col space-y-4 text-gray-700 px-6 py-4 bg-white shadow-lg rounded-lg"
           >
-            <li className="hover:text-purple-500 font-bold cursor-pointer hover:underline border-b py-2 flex items-center">
-              <CiHome className="mr-2 text-2xl" /> <Link to="/">Home</Link>
+            <li className="group hover:bg-purple-100 transition duration-300 ease-in-out rounded-lg">
+              <Link
+                to="/"
+                className="flex items-center space-x-3 py-2 px-4 text-gray-800 font-semibold rounded-lg group-hover:bg-purple-200 transition-all"
+              >
+                <CiHome className="text-2xl text-gray-600 group-hover:text-purple-500 transition-all" />
+                <span className="group-hover:text-purple-500">Home</span>
+              </Link>
             </li>
-            <li className="hover:text-purple-500 font-bold cursor-pointer hover:underline border-b py-2 flex items-center">
-              <MdOutlineSpaceDashboard className="mr-2 text-2xl" />{" "}
-              {account ? (
-                <Link to="/dashboard">Dashboard</Link>
-              ) : (
-                <span onClick={() => showPopup("Kindly sign in", 2000)}>
-                  Dashboard
+            <li className="group hover:bg-purple-100 transition duration-300 ease-in-out rounded-lg">
+              <div
+                className="flex items-center space-x-3 py-2 px-4 text-gray-800 font-semibold rounded-lg group-hover:bg-purple-200 transition-all cursor-pointer"
+                onClick={() => {
+                  if (!account) {
+                    showPopup("Kindly sign in", 2000);
+                  }
+                }}
+              >
+                <MdOutlineSpaceDashboard className="text-2xl text-gray-600 group-hover:text-purple-500 transition-all" />
+                <span className="group-hover:text-purple-500">
+                  {account ? "Dashboard" : "Please Sign In"}
                 </span>
-              )}
+              </div>
             </li>
-            <li className="hover:text-purple-500 font-bold cursor-pointer hover:underline border-b py-2 flex items-center">
-              <FaBookReader className="mr-2 text-2xl" />{" "}
-              <Link to="/about">About</Link>
+            <li className="group hover:bg-purple-100 transition duration-300 ease-in-out rounded-lg">
+              <Link
+                to="/about"
+                className="flex items-center space-x-3 py-2 px-4 text-gray-800 font-semibold rounded-lg group-hover:bg-purple-200 transition-all"
+              >
+                <FaBookReader className="text-2xl text-gray-600 group-hover:text-purple-500 transition-all" />
+                <span className="group-hover:text-purple-500">About</span>
+              </Link>
             </li>
-            <li className="hover:text-purple-500 font-bold cursor-pointer hover:underline border-b py-2 flex items-center">
-              <FaClipboardQuestion className="mr-2 text-2xl" />
-              <Link to="/questions">Past Questions</Link>
+            <li className="group hover:bg-purple-100 transition duration-300 ease-in-out rounded-lg">
+              <Link
+                to="/questions"
+                className="flex items-center space-x-3 py-2 px-4 text-gray-800 font-semibold rounded-lg group-hover:bg-purple-200 transition-all"
+              >
+                <FaClipboardQuestion className="text-2xl text-gray-600 group-hover:text-purple-500 transition-all" />
+                <span className="group-hover:text-purple-500">
+                  Past Questions
+                </span>
+              </Link>
             </li>
           </motion.ul>
         )}

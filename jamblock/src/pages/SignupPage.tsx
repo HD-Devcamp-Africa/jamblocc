@@ -81,6 +81,11 @@ const SignupPage: React.FC = () => {
       );
 
       console.log("Signup successful:", response.data);
+      const token = response.data.token;
+      if (token) {
+        // save the token to local storage
+        localStorage.setItem("authToken", token);
+      }
       // Redirect or handle successful signup here
       // const { redirectUrl } = response.data;
       navigate("/welcome");

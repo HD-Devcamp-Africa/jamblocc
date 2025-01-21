@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
     });
   };
 
-  const VITE_API_URL = process.env.VITE_API_URL || " http://localhost:5000";
+  const VITE_API_URL = import.meta.env.VITE_API_URL || " http://localhost:5000";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent default form submission
@@ -46,7 +46,7 @@ const LoginPage: React.FC = () => {
 
       console.log("Login successful:", response.data);
       // Handle successful login, e.g., save token or redirect
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("authToken", response.data.token);
       window.location.href = "/dashboard"; // Redirect to dashboard
     } catch (error: any) {
       console.error("Error during login:", error);

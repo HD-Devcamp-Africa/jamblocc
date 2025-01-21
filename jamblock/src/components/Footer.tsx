@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
   if (!isDesktopOrTablet) return null;
 
   return (
-    <footer className="bg-gray-800 text-white py-6">
+    <footer className="bg-gray-900 text-white py-6">
       <div className="container mx-auto px-6 text-center">
         <p className="text-sm">
           &copy; {new Date().getFullYear()} JAMBlock. All rights reserved.
@@ -19,7 +19,6 @@ const Footer: React.FC = () => {
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-800 to-purple-400">
             Passion
           </span>
-          .
         </p>
       </div>
     </footer>

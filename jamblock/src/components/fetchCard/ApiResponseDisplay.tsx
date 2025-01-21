@@ -29,7 +29,9 @@ interface ApiResponse {
   };
 }
 
-const ApiResponseDisplay: React.FC = () => {
+const ApiResponseDisplay: React.FC<{ registeredSubjects: string[] }> = ({
+  registeredSubjects,
+}) => {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
   const [filteredData, setFilteredData] = useState<
     ApiResponse["data"][keyof ApiResponse["data"]] | null
@@ -37,7 +39,9 @@ const ApiResponseDisplay: React.FC = () => {
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: number]: string;
   }>({});
-  const [selectedSubject, setSelectedSubject] = useState<string>("english");
+  const [selectedSubject, setSelectedSubject] = useState<string>(
+    registeredSubjects[0] || "english"
+  );
 
   useEffect(() => {
     // Fetch the questions from your endpoint

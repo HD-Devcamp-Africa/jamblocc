@@ -8,41 +8,60 @@ import {
   HiOutlineCheck,
   HiOutlineClipboard,
 } from "react-icons/hi";
-import { GoHome } from "react-icons/go";
 import { FaUserCircle } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import {
   ConnectButton,
   useActiveAccount,
-  useActiveWallet,
   useDisconnect,
   useWalletBalance,
 } from "thirdweb/react";
 import { useNavigate } from "react-router-dom";
-
-import { clientId } from "../client";
+import axios from "axios";
 import BottomNav from "../components/BottomNav";
 import { shortenAddress } from "@thirdweb-dev/react";
-import { inAppWallet, createWallet } from "thirdweb/wallets";
-import { useBalance } from "wagmi";
 
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [userProfile, setUserProfile] = useState<any>(null);
   const controls = useAnimation();
   const { ref, inView } = useInView({ triggerOnce: true });
   const navigate = useNavigate();
   const account = useActiveAccount();
   const { disconnect } = useDisconnect();
-  const wallet = useActiveWallet();
-  // const { data: balance, isLoading } = useBalance(wallet?.getAccount.name);
+  // import the api url from the dot env file
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (inView) {
       controls.start("visible");
     }
   }, [controls, inView]);
+
+  // Fetch user profile data
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+
+    if (token) {
+      axios
+        .get(`${VITE_API_URL}/api/user/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          console.log("User profile fetched:", response.data);
+          setUserProfile(response.data); // Set the user profile data
+        })
+        .catch((error) => {
+          console.error("Error fetching user profile:", error);
+        });
+    } else {
+      console.log("User not logged in");
+      // Redirect to login page or handle this situation appropriately
+      navigate("/login");
+    }
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -65,7 +84,6 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen h-full bg-gray-800 text-white flex overflow-hidden">
-      {/* <div className="min-h-screen h-full bg-gradient-to-r from-purple-800 via-purple-600 to-purple-400 text-white flex overflow-hidden"> */}
       <motion.div
         className="bg-gray-900 p-6 space-y-6 fixed top-0 left-0 h-full z-0"
         variants={sidebarVariants}
@@ -81,26 +99,6 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="mt-40">
           <nav className="space-y-10">
-            {/* <motion.a
-              href="#"
-              className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
-              variants={itemVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <HiOutlineBell className="text-xl" />
-              {isSidebarOpen && <span>Tasks</span>}
-            </motion.a> */}
-            {/* <motion.a
-              href="/"
-              className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
-              variants={itemVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <GoHome className="text-xl" />
-              {isSidebarOpen && <span>Home</span>}
-            </motion.a> */}
             <motion.a
               href="*"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
@@ -111,7 +109,6 @@ const Dashboard: React.FC = () => {
               <HiOutlineChartBar className="text-xl" />
               {isSidebarOpen && <span>Exams</span>}
             </motion.a>
-
             <motion.a
               href="/account-settings"
               className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
@@ -171,7 +168,6 @@ const Dashboard: React.FC = () => {
                   title="Copy"
                 >
                   {shortenAddress(account.address)}
-                  {/* {account.getbalance()} */}
                   {copied ? (
                     <HiOutlineCheck className="text-green-500" />
                   ) : (
@@ -180,7 +176,7 @@ const Dashboard: React.FC = () => {
                 </div>
               </>
             ) : (
-              <> Welcome back, User</>
+              <> Welcome back, {userProfile ? userProfile.name : "User"}</>
             )}
           </h1>
 
@@ -197,7 +193,6 @@ const Dashboard: React.FC = () => {
                   title="Copy"
                 >
                   {shortenAddress(account.address)}
-                  {/* {account.getbalance()} */}
                   {copied ? (
                     <HiOutlineCheck className="text-green-500" />
                   ) : (
@@ -205,7 +200,7 @@ const Dashboard: React.FC = () => {
                   )}
                 </div>
 
-                <button
+                {/* <button
                   onClick={() => {
                     disconnect(wallet!);
                     setTimeout(() => {
@@ -215,16 +210,17 @@ const Dashboard: React.FC = () => {
                   className="text-sm font-bold text-white rounded-lg bg-[#E91E63] py-3 px-10"
                 >
                   Logout
-                </button>
+                </button> */}
               </div>
             ) : (
-              <ConnectButton client={clientId} />
+              <button onClick={() => {}}>Connect Wallet</button>
+              // <ConnectButton client={clientId} />
             )}
           </div>
         </header>
 
         {/* Dashboard Section */}
-        <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-20">
           {/* Settings Card */}
           <motion.div
             ref={ref}
@@ -282,21 +278,18 @@ const Dashboard: React.FC = () => {
               Notifications
             </h3>
             <p className="text-black mb-4 text-sm md:text-base lg:text-lg">
-              Stay up to date with the latest updates, messages, and alerts
-              related to your account.
+              Stay updated with the latest notifications from your activities.
             </p>
             <button
-              onClick={() => navigate("*")}
-              className="bg-purple-800  text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg"
+              onClick={() => navigate("/notifications")}
+              className="bg-purple-800 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-base lg:text-lg"
             >
-              Check Notifications
+              View Notifications
             </button>
           </motion.div>
         </div>
       </motion.div>
-      <div>
-        <BottomNav />
-      </div>
+      <BottomNav />
     </div>
   );
 };
