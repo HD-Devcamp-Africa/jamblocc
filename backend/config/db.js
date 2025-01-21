@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-// const MONGODB_URI = process.env.LIVE_DATABASE_URL;
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/JAMBlock";
+const MONGODB_URI = process.env.LIVE_DATABASE_URL;
+// const MONGODB_URI =
+// process.env.MONGODB_URI || "mongodb://localhost:27017/JAMBlock";
 
 const connectDB = async () => {
   try {
