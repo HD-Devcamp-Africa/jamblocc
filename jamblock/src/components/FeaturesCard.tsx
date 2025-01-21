@@ -66,7 +66,7 @@ function FeaturesCard() {
                       d={item.icon}
                     />
                   </svg>
-                  <h2 className="ml-4 text-xl font-bold">{item.title}</h2>
+                  <h2 className="ml-4 md:text-xl font-bold">{item.title}</h2>
                 </div>
                 <p className="mt-2 text-gray-400 text-sm text-justify">
                   {item.description}

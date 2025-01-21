@@ -69,7 +69,7 @@ const LoginPage: React.FC = () => {
           animation: "slide-up 0.5s ease-out",
         }}
       >
-        <h2 className="text-xl md:text-2xl font-bold text-white text-center mb-6">
+        <h2 className="text-xl md:text-2xl font-bold text-purple-300 text-center mb-6">
           Login
         </h2>
         {errorMessage && (
@@ -102,7 +102,7 @@ const LoginPage: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-2 bg-green-500 hover:bg-green-600 transition duration-200 rounded text-white font-semibold text-sm md:text-base"
+            className="w-full py-2 bg-purple-800 hover:bg-purple-600 transition duration-200 rounded text-white font-semibold text-sm md:text-base"
             disabled={isLoading}
           >
             {isLoading ? "Logging in..." : "Login"}

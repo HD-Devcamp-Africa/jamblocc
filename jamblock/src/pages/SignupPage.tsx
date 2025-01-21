@@ -103,7 +103,7 @@ const SignupPage: React.FC = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 bg-opacity-80 px-4">
       <div className="bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-lg animate-slide-up">
-        <h2 className="text-xl md:text-2xl font-bold text-white text-center mb-6">
+        <h2 className="text-xl md:text-2xl font-bold text-purple-300 text-center mb-6">
           Sign Up
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -181,7 +181,7 @@ const SignupPage: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-2 bg-green-500 hover:bg-green-600 transition duration-200 rounded text-white font-semibold text-sm md:text-base flex justify-center items-center"
+            className="w-full py-2 bg-purple-500 hover:bg-purple-600 transition duration-200 rounded text-white font-semibold text-sm md:text-base flex justify-center items-center"
           >
             {loading ? (
               <svg
