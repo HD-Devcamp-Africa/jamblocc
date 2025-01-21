@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import QuestionLayout from "../../layout/QuestionLayout";
 import QuestionCard from "./QuestionCard";
+import axios from "axios";
 
-// The expected shape of the API response
 interface ApiResponse {
   message: string;
   data: {
@@ -29,9 +29,7 @@ interface ApiResponse {
   };
 }
 
-const ApiResponseDisplay: React.FC<{ registeredSubjects: string[] }> = ({
-  registeredSubjects,
-}) => {
+const ApiResponseDisplay: React.FC = () => {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
   const [filteredData, setFilteredData] = useState<
     ApiResponse["data"][keyof ApiResponse["data"]] | null
@@ -39,20 +37,62 @@ const ApiResponseDisplay: React.FC<{ registeredSubjects: string[] }> = ({
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: number]: string;
   }>({});
-  const [selectedSubject, setSelectedSubject] = useState<string>(
-    registeredSubjects[0] || "english"
-  );
+  const [selectedSubject, setSelectedSubject] = useState<string>("");
+  const [registeredSubjects, setRegisteredSubjects] = useState<string[]>([]);
+
+  // Fetch user profile and question data
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/user/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const profileData = response.data;
+        if (profileData.subjects && Array.isArray(profileData.subjects)) {
+          setRegisteredSubjects(profileData.subjects);
+          setSelectedSubject(profileData.subjects[0] || ""); // Default to the first subject
+        }
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
 
   useEffect(() => {
-    // Fetch the questions from your endpoint
-    fetch("http://localhost:5000/api/questions/all-questions")
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/questions/all-questions"
+        );
+        const data = response.data;
+
         setApiResponse(data);
-        setFilteredData(data.data[selectedSubject]); // Initially, show data from the 'english' subject
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, [selectedSubject]); // Re-fetch when the selected subject changes
+
+        if (registeredSubjects.length > 0) {
+          const initialSubject = registeredSubjects[0];
+          setSelectedSubject(initialSubject);
+
+          if (data.data[initialSubject]) {
+            setFilteredData(data.data[initialSubject]);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    if (registeredSubjects.length > 0) {
+      fetchQuestions();
+    }
+  }, [registeredSubjects]);
 
   const handleFilterChange = (filters: {
     search: string;
@@ -81,6 +121,11 @@ const ApiResponseDisplay: React.FC<{ registeredSubjects: string[] }> = ({
 
   const handleSubjectChange = (subject: string) => {
     setSelectedSubject(subject);
+    if (apiResponse && apiResponse.data[subject]) {
+      setFilteredData(apiResponse.data[subject]);
+    } else {
+      setFilteredData([]);
+    }
   };
 
   const handleOptionClick = (questionId: number, option: string) => {
@@ -92,18 +137,17 @@ const ApiResponseDisplay: React.FC<{ registeredSubjects: string[] }> = ({
       {/* Subject Selector */}
       <div className="mb-4">
         <select
-          value={selectedSubject}
-          onChange={(e) => handleSubjectChange(e.target.value)}
+          value={selectedSubject} // Bind the selectedSubject state
+          onChange={(e) => handleSubjectChange(e.target.value)} // Call the handler on change
           className="p-2 border rounded"
         >
-          {Object.keys(apiResponse?.data || {}).map((subject) => (
+          {registeredSubjects.map((subject) => (
             <option key={subject} value={subject}>
               {subject}
             </option>
           ))}
         </select>
       </div>
-
       {/* Data Display */}
       {filteredData && filteredData.length > 0 ? (
         <div className="grid bg-gradient-to-r from-gray-700 to-purple-900 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">

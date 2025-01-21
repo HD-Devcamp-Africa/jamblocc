@@ -87,12 +87,12 @@ const Navbar: React.FC = () => {
           </li>
         </ul>
         <div className="hidden lg:block">
-          <ConnectButton
+          {/* <ConnectButton
             client={clientId}
             connectButton={{
               label: "Sign in",
             }}
-          />
+          /> */}
         </div>
         <button
           onClick={toggleMenu}

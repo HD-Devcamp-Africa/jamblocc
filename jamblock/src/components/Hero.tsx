@@ -121,7 +121,7 @@ const Hero: React.FC = () => {
           >
             <div>
               {/* The button to connect account */}
-              <ConnectButton
+              {/* <ConnectButton
                 client={clientId}
                 wallets={[
                   inAppWallet({
@@ -166,20 +166,23 @@ const Hero: React.FC = () => {
                 //   chain: sepolia,
                 //   sponsorGas: true,
                 // }}
-              />
+              /> */}
             </div>
           </motion.div>
         ) : (
           <button> Welcome</button>
         )}
-        <button
+        <motion.button
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 3, delay: 2 }}
           onClick={() => {
             navigate("/signup");
           }}
-          className="px-9 py-2 text-black bg-white rounded-md font-bold"
+          className="px-9 py-2 text-sm bg-purple-700 text-purple-200 bg-white rounded-md font-bold border border-purple-700 hover:border hover:border-purple-300  bg-gradient-to-r from-purple-200 to-purple-700 bg-clip-text text-transparent"
         >
           Get Started
-        </button>
+        </motion.button>
 
         <FeaturesCard />
       </div>
