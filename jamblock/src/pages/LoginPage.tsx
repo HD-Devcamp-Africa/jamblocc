@@ -1,10 +1,13 @@
 // src/LoginPage.tsx
 import React, { useState } from "react";
+import axios from "axios";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubjectChange = (subject: string) => {
     setSelectedSubjects((prev) => {
@@ -17,33 +20,44 @@ const LoginPage: React.FC = () => {
     });
   };
 
+  const VITE_API_URL = process.env.VITE_API_URL || " http://localhost:5000";
+
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
+    setErrorMessage(null); // Clear any previous error messages
+    setIsLoading(true); // Start loading indicator
 
     const formData = {
       email,
       password,
-      selectedSubjects,
+      selectedSubjects, // Optional, depending on your backend needs
     };
 
     try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await axios.post(
+        `${VITE_API_URL}/api/user/login`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
-
-      const data = await response.json();
-      console.log("Login successful:", data);
-      // Redirect or handle successful login here
-    } catch (error) {
+      console.log("Login successful:", response.data);
+      // Handle successful login, e.g., save token or redirect
+      localStorage.setItem("token", response.data.token);
+      window.location.href = "/dashboard"; // Redirect to dashboard
+    } catch (error: any) {
       console.error("Error during login:", error);
+      // Handle error: show a message to the user
+      if (error.response && error.response.data) {
+        setErrorMessage(error.response.data.message || "Login failed");
+      } else {
+        setErrorMessage("An unexpected error occurred");
+      }
+    } finally {
+      setIsLoading(false); // Stop loading indicator
     }
   };
 
@@ -58,6 +72,9 @@ const LoginPage: React.FC = () => {
         <h2 className="text-xl md:text-2xl font-bold text-white text-center mb-6">
           Login
         </h2>
+        {errorMessage && (
+          <div className="text-red-500 text-center mb-4">{errorMessage}</div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-gray-300 text-sm md:text-base">
@@ -86,8 +103,9 @@ const LoginPage: React.FC = () => {
           <button
             type="submit"
             className="w-full py-2 bg-green-500 hover:bg-green-600 transition duration-200 rounded text-white font-semibold text-sm md:text-base"
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
         <p className="mt-4 text-center text-gray-400 text-sm md:text-base">

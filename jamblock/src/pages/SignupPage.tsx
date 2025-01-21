@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const subjectsList = [
   { value: "english", label: "English" },
@@ -28,6 +29,8 @@ const SignupPage: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [subjects, setSubjects] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const handleSubjectChange = (value: string) => {
     setSubjects((prev) => {
@@ -79,6 +82,8 @@ const SignupPage: React.FC = () => {
 
       console.log("Signup successful:", response.data);
       // Redirect or handle successful signup here
+      // const { redirectUrl } = response.data;
+      navigate("/welcome");
     } catch (err: any) {
       if (axios.isAxiosError(err)) {
         console.error("API Error:", err.response?.data || err.message);

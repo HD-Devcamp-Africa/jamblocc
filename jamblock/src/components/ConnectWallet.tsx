@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import createThirdwebClient from "@thirdweb-dev/sdk";
-// import InjectedWallet from "@thirdweb-dev/sdk/wallets";
-
 // Replace with your actual client ID
 const clientId = "6151f89857874e35bb6b731f2712337c";
 
@@ -9,12 +7,6 @@ const WalletConnect: React.FC = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
-
-  // Create thirdweb client
-  //   const client = createThirdwebClient({ clientId });
-
-  // Initialize wallet instance for injected wallet (e.g., MetaMask)
-  //   const wallet = new InjectedWallet();
 
   useEffect(() => {
     // Check if MetaMask is already connected

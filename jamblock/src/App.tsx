@@ -14,6 +14,8 @@ import Airdop from "./pages/Airdrop";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 // import Login from "./pages/Admin/Login";
 import ProtectedRoute from "./middlewares/ProtectedRoute";
+import WelcomePage from "./pages/WelcomePage";
+import OnboardingPage from "./pages/OnboardingPage";
 
 export function App() {
   return (
@@ -30,6 +32,7 @@ export function App() {
         <Route path="/coming-soon" element={<ComingSoonPage />} />
         <Route path="/questions" element={<QuestionPage />} />
         <Route path="/about/" element={<AboutPage />} />
+        <Route path="/welcome/" element={<WelcomePage />} />
 
         {/* User Dashboard (Protected) */}
         <Route
