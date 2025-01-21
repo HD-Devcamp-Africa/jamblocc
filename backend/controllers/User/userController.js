@@ -2,6 +2,7 @@ import User from "../../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendVerificationEmail from "../../services/emailServices.js";
+// Import necessary modules and dependencies
 
 export const registerUser = async (req, res) => {
   const { name, email, password, subjects } = req.body;
@@ -50,6 +51,7 @@ export const registerUser = async (req, res) => {
     // Return success message
     res.status(201).send({
       message: "Signup successful! Check your email to verify.",
+      subjects: newUser.subjects,
     });
   } catch (error) {
     console.error("Registration error:", error);
@@ -59,37 +61,61 @@ export const registerUser = async (req, res) => {
   }
 };
 
+// Controller for user login
 export const loginUser = async (req, res) => {
+  // Destructure email and password from the request body
   const { email, password } = req.body;
 
+  console.log("Login endpoint triggered"); // Log when the endpoint is hit
+
+  // Validate that both email and password are provided
   if (!email || !password) {
     return res.status(400).json({ error: "Email and password are required" });
   }
 
   try {
+    // Find the user in the database by email
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ error: "Invalid email" });
+      // Return error if the email is not found
+      return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    console.log("User found:", user);
+    console.log("User found:", user); // Log the found user for debugging
 
+    // Compare the provided password with the stored hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
-    console.log("Password match result:", passwordMatch);
-
     if (!passwordMatch) {
-      return res.status(401).json({ error: "Invalid password" });
+      // Return error if passwords do not match
+      return res.status(401).json({ error: "Invalid email or password" });
     }
 
+    console.log("Password match successful"); // Log password match result
+
+    // Generate a JWT token for the authenticated user
     const token = jwt.sign(
-      { userId: user._id, name: user.name, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      {
+        userId: user._id, // Include user ID in the token payload
+        name: user.name, // Include user name in the token payload
+        email: user.email, // Include user email in the token payload
+      },
+      process.env.JWT_SECRET, // Secret key from environment variables
+      { expiresIn: "1h" } // Token expiration time
     );
 
-    res.status(200).json({ token, message: "Login successful" });
+    console.log("JWT token generated:", token); // Log the generated token
+
+    // Respond with the token and a success message
+    res.status(200).json({
+      token,
+      message: "Login successful",
+    });
   } catch (error) {
+    // Log and return an error response in case of exceptions
     console.error("Login error:", error);
-    res.status(500).json({ error: "Login failed", details: error.message });
+    res.status(500).json({
+      error: "Login failed",
+      details: error.message,
+    });
   }
 };

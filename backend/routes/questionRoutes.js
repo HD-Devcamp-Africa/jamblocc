@@ -7,7 +7,8 @@ import {
   getAllQuestions,
   searchQuestions,
 } from "../controllers/questionController.js";
-// import axios from "axios";
+//import the controller for creating the questions";
+import { createQuestion } from "../controllers/createQuestionController.js";
 import express from "express";
 
 // import cache from the service folder
@@ -27,4 +28,6 @@ router.get("/all-questions", cache(300), getAllQuestions); // get all questions
 // Define the route for fetching questions
 router.get("/fetch", cache(300), fetchQuestions);
 
+// Manually create questions locally
+router.post("/create", createQuestion);
 export default router;

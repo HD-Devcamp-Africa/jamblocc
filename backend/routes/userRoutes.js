@@ -12,6 +12,6 @@ const router = express.Router();
 router.post("/signup", registerUser);
 router.post("/login", loginUser);
 router.get("/profile", verifyToken, getUserData); // get user profile
-router.put("profile", verifyToken, updateUserProfile); // update user profile
+router.put("/profile", verifyToken, updateUserProfile); // update user profile
 router.get("/verify-email", verifyEmail);
 export default router;
