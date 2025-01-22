@@ -16,11 +16,13 @@ import {
   useActiveAccount,
   useDisconnect,
   useWalletBalance,
+  useActiveWallet,
 } from "thirdweb/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BottomNav from "../components/BottomNav";
 import { shortenAddress } from "@thirdweb-dev/react";
+import { clientId } from "../client";
 
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -31,6 +33,7 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const account = useActiveAccount();
   const { disconnect } = useDisconnect();
+  const wallet = useActiveWallet();
   // import the api url from the dot env file
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -154,30 +157,8 @@ const Dashboard: React.FC = () => {
       >
         <header className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-semibold text-lg md:text-2xl lg:text-3xl">
-            {account ? (
-              <>
-                {" "}
-                Welcome back,{" "}
-                <div
-                  onClick={() => {
-                    navigator.clipboard.writeText(account.address);
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 2000);
-                  }}
-                  className="cursor-pointer flex items-center space-x-2"
-                  title="Copy"
-                >
-                  {shortenAddress(account.address)}
-                  {copied ? (
-                    <HiOutlineCheck className="text-green-500" />
-                  ) : (
-                    <HiOutlineClipboard className="text-white" />
-                  )}
-                </div>
-              </>
-            ) : (
-              <> Welcome back, {userProfile ? userProfile.name : "User"}</>
-            )}
+            {/* {account ? ( */}
+            <> Welcome back,{userProfile ? userProfile.name : "User"}</>
           </h1>
 
           <div className="flex items-center space-x-4">
@@ -200,7 +181,7 @@ const Dashboard: React.FC = () => {
                   )}
                 </div>
 
-                {/* <button
+                <button
                   onClick={() => {
                     disconnect(wallet!);
                     setTimeout(() => {
@@ -210,11 +191,11 @@ const Dashboard: React.FC = () => {
                   className="text-sm font-bold text-white rounded-lg bg-[#E91E63] py-3 px-10"
                 >
                   Logout
-                </button> */}
+                </button>
               </div>
             ) : (
-              <button onClick={() => {}}>Connect Wallet</button>
-              // <ConnectButton client={clientId} />
+              // <button onClick={() => {}}>Connect Wallet</button>
+              <ConnectButton client={clientId} />
             )}
           </div>
         </header>
