@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import BottomNav from "../components/BottomNav";
 import Navbar from "../components/Navbar";
 import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
+import ScrollToTopButton from "../components/ScrollToTop";
 
 const AboutPage: React.FC = () => {
   const fullText = `
        <h1> About Our Platform</h1> <br /><br />
 
-        Welcome to JAMBlock, a revolutionary platform designed to transform how students prepare for JAMB and other academic challenges. Our mission is to combine education and innovation, offering a unique experience where students not only practice and excel but also earn real rewards for their achievements.<br /><br />
+        Welcome to JAMBlock, a revolutionary platform designed to transform how students prepare for JAMB, UTME,  other external exams and  academic challenges. Our mission is to combine education and innovation, offering a unique experience where students not only practice and excel but also earn real rewards for their achievements.<br /><br />
 
         On our platform, users can participate in carefully curated practice tasks and tests that simulate real exam scenarios. These tasks are time-limited, fostering a competitive and engaging environment. The top performers, based on speed and accuracy, share tokenized rewards, motivating students to push their boundaries and achieve excellence.<br /><br />
 
@@ -55,22 +56,22 @@ const AboutPage: React.FC = () => {
           >
             <FaTwitter />
           </a>
-          <a
+          {/* <a
             href="https://www.linkedin.com/in/moses-sunday/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-300 hover:text-blue-400 text-2xl"
           >
             <FaLinkedin />
-          </a>
-          <a
+          </a> */}
+          {/* <a
             href="https://github.com/Moses-main"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-gray-400 text-2xl"
           >
             <FaGithub />
-          </a>
+          </a> */}
         </div>
 
         {/* About Text */}
@@ -79,6 +80,7 @@ const AboutPage: React.FC = () => {
           dangerouslySetInnerHTML={{ __html: displayedText }}
         />
       </div>
+      <ScrollToTopButton />
       <BottomNav />
     </div>
   );

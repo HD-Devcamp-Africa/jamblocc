@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import QuestionLayout from "../../layout/QuestionLayout";
 import QuestionCard from "./QuestionCard";
 import axios from "axios";
+import ScrollToTopButton from "../ScrollToTop";
 
 interface ApiResponse {
   message: string;
@@ -178,6 +179,7 @@ const ApiResponseDisplay: React.FC = () => {
           <p className="text-lg">No questions available at the moment</p>
         </div>
       )}
+      <ScrollToTopButton />
     </QuestionLayout>
   );
 };
