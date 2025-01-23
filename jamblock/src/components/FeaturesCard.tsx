@@ -42,22 +42,60 @@ function FeaturesCard() {
           transition={{ duration: 1, delay: 1 }}
         >
           {data.map((item) => (
+            // <motion.div
+            //   initial={{ opacity: 0, y: 50 }}
+            //   animate={{ opacity: 1, y: 0 }}
+            //   // transition={{ duration: 2, delay: 1.5 }}
+            //   key={item.id}
+            //   className="card border border-red-100 rounded-md transition duration-300 ease-in-out transform hover:scale-105  hover:shadow-lg"
+            //   whileHover={{
+            //     scale: 1.05,
+            //     boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
+            //   }}
+            // >
+            //   <div className="p-6 rounded-lg">
+            //     <div className="flex flex-col ">
+            //       <svg
+            //         xmlns="http://www.w3.org/2000/svg"
+            //         className={`h-6 w-6 ${item.color}`}
+            //         fill="none"
+            //         viewBox="0 0 24 24"
+            //         stroke="currentColor"
+            //       >
+            //         <path
+            //           strokeLinecap="round"
+            //           strokeLinejoin="round"
+            //           strokeWidth={2}
+            //           d={item.icon}
+            //         />
+            //       </svg>
+            //       <div className="mt-4">
+            //         <h2 className="md:text-xl font-bold">{item.title}</h2>
+            //         <h4 className="md:text-lg text-purple-200 text-sm font-bold">
+            //           {item.subtitle}
+            //         </h4>
+            //       </div>
+            //     </div>
+            //     <p className="mt-4 text-gray-400 text-sm text-center">
+            //       {item.description}
+            //     </p>
+            //   </div>
+            // </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              // transition={{ duration: 2, delay: 1.5 }}
               key={item.id}
-              className="card border border-red-100 rounded-md transition duration-300 ease-in-out transform hover:scale-105  hover:shadow-lg"
+              className="card border border-red-100 rounded-md transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg md:min-h-[300px] lg:min-h-[350px]"
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
               }}
             >
               <div className="p-6 rounded-lg">
-                <div className="flex items-center">
+                <div className="flex flex-col items-center text-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`h-6 w-6 ${item.color}`}
+                    className={`h-10 w-10 ${item.color}`} // Increased icon size for better visibility
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -69,15 +107,16 @@ function FeaturesCard() {
                       d={item.icon}
                     />
                   </svg>
-                  <div className="text-center">
-                    <h2 className="ml-4 md:text-xl font-bold">{item.title}</h2>
-
-                    <h4 className="md:text-lg text-purple-200 text-sm font-bold">
+                  <div className="mt-4">
+                    <h2 className="text-lg md:text-xl font-bold">
+                      {item.title}
+                    </h2>
+                    <h4 className="text-sm md:text-base text-purple-200 font-semibold">
                       {item.subtitle}
                     </h4>
                   </div>
                 </div>
-                <p className="mt-2 text-gray-400 text-sm text-justify">
+                <p className="mt-4 text-gray-400 text-sm md:text-base text-center">
                   {item.description}
                 </p>
               </div>

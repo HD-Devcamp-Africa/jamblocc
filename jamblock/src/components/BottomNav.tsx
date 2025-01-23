@@ -26,8 +26,8 @@ const BottomNav: React.FC = (): JSX.Element | null => {
             to="/"
             className="flex border border-1 rounded-md w-20 py-1 px-5 flex-col items-center"
           >
-            <SiHomebridge className="text-2xl md:text-2xl" />
-            <span className="text-xs md:text-sm">Home</span>
+            <SiHomebridge className="text-3xl md:text-3xl" />
+            <span className="text-xs md:text-sm p-1">Home</span>
           </Link>
         </li>
         <li className="font-bold border border-1 rounded-md cursor-pointer flex flex-col items-center">
@@ -35,7 +35,7 @@ const BottomNav: React.FC = (): JSX.Element | null => {
             to="/dashboard"
             className="flex flex-col w-20 py-1 px-5 items-center"
           >
-            <MdSpaceDashboard className="text-2xl md:text-2xl" />
+            <MdSpaceDashboard className="text-3xl md:text-3xl" />
             <span className="text-xs md:text-sm">Dashboard</span>
           </Link>
         </li>

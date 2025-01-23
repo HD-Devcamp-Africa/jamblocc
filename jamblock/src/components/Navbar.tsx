@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { CiHome } from "react-icons/ci";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { FaBarsStaggered } from "react-icons/fa6";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -47,7 +48,7 @@ const Navbar: React.FC = () => {
           onClick={toggleMenu}
           className="lg:hidden px-4 py-2 bg-purple-800 text-white rounded"
         >
-          {isOpen ? <FaTimes /> : <FaBars />}
+          {isOpen ? <FaTimes /> : <FaBarsStaggered />}
         </button>
       </nav>
 
@@ -58,7 +59,7 @@ const Navbar: React.FC = () => {
             animate={{ y: 0 }}
             exit={{ y: -300 }}
             transition={{ type: "spring", stiffness: 100, duration: 0.3 }} // Faster closing
-            className="fixed inset-0 bg-white z-20 flex flex-col"
+            className="fixed pt-20 inset-0 bg-white z-20 flex flex-col"
           >
             {/* Close Button */}
             <button
