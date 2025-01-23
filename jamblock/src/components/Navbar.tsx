@@ -1,64 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { FaTimes } from "react-icons/fa";
-import { FaBars } from "react-icons/fa";
-import { CiHome } from "react-icons/ci";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaBookReader } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaTimes, FaBars, FaBookReader } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
-import { ConnectButton } from "thirdweb/react";
-import { Link, useNavigate } from "react-router-dom"; // Assuming you're using react-router for navigation
+import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+import { CiHome } from "react-icons/ci";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
-import { useActiveAccount } from "thirdweb/react";
-// import Popup from "./Popup";
-import { clientId } from "../client";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  // const [isConnected, setIsConnected] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const account = useActiveAccount();
-
-  const showPopup = (message: string, timeout: number = 3000): void => {
-    const popup = document.createElement("div");
-    popup.textContent = message;
-
-    const overlay = document.createElement("div");
-    overlay.style.position = "fixed";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-    overlay.style.zIndex = "999";
-
-    popup.style.position = "fixed";
-    popup.style.top = "50%";
-    popup.style.left = "50%";
-    popup.style.transform = "translate(-50%, -50%)";
-    popup.style.padding = "20px 40px";
-    popup.style.backgroundColor = "white";
-    popup.style.color = "#000";
-    popup.style.borderRadius = "10px";
-    popup.style.boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.1)";
-    popup.style.zIndex = "1000";
-
-    document.body.appendChild(overlay);
-    document.body.appendChild(popup);
-
-    setTimeout(() => {
-      document.body.removeChild(popup);
-      document.body.removeChild(overlay);
-    }, timeout);
-  };
 
   const toggleMenu = (): void => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <header className="bg-gray-900 shadow-md sticky top-0 z-10 font-roboto md:block lg:block hidden  border-b">
+    <header className="bg-gray-900 shadow-md sticky top-0 z-10 font-roboto">
       <nav className="container mx-auto flex justify-between items-center py-4 px-6">
-        {/* <div className="text-xl font-bold text-purple-800">JAMBlock</div> */}
         <Link to="/">
           <img
             src="/images/logo.jpg"
@@ -66,37 +23,29 @@ const Navbar: React.FC = () => {
             className="h-20 rounded-md"
           />
         </Link>
-        <ul className="hidden lg:flex space-x-8 font-bold text-gray-200">
-          <li className="hover:text-purple-500 cursor-pointer">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="hover:text-purple-500 cursor-pointer">
-            {account ? (
-              <Link to="/dashboard">Dashboard</Link>
-            ) : (
-              <span onClick={() => showPopup("Kindly sign in", 2000)}>
-                Dashboard
-              </span>
-            )}
-          </li>
-          <li className="hover:text-purple-500 cursor-pointer">
-            <Link to="/questions">Past Questions</Link>
-          </li>
-          <li className="hover:text-purple-500 cursor-pointer">
-            <Link to="/about">About</Link>
-          </li>
-        </ul>
-        <div className="hidden lg:block">
-          {/* <ConnectButton
-            client={clientId}
-            connectButton={{
-              label: "Sign in",
-            }}
-          /> */}
+        <div className="hidden lg:flex space-x-8 font-bold text-gray-200">
+          <Link to="/" className="hover:text-purple-500 cursor-pointer">
+            Home
+          </Link>
+          <Link
+            to="/dashboard"
+            className="hover:text-purple-500 cursor-pointer"
+          >
+            Dashboard
+          </Link>
+          <Link
+            to="/questions"
+            className="hover:text-purple-500 cursor-pointer"
+          >
+            Past Questions
+          </Link>
+          <Link to="/about" className="hover:text-purple-500 cursor-pointer">
+            About
+          </Link>
         </div>
         <button
           onClick={toggleMenu}
-          className="lg:hidden px-4 py-4 bg-purple-800 text-white rounded"
+          className="lg:hidden px-4 py-2 bg-purple-800 text-white rounded"
         >
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>
@@ -104,56 +53,84 @@ const Navbar: React.FC = () => {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.ul
-            initial={{ opacity: 0, x: -200 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -200 }}
-            transition={{ duration: 0.5 }}
-            className="lg:hidden flex flex-col space-y-4 text-gray-700 px-6 py-4 bg-white shadow-lg rounded-lg"
+          <motion.div
+            initial={{ y: -300 }}
+            animate={{ y: 0 }}
+            exit={{ y: -300 }}
+            transition={{ type: "spring", stiffness: 100, duration: 0.3 }} // Faster closing
+            className="fixed inset-0 bg-white z-20 flex flex-col"
           >
-            <li className="group hover:bg-purple-100 transition duration-300 ease-in-out rounded-lg">
-              <Link
-                to="/"
-                className="flex items-center space-x-3 py-2 px-4 text-gray-800 font-semibold rounded-lg group-hover:bg-purple-200 transition-all"
-              >
-                <CiHome className="text-2xl text-gray-600 group-hover:text-purple-500 transition-all" />
-                <span className="group-hover:text-purple-500">Home</span>
-              </Link>
-            </li>
-            <li className="group hover:bg-purple-100 transition duration-300 ease-in-out rounded-lg">
-              <div
-                className="flex items-center space-x-3 py-2 px-4 text-gray-800 font-semibold rounded-lg group-hover:bg-purple-200 transition-all cursor-pointer"
-                onClick={() => {
-                  if (!account) {
-                    showPopup("Kindly sign in", 2000);
-                  }
+            {/* Close Button */}
+            <button
+              onClick={toggleMenu}
+              className="absolute top-4 right-4 text-gray-800 bg-gray-200 rounded-full p-2 shadow-md z-30"
+            >
+              <FaTimes size={20} />
+            </button>
+
+            <div className="flex-1 px-6 py-4 overflow-y-auto">
+              <motion.ul
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.1 }, // Faster stagger effect
+                  },
                 }}
               >
-                <MdOutlineSpaceDashboard className="text-2xl text-gray-600 group-hover:text-purple-500 transition-all" />
-                <span className="group-hover:text-purple-500">Dashboard</span>
-              </div>
-            </li>
-            <li className="group hover:bg-purple-100 transition duration-300 ease-in-out rounded-lg">
-              <Link
-                to="/about"
-                className="flex items-center space-x-3 py-2 px-4 text-gray-800 font-semibold rounded-lg group-hover:bg-purple-200 transition-all"
+                {[
+                  {
+                    path: "/",
+                    label: "Home",
+                    icon: <CiHome className="text-2xl" />,
+                  },
+                  {
+                    path: "/dashboard",
+                    label: "Dashboard",
+                    icon: <MdOutlineSpaceDashboard className="text-2xl" />,
+                  },
+                  {
+                    path: "/questions",
+                    label: "Past Questions",
+                    icon: <FaClipboardQuestion className="text-2xl" />,
+                  },
+                  {
+                    path: "/about",
+                    label: "About",
+                    icon: <FaBookReader className="text-2xl" />,
+                  },
+                ].map((item, index) => (
+                  <motion.li
+                    key={index}
+                    variants={{
+                      hidden: { opacity: 0, x: -50 },
+                      visible: { opacity: 1, x: 0 },
+                    }}
+                    className="mb-4 border-b pb-2 last:border-b-0"
+                  >
+                    <Link
+                      to={item.path}
+                      className="flex items-center space-x-4 text-gray-800 font-semibold text-lg"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </Link>
+                  </motion.li>
+                ))}
+              </motion.ul>
+            </div>
+            <div className="px-6 py-4 bg-gray-100 border-t">
+              <button
+                className="w-full bg-purple-800 text-white font-bold py-3 rounded"
+                onClick={() => setIsOpen(false)} // Replace with actual login logic
               >
-                <FaBookReader className="text-2xl text-gray-600 group-hover:text-purple-500 transition-all" />
-                <span className="group-hover:text-purple-500">About</span>
-              </Link>
-            </li>
-            <li className="group hover:bg-purple-100 transition duration-300 ease-in-out rounded-lg">
-              <Link
-                to="/questions"
-                className="flex items-center space-x-3 py-2 px-4 text-gray-800 font-semibold rounded-lg group-hover:bg-purple-200 transition-all"
-              >
-                <FaClipboardQuestion className="text-2xl text-gray-600 group-hover:text-purple-500 transition-all" />
-                <span className="group-hover:text-purple-500">
-                  Past Questions
-                </span>
-              </Link>
-            </li>
-          </motion.ul>
+                Login
+              </button>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </header>

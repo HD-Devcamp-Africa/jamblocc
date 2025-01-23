@@ -27,7 +27,7 @@ const AboutPage: React.FC = () => {
       if (index === fullText.length) {
         clearInterval(intervalId);
       }
-    }, 50); // Adjust the speed here (in milliseconds)
+    }, 5); // Adjust the speed here (in milliseconds)
     return () => clearInterval(intervalId);
   }, [fullText]);
 
