@@ -16,6 +16,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import ProtectedRoute from "./middlewares/ProtectedRoute";
 import WelcomePage from "./pages/WelcomePage";
 import Check from "./components/FeaturesCard";
+import AllQUestionApiResponseDisplay from "./components/AllQUestionApiResponseDisplay";
 
 export function App() {
   return (
@@ -32,6 +33,12 @@ export function App() {
         <Route path="/questions" element={<QuestionPage />} />
         <Route path="/about/" element={<AboutPage />} />
         <Route path="/welcome/" element={<WelcomePage />} />
+
+        {/* protect this route later */}
+        <Route
+          path="/open-past-questions"
+          element={<AllQUestionApiResponseDisplay />}
+        />
 
         {/* User Dashboard (Protected) */}
         <Route
