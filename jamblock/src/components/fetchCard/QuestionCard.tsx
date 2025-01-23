@@ -7,14 +7,10 @@ interface QuestionCardProps {
     question: string;
     option: { [key: string]: string };
     answer: string;
-    section: string;
-    image: string;
-    solution: string | JSX.Element;
     examtype: string;
-    examyear: string;
-    questionNub: number | null;
-    hasPassage: number;
     category: string;
+    image?: string; // Made optional for better handling
+    solution: string | JSX.Element;
   };
   index: number;
 }
@@ -34,29 +30,29 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question, index }) => {
   };
 
   return (
-    <div className="border p-6 rounded-lg shadow-lg bg-white">
-      <h3 className="text-lg font-semibold mb-2">
+    <div className="border p-3 md:p-5 rounded-lg shadow-lg bg-white">
+      <h3 className="text-sm md:text-lg font-semibold mb-1">
         {index}. {question.question}
       </h3>
-      <p className="text-sm text-gray-500 mb-2">
+      <p className="text-xs md:text-sm text-gray-500 mb-1">
         <strong>Subject:</strong> {question.examtype}
       </p>
-      <p className="text-sm text-gray-500 mb-2">
-        <strong>Category:</strong> {question.category} - {question.examyear}
+      <p className="text-xs md:text-sm text-gray-500 mb-2">
+        <strong>Category:</strong> {question.category}
       </p>
       {question.image && (
         <img
           src={question.image}
-          alt="question illustration"
-          className="mb-4"
+          alt="illustration"
+          className="mb-2 w-full h-auto"
         />
       )}
-      <div className="options space-y-2">
+      <div className="options space-y-1">
         {Object.entries(question.option).map(([key, value]) => (
           <button
             key={key}
             onClick={() => handleOptionClick(key)}
-            className={`block w-full text-left p-3 rounded-lg border transition-colors duration-200 ${
+            className={`block w-full text-left p-1.5 rounded-lg border transition-colors duration-200 ${
               selectedOption === key
                 ? key === question.answer
                   ? "bg-green-600 text-white"
@@ -68,10 +64,10 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question, index }) => {
           </button>
         ))}
       </div>
-      <div className="mt-4">
+      <div className="mt-2">
         <button
           onClick={toggleSolution}
-          className="text-sm bg-blue-500 text-white py-2 px-4 rounded"
+          className="text-xs md:text-sm bg-blue-500 text-white py-1 px-2 rounded"
         >
           {showSolution ? "Hide Solution" : "Show Solution"}
         </button>
@@ -82,7 +78,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question, index }) => {
             transition={{ duration: 0.5 }}
             className="mt-2"
           >
-            <p className="text-sm text-gray-500">
+            <p className="text-xs md:text-sm text-gray-500">
               <strong>Solution:</strong> {question.solution}
             </p>
           </motion.div>
