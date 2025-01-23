@@ -17,6 +17,7 @@ import ProtectedRoute from "./middlewares/ProtectedRoute";
 import WelcomePage from "./pages/WelcomePage";
 import Check from "./components/FeaturesCard";
 import AllQuestionPage from "./pages/AllQuestionPage";
+import ScrollToTopButton from "./components/ScrollToTop";
 
 export function App() {
   return (
@@ -65,8 +66,6 @@ export function App() {
             </ProtectedRoute>
           }
         /> */}
-        {/* <Route path="/checkout" element={<Check />} /> */}
-
         <Route path="/airdrop" element={<Airdop />} />
 
         {/* Catch-All Routes */}

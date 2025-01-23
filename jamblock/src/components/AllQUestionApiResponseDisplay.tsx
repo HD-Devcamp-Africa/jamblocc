@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import QuestionLayout from "../layout/QuestionLayout";
 import QuestionCard from "./fetchCard/QuestionCard";
+import ScrollToTopButton from "./ScrollToTop";
 
 // The expected shape of the API response
 interface ApiResponse {
@@ -107,6 +108,7 @@ const AllQUestionApiResponseDisplay: React.FC = () => {
           <QuestionCard key={item._id} question={item.data} index={index + 1} />
         ))}
       </div>
+      <ScrollToTopButton />
     </QuestionLayout>
   );
 };
