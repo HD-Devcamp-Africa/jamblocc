@@ -3,12 +3,13 @@ import React, { useState } from "react";
 // import { useAddress } from "@thirdweb-dev/react";
 import { ConnectButton } from "thirdweb/react";
 import { clientId } from "../client";
+import BottomNav from "../components/BottomNav";
 const AccountSettings: React.FC = () => {
   //   const address = useAddress(); // Fetch user's wallet address
   const [formData, setFormData] = useState({
     name: "",
     school: "",
-    course: "",
+    subject: "",
   });
 
   const handleInputChange = (
@@ -28,25 +29,15 @@ const AccountSettings: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[600px] mx-auto p-5 font-sans border border-gray-200 rounded-lg shadow-md bg-white">
+    <div className="max-w-[600px] mx-auto p-5 font-sans bg-gray-900 border rounded-lg shadow-md bg-white">
       <h1 className="text-center mb-5 text-gray-800">Account Settings</h1>
 
       {/* Wallet Connection */}
-      <div className="mb-5 p-3 border border-gray-200 rounded-lg bg-gray-50">
-        <h3 className="text-center mb-3">Wallet Connection</h3>
+      <div className="mb-5 p-3 border border-gray-200 rounded-lg bg-gray-200">
+        <h3 className="text-center font-bold mb-3">Wallet</h3>
         <div className="flex justify-center">
           <ConnectButton client={clientId} />
         </div>
-        {/* <div className="flex flex-col mb-4">
-          <label htmlFor="walletAddress">Wallet Address</label>
-          <input
-            type="text"
-            id="walletAddress"
-            disabled
-            className="p-2.5 text-base border border-gray-300 rounded bg-gray-100 text-gray-600 cursor-not-allowed"
-            
-          />
-        </div> */}
       </div>
 
       {/* Account Settings Form */}
@@ -79,14 +70,14 @@ const AccountSettings: React.FC = () => {
         </div>
 
         <div className="flex flex-col mb-4">
-          <label htmlFor="course">Course</label>
+          <label htmlFor="subject">Subject</label>
           <input
             type="text"
-            id="course"
-            name="course"
-            value={formData.course}
+            id="subject"
+            name="subject"
+            value={formData.subject}
             onChange={handleInputChange}
-            placeholder="Enter your course"
+            placeholder="Enter your subject"
             className="p-2.5 text-base border border-gray-300 rounded"
           />
         </div>
@@ -98,6 +89,10 @@ const AccountSettings: React.FC = () => {
           Save Changes
         </button>
       </form>
+
+      <div>
+        <BottomNav />
+      </div>
     </div>
   );
 };

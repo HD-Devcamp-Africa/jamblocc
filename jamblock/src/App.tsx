@@ -45,9 +45,9 @@ export function App() {
         <Route
           path="/account-setting"
           element={
-            <ProtectedRoute>
-              <AccountSettings />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <AccountSettings />
+            // </ProtectedRoute>
           }
         />
 
