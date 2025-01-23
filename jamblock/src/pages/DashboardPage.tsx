@@ -109,10 +109,6 @@ const Dashboard: React.FC = () => {
               initial="hidden"
               animate="visible"
             >
-              {/* <img
-                src="https://pbs.twimg.com/profile_images/1878416738628280320/ZvpJSk-__400x400.jpg"
-                alt="Logo"
-              /> */}
               {isSidebarOpen && (
                 <img
                   src="https://pbs.twimg.com/profile_images/1878416738628280320/ZvpJSk-__400x400.jpg"

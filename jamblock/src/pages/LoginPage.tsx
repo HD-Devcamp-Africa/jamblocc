@@ -1,6 +1,7 @@
 // src/LoginPage.tsx
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -110,9 +111,12 @@ const LoginPage: React.FC = () => {
         </form>
         <p className="mt-4 text-center text-gray-400 text-sm md:text-base">
           Don't have an account?{" "}
-          <a href="/signup" className="text-green-500 hover:underline">
+          {/* <a href="/signup" className="text-green-500 hover:underline">
             Sign up
-          </a>
+          </a> */}
+          <Link to="/signup" className="text-green-500 hover:underline">
+            Sign up
+          </Link>
         </p>
       </div>
     </div>

@@ -61,7 +61,7 @@ const Navbar: React.FC = () => {
         {/* <div className="text-xl font-bold text-purple-800">JAMBlock</div> */}
         <Link to="/">
           <img
-            src="/public/images/logo.jpg"
+            src="/images/logo.jpg"
             alt="JAMBlock Logo"
             className="h-20 rounded-md"
           />

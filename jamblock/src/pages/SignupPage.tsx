@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const subjectsList = [
   { value: "english", label: "English" },
@@ -214,9 +214,12 @@ const SignupPage: React.FC = () => {
         </form>
         <p className="mt-4 text-center text-gray-400 text-sm md:text-base">
           Already have an account?{" "}
-          <a href="/login" className="text-green-500 hover:underline">
+          {/* <a href="/login" className="text-green-500 hover:underline">
             Log in
-          </a>
+          </a> */}
+          <Link to="/signup" className="text-green-500 hover:underline">
+            Sign up
+          </Link>
         </p>
       </div>
     </div>
