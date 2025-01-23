@@ -5,7 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { CiHome } from "react-icons/ci";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { MdSpaceDashboard } from "react-icons/md";
 import { FaBarsStaggered } from "react-icons/fa6";
+import { SiHomebridge } from "react-icons/si";
+import { VscWorkspaceUnknown } from "react-icons/vsc";
+import { GiBookshelf } from "react-icons/gi";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -15,7 +19,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="bg-gray-900 shadow-md sticky top-0 z-10 font-roboto">
+    <header className="bg-gray-900 md:block hidden shadow-md sticky top-0 z-10 font-roboto">
       <nav className="container mx-auto flex justify-between items-center py-4 px-6">
         <Link to="/">
           <img
@@ -46,7 +50,7 @@ const Navbar: React.FC = () => {
         </div>
         <button
           onClick={toggleMenu}
-          className="lg:hidden px-4 py-2 bg-purple-800 text-white rounded"
+          className="lg:hidden text-2xl px-4 py-2 bg-purple-800 text-white rounded"
         >
           {isOpen ? <FaTimes /> : <FaBarsStaggered />}
         </button>
@@ -85,22 +89,23 @@ const Navbar: React.FC = () => {
                   {
                     path: "/",
                     label: "Home",
-                    icon: <CiHome className="text-2xl" />,
+                    icon: <SiHomebridge className="text-2xl" />,
+                  },
+
+                  {
+                    path: "/about",
+                    label: "About",
+                    icon: <VscWorkspaceUnknown className="text-2xl" />,
                   },
                   {
                     path: "/dashboard",
                     label: "Dashboard",
-                    icon: <MdOutlineSpaceDashboard className="text-2xl" />,
+                    icon: <MdSpaceDashboard className="text-2xl" />,
                   },
                   {
                     path: "/questions",
                     label: "Past Questions",
-                    icon: <FaClipboardQuestion className="text-2xl" />,
-                  },
-                  {
-                    path: "/about",
-                    label: "About",
-                    icon: <FaBookReader className="text-2xl" />,
+                    icon: <GiBookshelf className="text-2xl" />,
                   },
                 ].map((item, index) => (
                   <motion.li

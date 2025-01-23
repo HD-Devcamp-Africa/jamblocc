@@ -141,7 +141,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onFilterChange }) => {
           {/* Header */}
           <header
             ref={headerRef}
-            className="bg-purple-900 text-white py-4 px-6 shadow-md flex justify-between items-center fixed top-18 left-0 right-0 z-20"
+            className="bg-purple-900 text-white py-4 px-6 shadow-md flex justify-between items-center fixed top-18 left-0 right-0 z-1"
           >
             <button
               onClick={toggleSidebar}
