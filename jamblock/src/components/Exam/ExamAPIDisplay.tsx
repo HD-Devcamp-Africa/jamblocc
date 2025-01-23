@@ -40,7 +40,7 @@ const ApiResponseDisplay: React.FC = () => {
 
   useEffect(() => {
     // Fetch the questions from your endpoint
-    fetch("http://localhost:5000/api/questions/all-questions")
+    fetch("https://jamblock.onrender.com/api/questions/all-questions")
       .then((response) => response.json())
       .then((data) => {
         setApiResponse(data);

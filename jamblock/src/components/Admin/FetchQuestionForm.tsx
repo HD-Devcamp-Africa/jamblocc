@@ -18,7 +18,7 @@ const FetchQuestionsForm: React.FC = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/questions/fetch-and-store`,
+        `https://jamblock.onrender.com/api/questions/fetch-and-store`,
         {
           params: { subject: apiSubject, random: apiRandom },
           headers: {

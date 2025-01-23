@@ -53,7 +53,7 @@ const BottomNav: React.FC = (): JSX.Element | null => {
             to={isLoggedIn ? "/questions" : "/all-past-question"}
             className="flex flex-col w-20 py-1 px-5 items-center"
           >
-            <GiBookshelf className="text-xl md:text-2xl" />
+            <GiBookshelf className="text-2xl md:text-2xl" />
             <span className="text-xs md:text-sm">Questions</span>
           </Link>
         </li>

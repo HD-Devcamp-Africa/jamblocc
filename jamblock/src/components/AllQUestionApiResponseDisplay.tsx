@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import QuestionLayout from "../layout/QuestionLayout";
 import QuestionCard from "./fetchCard/QuestionCard";
 import ScrollToTopButton from "./ScrollToTop";
+import axios from "axios";
 
 // The expected shape of the API response
 interface ApiResponse {
@@ -39,10 +40,10 @@ const AllQUestionApiResponseDisplay: React.FC = () => {
     [key: number]: string;
   }>({});
   const [selectedSubject, setSelectedSubject] = useState<string>("english");
-
+  const apiUrl = import.meta.env.REACT_APP_API;
   useEffect(() => {
     // Fetch the questions from your endpoint
-    fetch("http://localhost:5000/api/questions/all-questions")
+    fetch("https://jamblock.onrender.com/api/questions/all-questions")
       .then((response) => response.json())
       .then((data) => {
         setApiResponse(data);

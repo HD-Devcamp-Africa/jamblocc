@@ -46,7 +46,7 @@ const ApiResponseDisplay: React.FC = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/user/profile",
+          "https://jamblock.onrender.com/api/user/profile",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -71,7 +71,7 @@ const ApiResponseDisplay: React.FC = () => {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/questions/all-questions"
+          "https://jamblock.onrender.com/api/questions/all-questions"
         );
         const data = response.data;
 
