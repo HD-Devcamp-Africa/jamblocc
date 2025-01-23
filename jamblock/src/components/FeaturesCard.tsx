@@ -30,7 +30,7 @@ const data = [
 
 function FeaturesCard() {
   return (
-    <div className="bg-gray-900 text-white font-sans min-h-screen">
+    <div className="bg-gray-900 text-white font-sans ">
       <div className="container mx-auto px-4 py-16">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"

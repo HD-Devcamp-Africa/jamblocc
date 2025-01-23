@@ -50,3 +50,41 @@
     opacity: 1;
   }
 }
+
+
+/* animated border effect on the landing page */
+/* styles.css */
+/* styles.css */
+/* styles.css */
+.animate-border {
+  position: relative;
+  border: 2px solid #1a202c; /* Gray-900 */
+  border-radius: 8px; /* Adjust to your needs */
+}
+
+.animate-border::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: inherit;
+  border: 2px solid transparent;
+  background: linear-gradient(90deg, purple, blue, purple);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: exclude;
+  mask-composite: exclude;
+  animation: border-move 3s linear infinite;
+  z-index: 1;
+}
+
+@keyframes border-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}

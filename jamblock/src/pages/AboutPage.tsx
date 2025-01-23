@@ -33,24 +33,22 @@ const AboutPage: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <div className="bg-gray-800 text-white p-10 rounded-lg shadow-lg">
+      <div className="bg-gray-900 text-white p-10 rounded-lg shadow-lg">
         {/* Profile Section */}
         <div className="text-center mb-8">
           <img
-            src="https://avatars.githubusercontent.com/u/105107462?v=4"
+            src="https://pbs.twimg.com/profile_images/1878416738628280320/ZvpJSk-__400x400.jpg"
             alt="Owner"
-            className="w-24 h-24 rounded-full mx-auto border-4 border-purple-600"
+            className="w-24 h-24 rounded-full mx-auto border-4 border-gray-400"
           />
-          <h2 className="text-xl font-semibold mt-4">Moses Sunday</h2>
-          <p className="text-gray-400">
-            Fullstack Blockchain Engineer & Enthusiast{" "}
-          </p>
+          <h2 className="text-xl font-semibold mt-4">Jamblock</h2>
+          <p className="text-gray-400">Bringing Education on-chain </p>
         </div>
 
         {/* Social Media Links */}
         <div className="flex justify-center space-x-4 mb-6">
           <a
-            href="https://x.com/Moses_Sunday_"
+            href="https://x.com/JAMBlocc/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:text-blue-500 text-2xl"

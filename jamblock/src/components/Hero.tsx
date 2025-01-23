@@ -184,7 +184,9 @@ const Hero: React.FC = () => {
           Get Started
         </motion.button>
 
-        <FeaturesCard />
+        <div className="mt-20">
+          <FeaturesCard />
+        </div>
       </div>
     </section>
   );
