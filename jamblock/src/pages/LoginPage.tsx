@@ -85,7 +85,7 @@ const LoginPage: React.FC = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-green-500 text-sm md:text-base"
+              className="mt-1 block w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-purplw-500 text-sm md:text-base"
               required
             />
           </div>
@@ -97,7 +97,7 @@ const LoginPage: React.FC = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-green-500 text-sm md:text-base"
+              className="mt-1 block w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-purplw-500 text-sm md:text-base"
               required
             />
           </div>
@@ -111,7 +111,7 @@ const LoginPage: React.FC = () => {
         </form>
         <p className="mt-4 text-center text-gray-400 text-sm md:text-base">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-green-500 hover:underline">
+          <Link to="/signup" className="text-purplw-500 hover:underline">
             Sign up
           </Link>
         </p>

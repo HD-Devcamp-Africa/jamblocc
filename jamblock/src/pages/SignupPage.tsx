@@ -115,7 +115,7 @@ const SignupPage: React.FC = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-1 text-white block w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-green-500 text-sm md:text-base"
+              className="mt-1 text-white block w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-purple-500 text-sm md:text-base"
               required
             />
           </div>
@@ -127,7 +127,7 @@ const SignupPage: React.FC = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block text-white w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-green-500 text-sm md:text-base"
+              className="mt-1 block text-white w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-purple-500 text-sm md:text-base"
               required
             />
           </div>
@@ -139,7 +139,7 @@ const SignupPage: React.FC = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block text-white w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-green-500 text-sm md:text-base"
+              className="mt-1 block text-white w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-purple-500 text-sm md:text-base"
               required
             />
           </div>
@@ -151,7 +151,7 @@ const SignupPage: React.FC = () => {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="mt-1 text-white block w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-green-500 text-sm md:text-base"
+              className="mt-1 text-white block w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-purple-500 text-sm md:text-base"
               required
             />
           </div>
@@ -167,7 +167,7 @@ const SignupPage: React.FC = () => {
                     id={value}
                     checked={subjects.includes(value)}
                     onChange={() => handleSubjectChange(value)}
-                    className="mr-2 text-green-500 focus:ring-green-500"
+                    className="mr-2 text-purple-500 focus:ring-purple-500"
                   />
                   <label
                     htmlFor={value}
@@ -214,7 +214,7 @@ const SignupPage: React.FC = () => {
         </form>
         <p className="mt-4 text-center text-gray-400 text-sm md:text-base">
           Already have an account?{" "}
-          <Link to="/login" className="text-green-500 hover:underline">
+          <Link to="/login" className="text-purple-500 hover:underline">
             Login
           </Link>
         </p>
