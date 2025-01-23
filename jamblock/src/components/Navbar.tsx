@@ -130,9 +130,7 @@ const Navbar: React.FC = () => {
                 }}
               >
                 <MdOutlineSpaceDashboard className="text-2xl text-gray-600 group-hover:text-purple-500 transition-all" />
-                <span className="group-hover:text-purple-500">
-                  {account ? "Dashboard" : "Please Sign In"}
-                </span>
+                <span className="group-hover:text-purple-500">Dashboard</span>
               </div>
             </li>
             <li className="group hover:bg-purple-100 transition duration-300 ease-in-out rounded-lg">

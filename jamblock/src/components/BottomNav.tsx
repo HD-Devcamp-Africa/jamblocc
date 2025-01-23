@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const BottomNav: React.FC = (): JSX.Element | null => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isLoggedIn = Boolean(localStorage.getItem("authToken"));
 
   if (!isMobile) return null;
 
@@ -35,7 +36,10 @@ const BottomNav: React.FC = (): JSX.Element | null => {
           </Link>
         </li>
         <li className="hover:text-purple-500 cursor-pointer flex flex-col items-center">
-          <Link to="/questions" className="flex flex-col items-center">
+          <Link
+            to={isLoggedIn ? "/questions" : "/all-past-question"}
+            className="flex flex-col items-center"
+          >
             <FaClipboardQuestion className="text-xl md:text-2xl" />
             <span className="text-xs md:text-sm">Questions</span>
           </Link>
