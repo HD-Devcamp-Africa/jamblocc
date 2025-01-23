@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import QuizPlatformABI from "./QuizPlatformABI.json";
 import { FaMoneyBillAlt, FaCheckCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 // Define the types for the quiz questions and answers
 interface Question {
@@ -17,6 +18,7 @@ interface Answers {
 const contractAddress = "0x3131645cB713f1D5e5E7C36CF7AeDEc09DEa63bc";
 
 const Exam: React.FC = () => {
+  const navigate = useNavigate();
   const [score, setScore] = useState<number>(0);
   const [questions, setQuestions] = useState<Question[]>([
     { question: "1 + 1 = ?", options: [2, 3, 4, 5], correct: 2 },
@@ -139,6 +141,7 @@ const Exam: React.FC = () => {
   // Handle return to dashboard logic (placeholder function)
   const returnToDashboard = () => {
     console.log("Returning to dashboard...");
+    navigate("/dashboard");
     // Implement your navigation logic here (e.g., using React Router)
   };
 
