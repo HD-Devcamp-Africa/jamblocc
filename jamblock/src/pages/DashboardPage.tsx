@@ -15,13 +15,14 @@ import {
   ConnectButton,
   useActiveAccount,
   useDisconnect,
-  useWalletBalance,
   useActiveWallet,
 } from "thirdweb/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BottomNav from "../components/BottomNav";
 import { shortenAddress } from "@thirdweb-dev/react";
+import { PiExamFill } from "react-icons/pi";
+import { MdLibraryBooks } from "react-icons/md";
 import { clientId } from "../client";
 
 const Dashboard: React.FC = () => {
@@ -94,27 +95,45 @@ const Dashboard: React.FC = () => {
         animate={isSidebarOpen ? "open" : "closed"}
       >
         <div className="text-2xl font-bold mb-8 flex items-center justify-between">
-          <FaUserCircle className="inline mr-2" />
           {isSidebarOpen}
           <button onClick={toggleSidebar} className="ml-auto">
             {isSidebarOpen ? <HiOutlineX /> : <HiOutlineMenu />}
           </button>
         </div>
-        <div className="mt-40">
-          <nav className="space-y-10">
+        <div>
+          <nav className="space-y-10 mt-10">
             <motion.a
-              href="*"
-              className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
+              href="/dashboard"
+              className="flex bg-gray-200 mb-40 bg-gray-900 space-x-2"
               variants={itemVariants}
               initial="hidden"
               animate="visible"
             >
-              <HiOutlineChartBar className="text-xl" />
+              {/* <img
+                src="https://pbs.twimg.com/profile_images/1878416738628280320/ZvpJSk-__400x400.jpg"
+                alt="Logo"
+              /> */}
+              {isSidebarOpen && (
+                <img
+                  src="https://pbs.twimg.com/profile_images/1878416738628280320/ZvpJSk-__400x400.jpg"
+                  alt="Logo"
+                  className="rounded-full"
+                />
+              )}
+            </motion.a>
+            <motion.a
+              href="/exam"
+              className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <PiExamFill className="text-xl" />
               {isSidebarOpen && <span>Exams</span>}
             </motion.a>
             <motion.a
               href="/account-settings"
-              className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
+              className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
               variants={itemVariants}
               initial="hidden"
               animate="visible"
@@ -122,25 +141,26 @@ const Dashboard: React.FC = () => {
               <HiOutlineCog className="text-xl" />
               {isSidebarOpen && <span>Settings</span>}
             </motion.a>
-            <motion.a
-              href="/questions"
-              className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
-              variants={itemVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <HiOutlineCog className="text-xl" />
-              {isSidebarOpen && <span>Past Questions</span>}
-            </motion.a>
+
             <motion.a
               href="*"
-              className="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
+              className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
               variants={itemVariants}
               initial="hidden"
               animate="visible"
             >
               <HiOutlineBell className="text-xl" />
               {isSidebarOpen && <span>Notifications</span>}
+            </motion.a>
+            <motion.a
+              href="/questions"
+              className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <MdLibraryBooks className="text-xl" />
+              {isSidebarOpen && <span>Past Questions</span>}
             </motion.a>
           </nav>
         </div>
@@ -158,7 +178,7 @@ const Dashboard: React.FC = () => {
         <header className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-semibold text-lg md:text-2xl lg:text-3xl">
             {/* {account ? ( */}
-            <> Welcome back,{userProfile ? userProfile.name : "User"}</>
+            <> Welcome back, {userProfile ? userProfile.name : "User"}</>
           </h1>
 
           <div className="flex items-center space-x-4">
@@ -184,13 +204,13 @@ const Dashboard: React.FC = () => {
                 <button
                   onClick={() => {
                     disconnect(wallet!);
-                    setTimeout(() => {
-                      navigate("/");
-                    }, 400);
+                    // setTimeout(() => {
+                    //   // navigate("/");
+                    // }, 400);
                   }}
                   className="text-sm font-bold text-white rounded-lg bg-[#E91E63] py-3 px-10"
                 >
-                  Logout
+                  Disconnect
                 </button>
               </div>
             ) : (

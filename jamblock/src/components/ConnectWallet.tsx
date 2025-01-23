@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import createThirdwebClient from "@thirdweb-dev/sdk";
+import { useActiveWallet, useActiveAccount } from "thirdweb/react";
 // Replace with your actual client ID
 const clientId = "6151f89857874e35bb6b731f2712337c";
 
@@ -7,6 +8,8 @@ const WalletConnect: React.FC = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
+  const wallet = useActiveWallet();
+  const account = useActiveAccount();
 
   useEffect(() => {
     // Check if MetaMask is already connected
@@ -19,7 +22,7 @@ const WalletConnect: React.FC = () => {
             setWalletAddress(accounts[0]);
           }
         })
-        .catch((err) =>
+        .catch((err: unknown) =>
           console.error("Error checking MetaMask accounts:", err)
         );
     }
@@ -32,10 +35,12 @@ const WalletConnect: React.FC = () => {
       // Check if MetaMask is available
       if (window.ethereum) {
         await window.ethereum.request({ method: "eth_requestAccounts" }); // Request account access
-        const address = await wallet.getAddress(); // Get the connected wallet address
-        setWalletAddress(address); // Store the address
-        setIsConnected(true);
-        console.log("Wallet connected!");
+        const address = account?.address;
+        if (address) {
+          setWalletAddress(address); // Store the address
+          setIsConnected(true);
+          console.log("Wallet connected!");
+        }
       } else {
         setErrorMessage(
           "MetaMask is not installed. Please install MetaMask to connect."

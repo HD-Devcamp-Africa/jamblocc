@@ -10,7 +10,7 @@ import QuestionPage from "./pages/QuestionPage";
 import Dashboard from "./pages/DashboardPage";
 import AboutPage from "./pages/AboutPage";
 import AccountSettings from "./pages/AccountSettingPage";
-import Airdop from "./pages/Airdrop";
+import Exam from "./pages/Exam";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 // import Login from "./pages/Admin/Login";
 import ProtectedRoute from "./middlewares/ProtectedRoute";
@@ -33,7 +33,7 @@ export function App() {
         <Route path="/coming-soon" element={<ComingSoonPage />} />
         <Route path="/questions" element={<QuestionPage />} />
         <Route path="/about/" element={<AboutPage />} />
-        <Route path="/welcome/" element={<WelcomePage />} />
+        <Route path="/welcome" element={<WelcomePage />} />
 
         {/* protect this route later */}
         <Route path="/all-past-question" element={<AllQuestionPage />} />
@@ -66,7 +66,7 @@ export function App() {
             </ProtectedRoute>
           }
         /> */}
-        <Route path="/airdrop" element={<Airdop />} />
+        <Route path="/exam" element={<Exam />} />
 
         {/* Catch-All Routes */}
         <Route path="*" element={<ComingSoonPage />} />
