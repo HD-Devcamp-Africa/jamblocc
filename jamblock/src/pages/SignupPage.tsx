@@ -29,6 +29,7 @@ const SignupPage: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [subjects, setSubjects] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -47,12 +48,12 @@ const SignupPage: React.FC = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      setError("Passwords do not match");
       return;
     }
 
     if (!name || !email || !password || subjects.length === 0) {
-      alert(
+      setError(
         "Please fill in all required fields and select at least one subject."
       );
       return;
@@ -68,7 +69,8 @@ const SignupPage: React.FC = () => {
     setLoading(true); // Start the spinner
 
     try {
-      const BACKEND_API_URL = import.meta.env.VITE_API_URL;
+      const BACKEND_API_URL =
+        import.meta.env.VITE_API_URL || "https://jamblock.onrender.com";
       console.log(BACKEND_API_URL);
       const response = await axios.post(
         `${BACKEND_API_URL}/api/user/signup`,
@@ -91,9 +93,13 @@ const SignupPage: React.FC = () => {
       navigate("/welcome");
     } catch (err: any) {
       if (axios.isAxiosError(err)) {
+        setError(
+          err.response?.data?.message || "An error occurred during signup"
+        );
         console.error("API Error:", err.response?.data || err.message);
       } else {
-        console.error("Unexpected Error:", err.message);
+        setError("Unexpected error occured");
+        console.error("Unexpected Error:", err.message || err.response?.data);
       }
     } finally {
       setLoading(false); // Stop the spinner after the request
@@ -106,6 +112,12 @@ const SignupPage: React.FC = () => {
         <h2 className="text-xl md:text-2xl font-bold text-purple-300 text-center mb-6">
           Sign Up
         </h2>
+
+        {error && (
+          <div className="bg-red-500 text-white text-sm md:text-base rounded p-2 mb-4">
+            {error}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-gray-300 text-sm md:text-base">
@@ -156,8 +168,8 @@ const SignupPage: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-300 text-sm md:text-base">
-              Select Subjects (max 4)
+            <label className="block text-purple-300 text-center text-sm md:text-base">
+              Select Jamb Subjects (max 4)
             </label>
             <div className="mt-2 grid grid-cols-2 md:grid-cols-4 gap-2">
               {subjectsList.map(({ value, label }) => (
