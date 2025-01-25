@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { FaTimes, FaBars, FaBookReader } from "react-icons/fa";
-import { FaClipboardQuestion } from "react-icons/fa6";
+import { FaTimes } from "react-icons/fa";
+// import { FaClipboardQuestion } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { CiHome } from "react-icons/ci";
-import { MdOutlineSpaceDashboard } from "react-icons/md";
+// import { CiHome } from "react-icons/ci";
+// import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { MdSpaceDashboard } from "react-icons/md";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { SiHomebridge } from "react-icons/si";
@@ -13,6 +14,19 @@ import { GiBookshelf } from "react-icons/gi";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    const authToken = localStorage.getItem("authToken");
+
+    if (authToken) {
+      // perfom logout action
+      localStorage.removeItem("authToken");
+      navigate("/logout");
+    } else {
+      navigate("/login");
+    }
+  };
 
   const toggleMenu = (): void => {
     setIsOpen(!isOpen);
@@ -131,7 +145,8 @@ const Navbar: React.FC = () => {
             <div className="px-6 py-4 bg-gray-100 border-t">
               <button
                 className="w-full bg-purple-800 text-white font-bold py-3 rounded"
-                onClick={() => setIsOpen(false)} // Replace with actual login logic
+                // onClick={() => setIsOpen(false)} // Replace with actual login logic
+                onClick={handleButtonClick}
               >
                 Login
               </button>
