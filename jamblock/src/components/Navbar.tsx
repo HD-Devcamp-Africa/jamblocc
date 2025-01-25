@@ -14,6 +14,7 @@ import { GiBookshelf } from "react-icons/gi";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isLoggedIn, setIsLogged] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
@@ -22,8 +23,11 @@ const Navbar: React.FC = () => {
     if (authToken) {
       // perfom logout action
       localStorage.removeItem("authToken");
+      setIsLogged(true);
+
       navigate("/logout");
     } else {
+      setIsLogged(false);
       navigate("/login");
     }
   };
@@ -53,7 +57,7 @@ const Navbar: React.FC = () => {
             Dashboard
           </Link>
           <Link
-            to="/questions"
+            to={isLoggedIn ? "/questions" : "/all-past-question"}
             className="hover:text-purple-500 cursor-pointer"
           >
             Past Questions
@@ -117,7 +121,7 @@ const Navbar: React.FC = () => {
                     icon: <MdSpaceDashboard className="text-2xl" />,
                   },
                   {
-                    path: "/questions",
+                    path: isLoggedIn ? "/questions" : "/all-past-question",
                     label: "Past Questions",
                     icon: <GiBookshelf className="text-2xl" />,
                   },
