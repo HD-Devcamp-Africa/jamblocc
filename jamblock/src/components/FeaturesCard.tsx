@@ -116,7 +116,7 @@ function FeaturesCard() {
                     </h4>
                   </div>
                 </div>
-                <p className="mt-4 text-gray-400 text-sm md:text-base text-center">
+                <p className="mt-4 text-justify text-gray-400 text-sm md:text-base text-center">
                   {item.description}
                 </p>
               </div>
