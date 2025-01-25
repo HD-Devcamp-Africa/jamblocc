@@ -42,8 +42,10 @@ const AboutPage: React.FC = () => {
             alt="Owner"
             className="w-24 h-24 rounded-full mx-auto border-4 border-gray-400"
           />
-          <h2 className="text-xl font-semibold mt-4">Jamblock</h2>
-          <p className="text-gray-400">Bringing Education on-chain </p>
+          <h2 className="md:text-xl text-lg font-semibold mt-4">Jamblock</h2>
+          <p className="text-gray-400 text-sm italic">
+            Bringing Education on-chain{" "}
+          </p>
         </div>
 
         {/* Social Media Links */}
@@ -76,7 +78,7 @@ const AboutPage: React.FC = () => {
 
         {/* About Text */}
         <p
-          className="text-justify w-[80%] text-bold mx-auto"
+          className="text-justify text-sm md:text-md md:w-[80%] min-w-[95%] text-bold mx-auto"
           dangerouslySetInnerHTML={{ __html: displayedText }}
         />
       </div>
