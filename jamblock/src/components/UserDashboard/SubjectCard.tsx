@@ -24,7 +24,7 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
 
   return (
     <motion.div
-      className="bg-gray-900 p-3 border border-purple-400 rounded-lg shadow-lg hover:shadow-xl items-center text-center transition-shadow duration-300"
+      className="bg-gray-900 p-3 border border-purple-400 rounded-lg shadow-lg hover:shadow-xl items-center h-60 text-center transition-shadow duration-300"
       variants={contentVariants}
       initial="hidden"
       animate={controls}

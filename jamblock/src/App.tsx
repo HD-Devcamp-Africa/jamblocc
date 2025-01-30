@@ -1,5 +1,5 @@
 // App.tsx
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
@@ -19,7 +19,18 @@ import Check from "./components/FeaturesCard";
 import AllQuestionPage from "./pages/AllQuestionPage";
 import ScrollToTopButton from "./components/ScrollToTop";
 
+import { Provider, useDispatch } from "react-redux";
+import store from "./reducx/store";
+import { fetchQuestions } from "./reducx/questionSlice";
+
 export function App() {
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   // fetch data on app load (with default subject "english")
+  //   dispatch(fetchQuestions("english"));
+  // }, [dispatch]);
+
   return (
     <Router>
       <Routes>

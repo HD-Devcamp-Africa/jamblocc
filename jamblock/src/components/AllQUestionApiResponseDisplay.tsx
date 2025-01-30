@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import QuestionLayout from "../layout/QuestionLayout";
 import QuestionCard from "./fetchCard/QuestionCard";
 import ScrollToTopButton from "./ScrollToTop";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchQuestions, setSubject } from "../reducx/questionSlice";
+// import { RootState } from "../reducx/store";
 import axios from "axios";
 
 // The expected shape of the API response
@@ -32,6 +35,8 @@ interface ApiResponse {
 }
 
 const AllQUestionApiResponseDisplay: React.FC = () => {
+  const dispatch = useDispatch();
+  // const {data, selectedSubject, isLoading, error} = useSelector((state:RootState) => {state.questions)
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
   const [filteredData, setFilteredData] = useState<
     ApiResponse["data"][keyof ApiResponse["data"]] | null
