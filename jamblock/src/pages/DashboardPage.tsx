@@ -5,6 +5,8 @@ import {
   HiOutlineMenu,
   HiOutlineX,
 } from "react-icons/hi";
+import { FaWallet } from "react-icons/fa6";
+import { IoIosLogOut } from "react-icons/io";
 import CalendarComponent from "../components/UserDashboard/Calendar";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -161,6 +163,16 @@ const Dashboard: React.FC = () => {
             {isSidebarOpen && <span>Exams</span>}
           </motion.a>
           <motion.a
+            href="*"
+            className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <FaWallet className="text-xl" />
+            {isSidebarOpen && <span>Wallet</span>}
+          </motion.a>
+          <motion.a
             href="/account-settings"
             className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
             variants={itemVariants}
@@ -189,6 +201,16 @@ const Dashboard: React.FC = () => {
           >
             <MdLibraryBooks className="text-xl" />
             {isSidebarOpen && <span>Past Questions</span>}
+          </motion.a>
+          <motion.a
+            href="*"
+            className="absolute bottom-28  transform -translate-x-1/2 flex bg-red-700 font-bold text-white items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <IoIosLogOut className="text-xl" />
+            {isSidebarOpen && <span>Logout</span>}
           </motion.a>
         </nav>
       </motion.div>
