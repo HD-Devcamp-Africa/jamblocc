@@ -22,10 +22,11 @@ export const getUserData = async (req, res) => {
 
     // Return the user data (excluding password and token)
     res.status(200).json({
-      name: user.name,
+      username: user.username,
       email: user.email,
       subjects: user.subjects,
       verified: user.verified,
+      image: user.image,
     });
   } catch (error) {
     console.error("Error fetching user data:", error);
@@ -33,48 +34,79 @@ export const getUserData = async (req, res) => {
   }
 };
 // Update User Account (Profile)
-export const updateUserProfile = async (req, res) => {
-  const { username, email, password, subjects } = req.body;
+// export const updateUserProfile = async (req, res) => {
+//   const { username, email, password, subjects, image } = req.body;
 
-  // Input validation
-  if (!username || !email || !subjects) {
-    return res
-      .status(400)
-      .json({ error: "Username, email, and subjects are required" });
-  }
+//   // Input validation
+//   if (!username || !email || !subjects) {
+//     return res
+//       .status(400)
+//       .json({ error: "Username, email, and subjects are required" });
+//   }
+
+//   try {
+//     // Find the user by ID (from the token)
+//     const user = await User.findById(req.user.userId);
+
+//     if (!user) {
+//       return res.status(404).json({ error: "User not found" });
+//     }
+
+//     // Check if email is already taken by another user
+//     const existingUser = await User.findOne({ email });
+//     if (existingUser && existingUser._id.toString() !== user._id.toString()) {
+//       return res.status(400).json({ error: "Email is already in use" });
+//     }
+
+//     // Update the user fields
+//     user.username = username;
+//     user.email = email;
+//     user.subjects = subjects;
+//     user.image = image; // Update image URL or file path
+
+//     // If password is provided, hash it and update
+//     if (password) {
+//       const hashedPassword = await bcrypt.hash(password, 10);
+//       user.password = hashedPassword;
+//     }
+
+//     // Save the updated user
+//     await user.save();
+
+//     res.status(200).json({ message: "Profile updated successfully" });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ error: "Failed to update user profile", details: error.message });
+//   }
+// };
+export const updateUserProfile = async (req, res) => {
+  const { username } = req.body;
+  const profileImage = req.file ? req.file.path : null; // Store uploaded image path
 
   try {
-    // Find the user by ID (from the token)
-    const user = await User.findById(req.user.userId);
+    // Get user ID from token
+    const userId = req.user.userId;
+    const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Check if email is already taken by another user
-    const existingUser = await User.findOne({ email });
-    if (existingUser && existingUser._id.toString() !== user._id.toString()) {
-      return res.status(400).json({ error: "Email is already in use" });
-    }
+    // Update only username and image
+    if (username) user.username = username;
+    if (profileImage) user.image = profileImage;
 
-    // Update the user fields
-    user.username = username;
-    user.email = email;
-    user.subjects = subjects;
-
-    // If password is provided, hash it and update
-    if (password) {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      user.password = hashedPassword;
-    }
-
-    // Save the updated user
     await user.save();
-
-    res.status(200).json({ message: "Profile updated successfully" });
+    res.status(200).json({
+      message: "Profile updated successfully",
+      username: user.username,
+      image: user.image,
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Failed to update user profile", details: error.message });
+    res.status(500).json({
+      error: "Failed to update profile",
+      details: error.message,
+    });
   }
 };

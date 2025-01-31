@@ -32,7 +32,7 @@ describe("Auth Controller Tests", () => {
     expect(user).not.toBeNull();
 
     const response = await request(app)
-      .post("http://localhost:5000/api/user/login") // Adjust to your endpoint
+      .post("https://jamblock.onrender.com/api/user/login") // Adjust to your endpoint
       .send({
         email: "testuser@example.com",
         password: "TestPassword123",
@@ -45,7 +45,7 @@ describe("Auth Controller Tests", () => {
 
   test("Should fail login with incorrect password", async () => {
     const response = await request(app)
-      .post("http://localhost:5000/api/user/login")
+      .post("https://jamblock.onrender.com/api/user/login")
       .send({
         email: "testuser@example.com",
         password: "WrongPassword123",

@@ -20,6 +20,7 @@ app.use(cors());
 // Routes
 app.use("/api/questions", questionRoutes);
 app.use("/api/user", userRoutes);
+app.use("/uploads", express.static("uploads"));
 
 // Start the server
 const PORT = process.env.PORT || 5000;
