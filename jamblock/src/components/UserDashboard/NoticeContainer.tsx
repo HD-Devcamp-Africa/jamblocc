@@ -24,7 +24,7 @@ const NoticeBoard: React.FC<NoticeBoardProps> = ({
 
   return (
     <motion.div
-      className="bg-gray-900 p-3 my-3 mx-2 border border-purple-400 rounded-lg shadow-lg hover:shadow-xl items-center text-center transition-shadow  duration-300 w-80"
+      className="bg-gray-900 p-3 my-3 mx-2 border border-purple-400 rounded-lg shadow-lg hover:shadow-xl items-center text-center transition-shadow  duration-300"
       variants={contentVariants}
       initial="hidden"
       animate={controls}

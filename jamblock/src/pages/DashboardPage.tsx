@@ -242,28 +242,29 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Right Section */}
-          <div className="border mt-20 border-red-300 overflow-y-auto max-h-[calc(100vh-10rem)]">
+          {/* Right Section */}
+          <div className="border mt-20 border-red-300 overflow-y-auto max-h-[calc(100vh-10rem)] w-full">
             <motion.div className="p-4">
               <h3 className="text-white text-md text-center mb-4">Calendar</h3>
               <div className="overflow-auto">
                 <CalendarComponent />
               </div>
             </motion.div>
-            <div className="items-center text-center overflow-auto p-4">
-              <h4 className="text-white text-center font-bold mb-4">
-                Notice Board
-              </h4>
-              {cardData.map((card) => (
-                <NoticeBoard
-                  key={card.id}
-                  description={card.description}
-                  buttonText="Read more"
-                  buttonLink={card.buttonLink}
-                  contentVariants={contentVariants}
-                  controls="visible"
-                  src="public/images/jamblock.png"
-                />
-              ))}
+            <div className="flex flex-col items-center justify-center text-center overflow-auto p-4 w-full">
+              <h4 className="text-white font-bold mb-4">Notice Board</h4>
+              <div className="w-full space-y-4">
+                {cardData.map((card) => (
+                  <NoticeBoard
+                    key={card.id}
+                    description={card.description}
+                    buttonText="Read more"
+                    buttonLink={card.buttonLink}
+                    contentVariants={contentVariants}
+                    controls="visible"
+                    src="public/images/jamblock.png"
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
