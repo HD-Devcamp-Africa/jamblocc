@@ -1,20 +1,20 @@
-// AccountSettings.tsx
 import React, { useState } from "react";
-// import { useAddress } from "@thirdweb-dev/react";
+import axios from "axios";
 import { ConnectButton } from "thirdweb/react";
 import { clientId } from "../client";
 import BottomNav from "../components/BottomNav";
+import { useNavigate } from "react-router-dom";
+
 const AccountSettings: React.FC = () => {
-  //   const address = useAddress(); // Fetch user's wallet address
   const [formData, setFormData] = useState({
     name: "",
-    school: "",
-    subject: "",
   });
+  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const navigate = useNavigate();
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -22,17 +22,52 @@ const AccountSettings: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setProfileImage(event.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // Here, you can add logic to save the form data, such as sending it to a backend server
-    console.log("Form data submitted:", formData);
+    setLoading(true);
+
+    const data = new FormData();
+    data.append("name", formData.name);
+    if (profileImage) {
+      data.append("profileImage", profileImage);
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/update-dashboard",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("Response:", response.data);
+      alert("Profile updated successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      alert("Failed to update profile. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCancel = () => {
+    navigate("/dashboard");
   };
 
   return (
-    <div className="max-w-[600px] mx-auto p-5 font-sans bg-gray-900 border rounded-lg shadow-md bg-white">
+    <div className="mt-20 max-w-[600px] mx-auto p-5 font-sans bg-gray-900 border rounded-lg shadow-md bg-white">
       <h1 className="text-center mb-5 text-gray-800">Account Settings</h1>
 
-      {/* Wallet Connection */}
       <div className="mb-5 p-3 border border-gray-200 rounded-lg bg-gray-200">
         <h3 className="text-center font-bold mb-3">Wallet</h3>
         <div className="flex justify-center">
@@ -40,9 +75,9 @@ const AccountSettings: React.FC = () => {
         </div>
       </div>
 
-      {/* Account Settings Form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <h3>Personal Information</h3>
+
         <div className="flex flex-col mb-4">
           <label htmlFor="name">Name</label>
           <input
@@ -57,37 +92,35 @@ const AccountSettings: React.FC = () => {
         </div>
 
         <div className="flex flex-col mb-4">
-          <label htmlFor="school">School</label>
+          <label htmlFor="profileImage">Profile Picture</label>
           <input
-            type="text"
-            id="school"
-            name="school"
-            value={formData.school}
-            onChange={handleInputChange}
-            placeholder="Enter your school"
+            type="file"
+            id="profileImage"
+            accept="image/*"
+            onChange={handleFileChange}
             className="p-2.5 text-base border border-gray-300 rounded"
           />
         </div>
 
-        <div className="flex flex-col mb-4">
-          <label htmlFor="subject">Subject</label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            value={formData.subject}
-            onChange={handleInputChange}
-            placeholder="Enter your subject"
-            className="p-2.5 text-base border border-gray-300 rounded"
-          />
-        </div>
+        <div className="flex justify-between gap-4">
+          <button
+            type="submit"
+            className={`w-full p-2.5 text-base text-white rounded cursor-pointer ${
+              loading ? "bg-gray-500" : "bg-purple-600 hover:bg-purple-700"
+            }`}
+            disabled={loading}
+          >
+            {loading ? "Saving..." : "Save Changes"}
+          </button>
 
-        <button
-          type="submit"
-          className="p-2.5 px-5 text-base text-white bg-purple-600 border-none rounded cursor-pointer hover:bg-purple-700"
-        >
-          Save Changes
-        </button>
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="w-full p-2.5 text-base text-white bg-gray-500 rounded cursor-pointer hover:bg-gray-600"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
 
       <div>

@@ -68,7 +68,7 @@ const Dashboard: React.FC = () => {
   const cardData = [
     {
       id: "account-settings",
-      title: "Account Settings",
+      title: "Subject 1",
       description:
         "Manage your account settings, update your profile information, and adjust security settings.",
       buttonText: "Go to Settings",
@@ -76,7 +76,7 @@ const Dashboard: React.FC = () => {
     },
     {
       id: "analytics",
-      title: "Analytics",
+      title: "Subject 2",
       description:
         "View your recent activity, insights, and track your performance.",
       buttonText: "View Analytics",
@@ -84,7 +84,7 @@ const Dashboard: React.FC = () => {
     },
     {
       id: "notifications",
-      title: "Notifications",
+      title: "Subject 3",
       description:
         "Stay updated with the latest notifications from your activities.",
       buttonText: "View Notifications",
@@ -92,7 +92,7 @@ const Dashboard: React.FC = () => {
     },
     {
       id: "wallet",
-      title: "Wallet",
+      title: "Subject 4",
       description: "See your balance and see your transaction so far.",
       buttonText: "See All Transactions",
       buttonLink: "*",
@@ -173,7 +173,7 @@ const Dashboard: React.FC = () => {
             {isSidebarOpen && <span>Wallet</span>}
           </motion.a>
           <motion.a
-            href="/account-settings"
+            href="/account-setting"
             className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
             variants={itemVariants}
             initial="hidden"
@@ -226,10 +226,10 @@ const Dashboard: React.FC = () => {
       >
         <Header
           userProfile={userProfile}
-          wallet={wallet}
+          // wallet={wallet}
           account={account}
-          clientId={clientId}
-          disconnect={(address) => disconnect(address)}
+          // clientId={clientId}
+          // disconnect={(address) => disconnect(address)}
         />
 
         <div className="  grid grid-cols-1 lg:grid-cols-[70%_30%] gap-6">

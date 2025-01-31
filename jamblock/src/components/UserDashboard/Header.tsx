@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { HiOutlineClipboard, HiOutlineCheck } from "react-icons/hi";
-import { ConnectButton } from "thirdweb/react"; // Replace with actual path to your ConnectButton component
+import { HiOutlineClipboard, HiOutlineCheck, HiBell } from "react-icons/hi";
+import { FaUserCircle } from "react-icons/fa";
+import { ConnectButton } from "thirdweb/react";
 import { shortenAddress } from "@thirdweb-dev/react";
 import { clientId } from "../../client";
+import ThirdwebClient from "@thirdweb-dev/react"; // Add import for ThirdwebClient
 import { Wallet } from "thirdweb/wallets";
+
 interface UserProfile {
   name: string;
+  image?: string; // Optional user image
 }
 
 interface Account {
@@ -13,19 +17,19 @@ interface Account {
 }
 
 interface HeaderProps {
-  userProfile?: any;
+  userProfile?: UserProfile;
   account?: Account;
-  disconnect: (wallet: string) => void;
-  wallet?: Wallet | null;
-  clientId: string;
+  // disconnect: (address: string) => void; // Change type to string
+  // wallet?: Wallet | null;
+  // clientId: string;
 }
 
 const Header: React.FC<HeaderProps> = ({
   userProfile,
   account,
-  disconnect,
-  wallet,
-  clientId,
+  // disconnect,
+  // wallet,
+  // clientId,
 }) => {
   const [copied, setCopied] = useState(false);
 
@@ -37,15 +41,49 @@ const Header: React.FC<HeaderProps> = ({
     }
   };
 
+  // const thirdwebClient = new ThirdwebClient({ clientId }); // Initialize the client
+
   return (
-    <header className="flex justify-between items-center mb-6">
-      <h1 className="text-3xl font-semibold text-lg md:text-2xl lg:text-3xl">
-        Welcome back, {userProfile ? userProfile.name : "User"}
+    <header className="border border-white flex flex-col md:flex-row justify-between items-center px-6 py-4 bg-gray-800 text-white rounded-md">
+      {/* Welcome Text */}
+      <h1 className="text-lg md:text-2xl lg:text-3xl font-semibold whitespace-nowrap">
+        Welcome back,{" "}
+        <span className="text-purple-200">
+          {userProfile ? userProfile.name : "User"}
+        </span>
       </h1>
 
-      <div className="flex items-center space-x-4">
-        {account ? (
-          <div className="flex flex-col md:flex-row items-center mr-6 space-y-4 md:space-y-0 md:space-x-6">
+      {/* Search Bar */}
+      <div className="w-full md:w-1/3 flex items-center mt-4 md:mt-0">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="w-full p-2 bg-gray-700 text-white rounded-lg focus:outline-none"
+        />
+      </div>
+
+      {/* Right Section */}
+      <div className="flex items-center space-x-4 mt-4 md:mt-0">
+        {/* Notification Icon */}
+        <button className="relative">
+          <HiBell className="text-2xl" />
+          {/* Notification Dot */}
+          <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+        </button>
+
+        {/* User Profile Picture or Default Icon */}
+        {userProfile?.image ? (
+          <img
+            src={userProfile.image}
+            alt="User Profile"
+            className="w-10 h-10 rounded-full object-cover border-2 border-gray-500"
+          />
+        ) : (
+          <FaUserCircle className="text-3xl cursor-pointer" />
+        )}
+
+        {/* {account ? (
+          <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
             <div
               onClick={handleCopyAddress}
               className="cursor-pointer flex items-center space-x-2"
@@ -60,15 +98,15 @@ const Header: React.FC<HeaderProps> = ({
             </div>
 
             <button
-              onClick={() => disconnect(wallet!)}
-              className="text-sm font-bold text-white rounded-lg bg-[#E91E63] py-3 px-10"
+              onClick={() => disconnect(wallet?.address || "")} // Pass wallet address as string
+              className="text-sm font-bold text-white rounded-lg bg-[#E91E63] py-2 px-6"
             >
               Disconnect
             </button>
           </div>
         ) : (
-          <ConnectButton client={clientId} />
-        )}
+          <ConnectButton client={thirdwebClient} />
+        )} */}
       </div>
     </header>
   );
