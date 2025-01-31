@@ -36,7 +36,7 @@ const NoticeBoard: React.FC<NoticeBoardProps> = ({
           className="text-white h-20 w-20 rounded-lg"
         />
 
-        <p className="md:text-sm text-sm text-white ml-2 mb-4 lg:text-md">
+        <p className="md:text-sm text-sm text-center text-white ml-2 mb-4 lg:text-md">
           {description}
         </p>
       </div>

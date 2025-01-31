@@ -209,9 +209,10 @@ const Dashboard: React.FC = () => {
           clientId={clientId}
           disconnect={(address) => disconnect(address)}
         />
-        <div className=" border border-green-200 grid grid-cols-1 lg:grid-cols-[70%_30%] gap-6">
+
+        <div className="  grid grid-cols-1 lg:grid-cols-[70%_30%] gap-6">
           {/* Dashboard Section */}
-          <div className="sub-dashboard border border-blue-200 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6 mt-20">
+          <div className="sub-dashboard grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6 mt-20">
             {cardData.map((card) => (
               <SubjectCard
                 key={card.id}
@@ -225,25 +226,25 @@ const Dashboard: React.FC = () => {
             ))}
 
             {/* Statistics, Performance, and Leaderboard component */}
-            <div className="w-full col-span-full border border-red-200 overflow-hidden">
-              <div className="flex flex-col lg:flex-row gap-4 w-full max-w-full">
-                <div className="lg:basis-[65%] flex-shrink-0 min-h-[200px] max-w-full">
+
+            <div className="w-full col-span-full overflow-hidden">
+              <div className="flex flex-col lg:flex-row gap-1 w-full max-w-full">
+                <div className="lg:basis-[60%] flex-shrink-0 min-h-[200px] max-w-full">
                   <Statistics />
                 </div>
-                <div className="lg:basis-[35%] flex-shrink-0 min-h-[200px] max-w-full mr-4">
+                <div className="lg:basis-[39%] flex-shrink-0 min-h-[200px] max-w-full">
                   <Performance />
                 </div>
               </div>
 
-              <div className="w-full border border-white max-w-full">
+              <div className="w-full  max-w-full">
                 <Leaderboard />
               </div>
             </div>
           </div>
 
           {/* Right Section */}
-          {/* Right Section */}
-          <div className="border mt-20 border-red-300 overflow-y-auto max-h-[calc(100vh-10rem)] w-full">
+          <div className="border-l border-gray-300 mt-10 border-red-300 overflow-y-auto max-h-[calc(100vh-10rem)] w-full">
             <motion.div className="p-4">
               <h3 className="text-white text-md text-center mb-4">Calendar</h3>
               <div className="overflow-auto">
