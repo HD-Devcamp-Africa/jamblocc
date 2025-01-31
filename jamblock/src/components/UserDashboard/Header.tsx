@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({
     <header className="border border-white flex flex-col md:flex-row justify-between items-center px-6 py-4 bg-gray-800 text-white rounded-md">
       {/* Welcome Text */}
       <h1 className="text-lg md:text-2xl lg:text-3xl font-semibold whitespace-nowrap">
-        Welcome back,{" "}
+        Welcome back,
         <span className="text-purple-200">
           {userProfile ? userProfile.name : "User"}
         </span>

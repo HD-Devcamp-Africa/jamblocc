@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ConnectButton } from "thirdweb/react";
 import { clientId } from "../client";
@@ -7,12 +7,43 @@ import { useNavigate } from "react-router-dom";
 
 const AccountSettings: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
   });
   const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [profileImagePreview, setProfileImagePreview] = useState<string | null>(
+    null
+  );
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<{ username: string; image?: string }>({
+    username: "",
+    image: "",
+  });
 
   const navigate = useNavigate();
+
+  // Fetch user data from the backend
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/user", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        });
+
+        const userData = response.data;
+        setUser(userData);
+        setFormData({ username: userData.username });
+        if (userData.image) {
+          setProfileImagePreview(userData.image);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -25,6 +56,7 @@ const AccountSettings: React.FC = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setProfileImage(event.target.files[0]);
+      setProfileImagePreview(URL.createObjectURL(event.target.files[0]));
     }
   };
 
@@ -33,7 +65,7 @@ const AccountSettings: React.FC = () => {
     setLoading(true);
 
     const data = new FormData();
-    data.append("name", formData.name);
+    data.append("username", formData.username);
     if (profileImage) {
       data.append("profileImage", profileImage);
     }
@@ -45,6 +77,7 @@ const AccountSettings: React.FC = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
         }
       );
@@ -78,26 +111,41 @@ const AccountSettings: React.FC = () => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <h3>Personal Information</h3>
 
-        <div className="flex flex-col mb-4">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder="Enter your name"
-            className="p-2.5 text-base border border-gray-300 rounded"
-          />
-        </div>
-
-        <div className="flex flex-col mb-4">
+        <div className="flex flex-col mb-4 items-center">
           <label htmlFor="profileImage">Profile Picture</label>
+          <div className="flex justify-center">
+            {profileImagePreview ? (
+              <img
+                src={profileImagePreview}
+                alt="Preview"
+                className="w-24 h-24 rounded-full mb-2"
+              />
+            ) : (
+              <img
+                src={user.image || "default-profile.png"}
+                alt="Profile"
+                className="w-24 h-24 rounded-full mb-2"
+              />
+            )}
+          </div>
           <input
             type="file"
             id="profileImage"
             accept="image/*"
             onChange={handleFileChange}
+            className="p-2.5 text-base border border-gray-300 rounded"
+          />
+        </div>
+
+        <div className="flex flex-col mb-4">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+            placeholder="Enter your Username"
             className="p-2.5 text-base border border-gray-300 rounded"
           />
         </div>

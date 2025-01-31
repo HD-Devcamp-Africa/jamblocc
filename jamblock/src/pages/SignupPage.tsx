@@ -23,7 +23,7 @@ const subjectsList = [
 ];
 
 const SignupPage: React.FC = () => {
-  const [name, setName] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -52,7 +52,7 @@ const SignupPage: React.FC = () => {
       return;
     }
 
-    if (!name || !email || !password || subjects.length === 0) {
+    if (!username || !email || !password || subjects.length === 0) {
       setError(
         "Please fill in all required fields and select at least one subject."
       );
@@ -60,18 +60,17 @@ const SignupPage: React.FC = () => {
     }
 
     const formData = {
-      name,
+      username,
       email,
       password,
       subjects,
     };
 
-    setLoading(true); // Start the spinner
+    setLoading(true);
 
     try {
       const BACKEND_API_URL =
-        import.meta.env.VITE_API_URL || "https://jamblock.onrender.com";
-      console.log(BACKEND_API_URL);
+        import.meta.env.VITE_API_URL_LOCAL || "http://localhost:5000";
       const response = await axios.post(
         `${BACKEND_API_URL}/api/user/signup`,
         formData,
@@ -82,27 +81,21 @@ const SignupPage: React.FC = () => {
         }
       );
 
-      console.log("Signup successful:", response.data);
       const token = response.data.token;
       if (token) {
-        // save the token to local storage
         localStorage.setItem("authToken", token);
       }
-      // Redirect or handle successful signup here
-      // const { redirectUrl } = response.data;
       navigate("/welcome");
     } catch (err: any) {
       if (axios.isAxiosError(err)) {
         setError(
           err.response?.data?.message || "An error occurred during signup"
         );
-        console.error("API Error:", err.response?.data || err.message);
       } else {
-        setError("Unexpected error occured");
-        console.error("Unexpected Error:", err.message || err.response?.data);
+        setError("Unexpected error occurred");
       }
     } finally {
-      setLoading(false); // Stop the spinner after the request
+      setLoading(false);
     }
   };
 
@@ -118,55 +111,76 @@ const SignupPage: React.FC = () => {
             {error}
           </div>
         )}
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-gray-300 text-sm md:text-base">
-              Name
+            <label
+              htmlFor="username"
+              className="block text-gray-300 text-sm md:text-base"
+            >
+              Username
             </label>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="mt-1 text-white block w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-purple-500 text-sm md:text-base"
               required
             />
           </div>
+
           <div>
-            <label className="block text-gray-300 text-sm md:text-base">
+            <label
+              htmlFor="email"
+              className="block text-gray-300 text-sm md:text-base"
+            >
               Email
             </label>
             <input
               type="email"
+              id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="mt-1 block text-white w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-purple-500 text-sm md:text-base"
               required
             />
           </div>
+
           <div>
-            <label className="block text-gray-300 text-sm md:text-base">
+            <label
+              htmlFor="password"
+              className="block text-gray-300 text-sm md:text-base"
+            >
               Password
             </label>
             <input
               type="password"
+              id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="mt-1 block text-white w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-purple-500 text-sm md:text-base"
               required
             />
           </div>
+
           <div>
-            <label className="block text-gray-300 text-sm md:text-base">
+            <label
+              htmlFor="confirmPassword"
+              className="block text-gray-300 text-sm md:text-base"
+            >
               Confirm Password
             </label>
             <input
               type="password"
+              id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="mt-1 text-white block w-full p-2 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring focus:ring-purple-500 text-sm md:text-base"
               required
             />
           </div>
+
           <div>
             <label className="block text-purple-300 text-center text-sm md:text-base">
               Select Jamb Subjects (max 4)
@@ -191,6 +205,7 @@ const SignupPage: React.FC = () => {
               ))}
             </div>
           </div>
+
           <button
             type="submit"
             className="w-full py-2 bg-purple-500 hover:bg-purple-600 transition duration-200 rounded text-white font-semibold text-sm md:text-base flex justify-center items-center"
@@ -224,6 +239,7 @@ const SignupPage: React.FC = () => {
             )}
           </button>
         </form>
+
         <p className="mt-4 text-center text-gray-400 text-sm md:text-base">
           Already have an account?{" "}
           <Link to="/login" className="text-green-500 hover:underline">

@@ -5,6 +5,7 @@ import {
   HiOutlineMenu,
   HiOutlineX,
 } from "react-icons/hi";
+import { Link } from "react-router-dom";
 import { FaWallet } from "react-icons/fa6";
 import { IoIosLogOut } from "react-icons/io";
 import CalendarComponent from "../components/UserDashboard/Calendar";
@@ -36,7 +37,7 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const account = useActiveAccount();
   const { disconnect } = useDisconnect();
-  const wallet = useActiveWallet();
+  // const wallet = useActiveWallet();
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -48,6 +49,11 @@ const Dashboard: React.FC = () => {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); // remove the toke
+    window.location.href = "/"; // navigate to the home page
   };
 
   const sidebarVariants = {
@@ -100,27 +106,27 @@ const Dashboard: React.FC = () => {
   ];
 
   // Fetch user profile data
-  // useEffect(() => {
-  //   const token = localStorage.getItem("authToken");
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
 
-  //   if (token) {
-  //     axios
-  //       .get(`${VITE_API_URL}/api/user/profile`, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       })
-  //       .then((response) => {
-  //         console.log("User profile fetched:", response.data);
-  //         setUserProfile(response.data); // Set the user profile data
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error fetching user profile:", error);
-  //       });
-  //   } else {
-  //     console.log("User not logged in");
-  //     // Redirect to login page or handle this situation appropriately
-  //     navigate("/login");
-  //   }
-  // }, []);
+    if (token) {
+      axios
+        .get(`${VITE_API_URL}/api/user/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          console.log("User profile fetched:", response.data);
+          setUserProfile(response.data); // Set the user profile data
+        })
+        .catch((error) => {
+          console.error("Error fetching user profile:", error);
+        });
+    } else {
+      console.log("User not logged in");
+      // Redirect to login page or handle this situation appropriately
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <div className="min-h-screen h-full bg-gray-800 text-white flex overflow-hidden">
@@ -137,81 +143,102 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
         <nav className="space-y-10 mt-10">
-          <motion.a
-            href="/dashboard"
+          <motion.div
             className="flex bg-gray-200 mb-40 bg-gray-900 space-x-2"
             variants={itemVariants}
             initial="hidden"
             animate="visible"
           >
-            {isSidebarOpen && (
-              <img
-                src="https://pbs.twimg.com/profile_images/1878416738628280320/ZvpJSk-__400x400.jpg"
-                alt="Logo"
-                className="rounded-full"
-              />
-            )}
-          </motion.a>
-          <motion.a
-            href="/exam"
+            <Link to="/dashboard" className="flex">
+              {isSidebarOpen && (
+                <img
+                  src="https://pbs.twimg.com/profile_images/1878416738628280320/ZvpJSk-__400x400.jpg"
+                  alt="Logo"
+                  className="rounded-full"
+                />
+              )}
+            </Link>
+          </motion.div>
+
+          <motion.div
             className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
             variants={itemVariants}
             initial="hidden"
             animate="visible"
           >
-            <PiExamFill className="text-xl" />
-            {isSidebarOpen && <span>Exams</span>}
-          </motion.a>
-          <motion.a
-            href="*"
+            <Link to="/exam" className="flex items-center space-x-2 w-full">
+              <PiExamFill className="text-xl" />
+              {isSidebarOpen && <span>Exams</span>}
+            </Link>
+          </motion.div>
+
+          <motion.div
             className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
             variants={itemVariants}
             initial="hidden"
             animate="visible"
           >
-            <FaWallet className="text-xl" />
-            {isSidebarOpen && <span>Wallet</span>}
-          </motion.a>
-          <motion.a
-            href="/account-setting"
+            <Link to="/wallet" className="flex items-center space-x-2 w-full">
+              <FaWallet className="text-xl" />
+              {isSidebarOpen && <span>Wallet</span>}
+            </Link>
+          </motion.div>
+
+          <motion.div
             className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
             variants={itemVariants}
             initial="hidden"
             animate="visible"
           >
-            <HiOutlineCog className="text-xl" />
-            {isSidebarOpen && <span>Settings</span>}
-          </motion.a>
-          <motion.a
-            href="*"
+            <Link
+              to="/account-setting"
+              className="flex items-center space-x-2 w-full"
+            >
+              <HiOutlineCog className="text-xl" />
+              {isSidebarOpen && <span>Settings</span>}
+            </Link>
+          </motion.div>
+
+          <motion.div
             className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
             variants={itemVariants}
             initial="hidden"
             animate="visible"
           >
-            <HiOutlineBell className="text-xl" />
-            {isSidebarOpen && <span>Notifications</span>}
-          </motion.a>
-          <motion.a
-            href="/questions"
+            <Link
+              to="/notifications"
+              className="flex items-center space-x-2 w-full"
+            >
+              <HiOutlineBell className="text-xl" />
+              {isSidebarOpen && <span>Notifications</span>}
+            </Link>
+          </motion.div>
+
+          <motion.div
             className="flex bg-gray-200 text-black items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
             variants={itemVariants}
             initial="hidden"
             animate="visible"
           >
-            <MdLibraryBooks className="text-xl" />
-            {isSidebarOpen && <span>Past Questions</span>}
-          </motion.a>
-          <motion.a
-            href="*"
-            className="absolute bottom-28  transform -translate-x-1/2 flex bg-red-700 font-bold text-white items-center space-x-2 hover:bg-purple-700 p-2 rounded-md"
+            <Link
+              to="/questions"
+              className="flex items-center space-x-2 w-full"
+            >
+              <MdLibraryBooks className="text-xl" />
+              {isSidebarOpen && <span>Past Questions</span>}
+            </Link>
+          </motion.div>
+
+          <motion.div
+            onClick={handleLogout}
+            className="absolute bottom-28 transform -translate-x-1/2 flex bg-red-700 font-bold text-white items-center space-x-2 hover:bg-purple-700 p-2 rounded-md cursor-pointer"
             variants={itemVariants}
             initial="hidden"
             animate="visible"
           >
             <IoIosLogOut className="text-xl" />
             {isSidebarOpen && <span>Logout</span>}
-          </motion.a>
+          </motion.div>
         </nav>
       </motion.div>
 
@@ -225,7 +252,7 @@ const Dashboard: React.FC = () => {
         animate="visible"
       >
         <Header
-          userProfile={userProfile}
+          userProfile={userProfile.username}
           // wallet={wallet}
           account={account}
           // clientId={clientId}
