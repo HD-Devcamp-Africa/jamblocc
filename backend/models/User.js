@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, unique: true, required: true },
+    username: { type: String, unique: true, required: true },
     email: {
       type: String,
       unique: true,
@@ -45,9 +45,11 @@ const userSchema = new mongoose.Schema(
         "history",
       ],
     },
-    // Add `token` and `verified` fields explicitly
     token: { type: String, default: null },
     verified: { type: Boolean, default: false },
+
+    // New field for user profile image
+    image: { type: String, default: null }, // Stores image URL or file path
   },
   { timestamps: true, strict: true }
 );
