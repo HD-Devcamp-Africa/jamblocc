@@ -49,7 +49,10 @@ const Header: React.FC<HeaderProps> = ({
       <h1 className="text-lg md:text-2xl lg:text-3xl font-semibold whitespace-nowrap">
         Welcome back,
         <span className="ml-2 text-purple-200">
-          {userProfile ? userProfile.username : "User"}
+          {userProfile
+            ? userProfile.username.charAt(0).toUpperCase() +
+              userProfile.username.slice(1)
+            : "User"}
         </span>
       </h1>
 

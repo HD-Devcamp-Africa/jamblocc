@@ -43,7 +43,7 @@ const NoticeBoard: React.FC<NoticeBoardProps> = ({
         </p>
       </div>
 
-      <p className="text-white mb-4 text-sm md:text-sm lg:text-md">{}</p>
+      <p className="text-white mb-4 text-sm md:text-sm lg:text-md">{title}</p>
       <button
         onClick={() => navigate(buttonLink)}
         className="bg-purple-800 text-white py-1 px-2  md:py-2 md:px-4 rounded-md hover:bg-purple-700 transition duration-300 text-sm md:text-sm lg:text-md"

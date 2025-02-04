@@ -295,12 +295,22 @@ const Dashboard: React.FC = () => {
               <h4 className="text-white font-bold mb-4">Notice Board</h4>
               <div className="w-full space-y-4">
                 {cardData.map((card) => (
+                  // <NoticeBoard
+                  //   key={card.id}
+                  //   description={card.description}
+                  //   buttonText="Read more"
+                  //   buttonLink={card.buttonLink}
+                  //   title={card.title}
+                  // />
                   <NoticeBoard
                     key={card.id}
                     description={card.description}
                     buttonText="Read more"
                     buttonLink={card.buttonLink}
                     title={card.title}
+                    contentVariants={contentVariants} // Pass the contentVariants prop
+                    controls="visible" // Pass controls prop
+                    src="someValue" // Provide a value for srct (this could be any value as per your component's requirement)
                   />
                 ))}
               </div>
