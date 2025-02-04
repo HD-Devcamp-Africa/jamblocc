@@ -37,9 +37,9 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const account = useActiveAccount();
   const { disconnect } = useDisconnect();
-  // const wallet = useActiveWallet();
 
-  const VITE_API_URL = import.meta.env.VITE_API_URL;
+  const VITE_API_URL =
+    import.meta.env.VITE_API_URL_LOCAL || "http://localhost:5000";
 
   useEffect(() => {
     if (inView) {
@@ -52,8 +52,8 @@ const Dashboard: React.FC = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken"); // remove the toke
-    window.location.href = "/"; // navigate to the home page
+    localStorage.removeItem("authToken");
+    navigate("/");
   };
 
   const sidebarVariants = {
@@ -105,7 +105,6 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  // Fetch user profile data
   useEffect(() => {
     const token = localStorage.getItem("authToken");
 
@@ -115,15 +114,12 @@ const Dashboard: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
-          console.log("User profile fetched:", response.data);
-          setUserProfile(response.data); // Set the user profile data
+          setUserProfile(response.data);
         })
         .catch((error) => {
           console.error("Error fetching user profile:", error);
         });
     } else {
-      console.log("User not logged in");
-      // Redirect to login page or handle this situation appropriately
       navigate("/login");
     }
   }, []);
@@ -251,31 +247,25 @@ const Dashboard: React.FC = () => {
         initial="hidden"
         animate="visible"
       >
-        <Header
-          userProfile={userProfile.username}
-          // wallet={wallet}
-          account={account}
-          // clientId={clientId}
-          // disconnect={(address) => disconnect(address)}
-        />
+        {!userProfile ? (
+          <p>Loading...</p>
+        ) : (
+          <Header userProfile={userProfile} account={account} />
+        )}
 
-        <div className="  grid grid-cols-1 lg:grid-cols-[70%_30%] gap-6">
-          {/* Dashboard Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-[70%_30%] gap-6 mt-20">
+          {/* Left Section (70% width on large screens) */}
           <div className="sub-dashboard grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6 mt-20">
-            {cardData.map((card) => (
+            {userProfile?.subjects?.map((subject: string, index: number) => (
               <SubjectCard
-                key={card.id}
-                title={card.title}
-                description={card.description}
-                buttonText={card.buttonText}
-                buttonLink={card.buttonLink}
-                contentVariants={contentVariants}
-                controls="visible"
+                key={index}
+                title={subject.charAt(0).toUpperCase() + subject.slice(1)}
+                contentVariants={contentVariants} // Pass contentVariants prop
+                controls="visible" // Pass controls prop
               />
             ))}
 
             {/* Statistics, Performance, and Leaderboard component */}
-
             <div className="w-full col-span-full overflow-hidden">
               <div className="flex flex-col lg:flex-row gap-1 w-full max-w-full">
                 <div className="lg:basis-[60%] flex-shrink-0 min-h-[200px] max-w-full">
@@ -286,13 +276,13 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
 
-              <div className="w-full  max-w-full">
+              <div className="w-full max-w-full">
                 <Leaderboard />
               </div>
             </div>
           </div>
 
-          {/* Right Section */}
+          {/* Right Section (30% width on large screens) */}
           <div className="border-l border-gray-300 mt-10 border-red-300 overflow-y-auto max-h-[calc(100vh-10rem)] w-full">
             <motion.div className="p-4">
               <h3 className="text-white text-md text-center mb-4">Calendar</h3>
@@ -309,9 +299,7 @@ const Dashboard: React.FC = () => {
                     description={card.description}
                     buttonText="Read more"
                     buttonLink={card.buttonLink}
-                    contentVariants={contentVariants}
-                    controls="visible"
-                    src="public/images/jamblock.png"
+                    title={card.title}
                   />
                 ))}
               </div>
@@ -319,7 +307,6 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </motion.div>
-
       <BottomNav />
     </div>
   );

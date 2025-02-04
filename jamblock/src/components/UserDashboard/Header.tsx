@@ -8,7 +8,7 @@ import ThirdwebClient from "@thirdweb-dev/react"; // Add import for ThirdwebClie
 import { Wallet } from "thirdweb/wallets";
 
 interface UserProfile {
-  name: string;
+  username: string;
   image?: string; // Optional user image
 }
 
@@ -48,8 +48,8 @@ const Header: React.FC<HeaderProps> = ({
       {/* Welcome Text */}
       <h1 className="text-lg md:text-2xl lg:text-3xl font-semibold whitespace-nowrap">
         Welcome back,
-        <span className="text-purple-200">
-          {userProfile ? userProfile.name : "User"}
+        <span className="ml-2 text-purple-200">
+          {userProfile ? userProfile.username : "User"}
         </span>
       </h1>
 
