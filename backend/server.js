@@ -14,8 +14,11 @@ app.use(express.json()); // Only this is needed
 // Connect to MongoDB
 connectDB();
 
-// Middleware
-app.use(cors());
+// // Middleware
+// app.use(cors());
+
+// Allow all origins
+app.use(cors()); // This will allow requests from any origin
 
 // Routes
 app.use("/api/questions", questionRoutes);
