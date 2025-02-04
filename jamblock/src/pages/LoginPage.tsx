@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const VITE_API_URL =
-    import.meta.env.VITE_API_URL_LOCAL || "http://localhost:5000";
+    import.meta.env.VITE_API_URL || "https://jamblock.onrender.com";
+  // import.meta.env.VITE_API_URL_LOCAL || "http://localhost:5000";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +27,8 @@ const LoginPage: React.FC = () => {
 
       console.log("Login successful:", response.data);
       localStorage.setItem("authToken", response.data.token);
-      window.location.href = "/dashboard";
+      // window.location.href = "/dashboard";
+      navigate("/dashboard");
     } catch (error: any) {
       console.error("Error during login:", error);
       setErrorMessage(error.response?.data?.message || "Login failed");
