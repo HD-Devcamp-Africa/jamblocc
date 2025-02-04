@@ -8,6 +8,7 @@ interface NoticeBoardProps {
   buttonText: string;
   buttonLink: string;
   contentVariants: any;
+  title: string;
   controls: any;
   src: string;
 }
@@ -18,6 +19,7 @@ const NoticeBoard: React.FC<NoticeBoardProps> = ({
   buttonLink,
   contentVariants,
   controls,
+  title,
   src,
 }) => {
   const navigate = useNavigate();

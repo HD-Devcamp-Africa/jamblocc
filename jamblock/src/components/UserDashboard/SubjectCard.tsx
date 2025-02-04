@@ -20,7 +20,7 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
       initial="hidden"
       animate={controls}
     >
-      <div className="flex flex-col items-center space-y-3">
+      <div className="flex flex-col mt-10 items-center space-y-3">
         <ImBooks className="h-10 w-10 text-white" />
         <h3 className="text-white text-sm md:text-lg font-semibold">{title}</h3>
       </div>

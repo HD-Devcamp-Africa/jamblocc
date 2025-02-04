@@ -68,12 +68,49 @@ const LoginPage: React.FC = () => {
               required
             />
           </div>
-          <button
+          {/* <button
             type="submit"
             className={`w-full py-2 rounded font-semibold text-sm md:text-base transition duration-200 ${
               isLoading
                 ? "bg-gray-600 cursor-not-allowed"
                 : "bg-purple-800 hover:bg-purple-600"
+            }`}
+            disabled={!email || !password || isLoading}
+          >
+            {isLoading ? (
+              <span className="flex items-center justify-center">
+                <svg
+                  className="w-5 h-5 mr-2 animate-spin"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="white"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="white"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  />
+                </svg>
+                Logging in...
+              </span>
+            ) : (
+              "Login"
+            )}
+          </button> */}
+          <button
+            type="submit"
+            className={`w-full py-2 text-white rounded font-semibold text-sm md:text-base transition duration-200 ${
+              isLoading || !email || !password
+                ? "bg-gray-300 cursor-not-allowed" // Disabled state
+                : "bg-purple-800 hover:bg-purple-600" // Active state
             }`}
             disabled={!email || !password || isLoading}
           >
