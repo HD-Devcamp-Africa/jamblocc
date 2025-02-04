@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import QuestionLayout from "../layout/QuestionLayout";
 import QuestionCard from "./fetchCard/QuestionCard";
 import ScrollToTopButton from "./ScrollToTop";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchQuestions, setSubject } from "../reducx/questionSlice";
-// import { RootState } from "../reducx/store";
+import { FaRegSquare } from "react-icons/fa"; // Import an empty square icon
 import axios from "axios";
 
 // The expected shape of the API response
@@ -35,8 +33,6 @@ interface ApiResponse {
 }
 
 const AllQUestionApiResponseDisplay: React.FC = () => {
-  const dispatch = useDispatch();
-  // const {data, selectedSubject, isLoading, error} = useSelector((state:RootState) => {state.questions)
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
   const [filteredData, setFilteredData] = useState<
     ApiResponse["data"][keyof ApiResponse["data"]] | null
@@ -109,12 +105,34 @@ const AllQUestionApiResponseDisplay: React.FC = () => {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-        {filteredData.map((item, index) => (
-          <QuestionCard key={item._id} question={item.data} index={index + 1} />
-        ))}
-      </div>
-      <ScrollToTopButton />
+      {!apiResponse ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "200px",
+            border: "1px dashed #ccc",
+          }}
+        >
+          <FaRegSquare size={50} color="#ccc" />
+          <span style={{ marginLeft: "10px", fontSize: "18px", color: "#ccc" }}>
+            Empty Container
+          </span>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+          {filteredData.map((item, index) => (
+            <QuestionCard
+              key={item._id}
+              question={item.data}
+              index={index + 1}
+            />
+          ))}
+
+          <ScrollToTopButton />
+        </div>
+      )}
     </QuestionLayout>
   );
 };
