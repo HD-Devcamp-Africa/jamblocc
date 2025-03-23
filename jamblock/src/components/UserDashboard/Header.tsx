@@ -189,7 +189,7 @@ const Header: React.FC<HeaderProps> = ({
           <div className="bg-gray-700 p-6 rounded-lg shadow-lg ">
             <div className="flex items-center text-right gap-5 w-full mb-10 border-b border-1 mx-auto pb-5">
               <h2 className="text-xl text-md md:text-lg lg:text-xl xl:text-3xl  text-center mx-auto text-purple-300 font-bold">
-                Account
+                Account Info
               </h2>
               <button
                 onClick={handleCloseUserModal}
@@ -199,9 +199,15 @@ const Header: React.FC<HeaderProps> = ({
               </button>
             </div>
 
-            <div className="max-w-sm mx-auto p-6 bg-gray-900 rounded-lg shadow-md text-white">
+            <div className="max-w-3xl w-md mx-auto p-6 bg-gray-900 rounded-lg shadow-md text-white">
               <div className="flex flex-col items-center">
                 {/* Profile Picture */}
+                <p className="text-gray-900">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic
+                  tempora minus voluptas amet esse obcaecati nemo laudantium?
+                  Nesciunt nihil molestiae non optio ipsa unde veritatis dolores
+                  minus, voluptatum earum necessitatibus.
+                </p>
                 <div className="w-24 h-24 text-center ">
                   {/* User Profile Picture or Default Icon */}
                   {userProfile?.image ? (

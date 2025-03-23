@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
   const navigate = useNavigate();
   const account = useActiveAccount();
   const [isConnected, setIsConnected] = useState<boolean>(false);
-
+  const [isLoggedIn, setIsLogged] = useState<boolean>(false);
   // const client = createThirdwebClient({ clientId });
 
   const showPopup = (message: string, timeout: number = 3000): void => {
@@ -75,6 +75,20 @@ const Hero: React.FC = () => {
   function login(params: VerifyLoginPayloadParams) {
     navigate("/dashboard");
   }
+
+  const handleButtonClick = () => {
+    const authToken = localStorage.getItem("authToken");
+
+    if (authToken) {
+      // perfom logout action
+      // localStorage.removeItem("authToken");
+      setIsLogged(true);
+      navigate("/dashboard");
+    } else {
+      setIsLogged(false);
+      navigate("/login");
+    }
+  };
 
   function generatePayload(arg0: {
     address: string;
@@ -176,12 +190,10 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 3, delay: 2 }}
-          onClick={() => {
-            navigate("/signup");
-          }}
+          onClick={handleButtonClick}
           className="px-9 py-2 text-sm bg-purple-700 text-purple-200 bg-white rounded-md font-bold border border-purple-700 hover:border hover:border-purple-300  bg-gradient-to-r from-purple-200 to-purple-700 bg-clip-text text-transparent"
         >
-          Get Started
+          {isLoggedIn ? "Get Started" : "Dashboard"}
         </motion.button>
 
         <div className="mt-20">
