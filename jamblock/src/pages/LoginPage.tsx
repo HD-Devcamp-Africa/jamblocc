@@ -27,7 +27,6 @@ const LoginPage: React.FC = () => {
 
       console.log("Login successful:", response.data);
       localStorage.setItem("authToken", response.data.token);
-      // window.location.href = "/dashboard";
       navigate("/dashboard");
     } catch (error: any) {
       console.error("Error during login:", error);

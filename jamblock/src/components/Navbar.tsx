@@ -15,6 +15,7 @@ import { GiBookshelf } from "react-icons/gi";
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLoggedIn, setIsLogged] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
@@ -25,7 +26,7 @@ const Navbar: React.FC = () => {
       localStorage.removeItem("authToken");
       setIsLogged(true);
 
-      navigate("/logout");
+      navigate("/");
     } else {
       setIsLogged(false);
       navigate("/login");
@@ -152,7 +153,7 @@ const Navbar: React.FC = () => {
                 // onClick={() => setIsOpen(false)} // Replace with actual login logic
                 onClick={handleButtonClick}
               >
-                Login
+                {isLoggedIn ? "Logout" : "Log in"}
               </button>
             </div>
           </motion.div>
