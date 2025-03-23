@@ -27,6 +27,7 @@ export const getUserData = async (req, res) => {
       subjects: user.subjects,
       verified: user.verified,
       image: user.image,
+      balance: user.balance,
     });
   } catch (error) {
     console.error("Error fetching user data:", error);
