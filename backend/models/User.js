@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: [6, "Password must be at least 6 characters"],
     },
+    balance: Number,
     subjects: {
       type: [String],
       required: true,

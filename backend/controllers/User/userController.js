@@ -84,8 +84,9 @@ export const registerUser = async (req, res) => {
       { expiresIn: "1h" }
     );
 
+    // UN-COMMENT HERE TO SEND VERIFICATION CODE TO EMAIL
     // Send verification email
-    await sendVerificationEmail(email, verificationToken);
+    // await sendVerificationEmail(email, verificationToken);
 
     // Return success message
     res.status(201).send({

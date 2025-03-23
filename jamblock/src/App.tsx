@@ -18,10 +18,10 @@ import WelcomePage from "./pages/WelcomePage";
 import Check from "./components/FeaturesCard";
 import AllQuestionPage from "./pages/AllQuestionPage";
 import ScrollToTopButton from "./components/ScrollToTop";
-
 import { Provider, useDispatch } from "react-redux";
 import store from "./reducx/store";
 import { fetchQuestions } from "./reducx/questionSlice";
+import ProfileCard from "./components/ProfileCard";
 
 export function App() {
   // const dispatch = useDispatch();
@@ -78,6 +78,12 @@ export function App() {
           }
         /> */}
         <Route path="/exam" element={<Exam />} />
+        <Route
+          path="/profile"
+          element={
+            <ProfileCard name="moses" balance={20} profilePicture="./" />
+          }
+        />
 
         {/* Catch-All Routes */}
         <Route path="*" element={<ComingSoonPage />} />

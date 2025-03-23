@@ -37,10 +37,11 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const account = useActiveAccount();
   const { disconnect } = useDisconnect();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const VITE_API_URL =
-    // import.meta.env.VITE_API_URL_LOCAL || "http://localhost:5000";
-    import.meta.env.VITE_API_URL || "https://jamblock.onrender.com";
+    import.meta.env.VITE_API_URL_LOCAL || "http://localhost:5000";
+  // import.meta.env.VITE_API_URL || "https://jamblock.onrender.com";
 
   useEffect(() => {
     if (inView) {
@@ -55,6 +56,10 @@ const Dashboard: React.FC = () => {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     navigate("/");
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   const sidebarVariants = {
@@ -103,6 +108,28 @@ const Dashboard: React.FC = () => {
       description: "See your balance and see your transaction so far.",
       buttonText: "See All Transactions",
       buttonLink: "*",
+    },
+  ];
+
+  // List of notifications
+  const NotificationList = [
+    {
+      id: 1,
+      name: "Sheila.....",
+      info: "User logged in from Recent location",
+      // subjects: ["Agric", " English", "Biology", "Maths"],
+    },
+    {
+      id: 2,
+      name: "Sheila.....",
+      info: "User not verified yet",
+      // subjects: ["Agric", " English", "Biology", "Hausa"],
+    },
+    {
+      id: 3,
+      name: "Sheila.....",
+      info: "User score high score",
+      // subjects: ["Agric", " English", "Biology", "Igbo"],
     },
   ];
 
@@ -251,7 +278,13 @@ const Dashboard: React.FC = () => {
         {!userProfile ? (
           <p>Loading...</p>
         ) : (
-          <Header userProfile={userProfile} account={account} />
+          <Header
+            userProfile={userProfile}
+            account={account}
+            name={userProfile}
+            balance={200}
+            profilePicture={userProfile}
+          />
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-[70%_30%] gap-6 mt-20">
