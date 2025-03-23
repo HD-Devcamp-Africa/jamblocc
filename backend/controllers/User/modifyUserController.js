@@ -34,6 +34,7 @@ export const getUserData = async (req, res) => {
     res.status(500).json({ error: "Server error, please try again later" });
   }
 };
+
 // Update User Account (Profile)
 // export const updateUserProfile = async (req, res) => {
 //   const { username, email, password, subjects, image } = req.body;

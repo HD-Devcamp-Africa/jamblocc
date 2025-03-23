@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const VITE_API_URL =
-    import.meta.env.VITE_API_URL_LOCAL || "http://localhost:5000";
+    import.meta.env.VITE_API_URL_LOCAL || "http://localhost:4000";
   // import.meta.env.VITE_API_URL || "https://jamblock.onrender.com";
 
   useEffect(() => {
@@ -173,7 +173,7 @@ const Dashboard: React.FC = () => {
             initial="hidden"
             animate="visible"
           >
-            <Link to="/dashboard" className="flex">
+            <Link to="/" className="flex">
               {isSidebarOpen && (
                 <img
                   src="https://pbs.twimg.com/profile_images/1878416738628280320/ZvpJSk-__400x400.jpg"

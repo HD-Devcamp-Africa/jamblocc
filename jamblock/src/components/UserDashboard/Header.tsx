@@ -79,7 +79,6 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const handleShowNotification = () => {
-    // navigate("/notifications");
     setIsNotificationModalOpen(true);
   };
 
@@ -190,10 +189,10 @@ const Header: React.FC<HeaderProps> = ({
           <div className="bg-gray-700 p-6 rounded-lg shadow-lg ">
             <div className="flex items-center text-right gap-5 w-full mb-10 border-b border-1 mx-auto pb-5">
               <h2 className="text-xl text-md md:text-lg lg:text-xl xl:text-3xl  text-center mx-auto text-purple-300 font-bold">
-                Notifications
+                Account
               </h2>
               <button
-                onClick={handleCloseNotification}
+                onClick={handleCloseUserModal}
                 className="bg-red-900 font-bold hover:bg-red-700 text-white py-2 px-4 rounded-md mt-4"
               >
                 X
@@ -203,23 +202,21 @@ const Header: React.FC<HeaderProps> = ({
             <div className="max-w-sm mx-auto p-6 bg-gray-900 rounded-lg shadow-md text-white">
               <div className="flex flex-col items-center">
                 {/* Profile Picture */}
-                <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-purple-500">
+                <div className="w-24 h-24 text-center ">
                   {/* User Profile Picture or Default Icon */}
                   {userProfile?.image ? (
-                    <img
-                      src={userProfile.image}
-                      alt="User Profile"
-                      className="w-10 h-10 rounded-full object-cover border-2 border-gray-500 cursor-pointer"
-                    />
+                    <div className="rounded-full overflow-hidden border-4 border-purple-500">
+                      <img
+                        src={userProfile.image}
+                        alt="User Profile"
+                        className="w-10 h-10 rounded-full object-cover border-2 border-gray-500 cursor-pointer"
+                      />
+                    </div>
                   ) : (
-                    <FaUserCircle className="text-3xl cursor-pointer" />
+                    <div className="w-[90%] mx-auto text-center">
+                      <FaUserCircle className="text-3xl text-center cursor-pointer" />
+                    </div>
                   )}
-
-                  {/* <img
-                    src={profilePicture}
-                    alt={`${name}'s profile`}
-                    className="w-full h-full object-cover"
-                  /> */}
                 </div>
 
                 {/* Name */}
@@ -236,9 +233,8 @@ const Header: React.FC<HeaderProps> = ({
                   {/* <p className="text-xl font-bold">${balance.toFixed(2)}</p> */}
                   <p className="text-xl font-bold">
                     {userProfile
-                      ? `${userProfile.balance.toFixed()}`
+                      ? `$ ${userProfile.balance.toFixed()}`
                       : "$ 0.00"}
-                    $
                   </p>
                 </div>
 
