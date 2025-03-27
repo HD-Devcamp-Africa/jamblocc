@@ -10,8 +10,8 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const VITE_API_URL =
-    // import.meta.env.VITE_API_URL || "https://jamblock.onrender.com";
-    import.meta.env.VITE_API_URL_LOCAL || "http://localhost:4000/";
+    import.meta.env.VITE_API_URL || "https://jamblock.onrender.com";
+  // import.meta.env.VITE_API_URL_LOCAL || "http://localhost:4000/";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
