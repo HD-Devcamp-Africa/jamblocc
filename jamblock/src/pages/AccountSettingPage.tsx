@@ -72,7 +72,7 @@ const AccountSettings: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/update-dashboard",
+        "http://localhost:5001/api/update-dashboard",
         data,
         {
           headers: {
